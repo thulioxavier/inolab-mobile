@@ -135,6 +135,7 @@ export const Home = () => {
                     <Matter values={values} />
                     <S.SectionTitle>MÓDULUS NOVOS</S.SectionTitle>
                     <Modules values={valuesModules} />
+                    <S.SectionTitle>DESEMPENHO</S.SectionTitle>
                     <Performance />
                 </S.Content>
             </S.Container>
