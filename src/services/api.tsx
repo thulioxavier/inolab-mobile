@@ -6,7 +6,6 @@ type JsonResponse = {
 }
 
 export const RegisterUser = async (data: Object) => {
-    console.log('Entrou')
     let json: JsonResponse = { data: Object, error: Object };
     try {
         const result = await api.post('/user/', data);
@@ -17,5 +16,4 @@ export const RegisterUser = async (data: Object) => {
         json.error = {error}
         return json;
     }
-
 }

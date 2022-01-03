@@ -1,22 +1,22 @@
 import { KeyboardAvoidingView, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import styled from "styled-components";
 
 export const Container = styled(KeyboardAvoidingView)`
     width: 100%;
-    margin-top: 24px;
+    padding: 0 5px;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFF;
 `;
 
 export const Scroll = styled(ScrollView)`
 `;
 
-export const Form = styled(View)`
+export const Form = styled(SafeAreaView)`
     width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 5px;
-    background-color: #FFFF;
+    
 `;
 export const AreaInput = styled(View)`
     width: 100%;
@@ -120,6 +120,8 @@ export const AreaButton = styled(View)`
 
 export const ViewTitle = styled(View)`
     width: 100%;
+    justify-content: center;
+    align-items: center;
 `;
 
 export const P = styled(Text)`
@@ -131,7 +133,6 @@ export const P = styled(Text)`
 export const Title = styled(Text)`
     font-size: 20px;
     font-weight: bold;
-
     color: #3f3f3f;
 `;
 
@@ -162,9 +163,9 @@ export const ButtonRegister = styled(TouchableOpacity)`
 
 export const ViewError = styled(View)`
     width: 100%;
-    padding: 5px;
 `; 
 
 export const LabelError = styled(Text)`
     color: #E75353;
+    font-size: 12px;
 `; 

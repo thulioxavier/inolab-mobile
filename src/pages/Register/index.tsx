@@ -1,3 +1,5 @@
+import { useNavigation } from "@react-navigation/native";
+import { StatusBar } from "expo-status-bar";
 import React, { Fragment, useRef, useState } from "react";
 import { Alert, Platform } from "react-native";
 import Icon from 'react-native-vector-icons/Feather';
@@ -19,14 +21,15 @@ type ErrorRegister = {
     nameError: string | null,
     emailError: string | null,
     passwordError: string | null
-
 }
 
 
-export const Register = () => {
+export const Register: React.FC = () => {
 
+    const navigation = useNavigation();
     const [email, setEmail] = useState<string>('');
     const [name, setName] = useState<string>('');
+    const [registration, setRegistration] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [visible, setVisible] = useState<boolean>(true);
     const [acept, setAcept] = useState<boolean>(false);
@@ -35,9 +38,10 @@ export const Register = () => {
         emailError: null,
         passwordError: null,
         aceptError: null,
+        registrationError: null,
     });
 
-    const nameInput = useRef();
+    const registrationInput = useRef();
     const emailInput = useRef();
     const passInput = useRef();
 
@@ -46,14 +50,18 @@ export const Register = () => {
     const Error = () => {
 
         let aux: boolean = false;
-
         if (!name) {
             errors.nameError = 'Campo nome é obrigatorio!';
             aux = true;
         } else {
             errors.nameError = null;
         }
-
+        if (!registration) {
+            errors.registrationError = 'Campo matricula é obrigatorio!';
+            aux = true;
+        } else {
+            errors.registrationError = null;
+        }
         if (!email) {
             errors.emailError = 'Campo e-mail é obrigatorio!';
             aux = true;
@@ -86,43 +94,46 @@ export const Register = () => {
         }
 
         setErrors({ ...errors });
+        setErr(aux);
         return aux;
     }
 
     const handleSubmit = async () => {
-        Error();
-        setErr(Error());
+        if (!Error()) {
+            await RegisterUser({ email, name, password })
+                .then((result: ResultRequeste) => {
+                    if ((result.data?.data?.resultToken && result.data?.data?.resultUser)) {
+                        navigation.navigate('Home')
+                    } else {
+                        Alert.alert(result.data.error ? result.data.error : 'Tente novamente mais tarde!' )
+                    }
+                }).catch((reject) => {
+                    console.log('Erro')
+                    console.log(reject.error);
+                });
+        } else {
+            return false;
+        }
+    }
 
-        // if (!err) {
-        //     await RegisterUser({ email, name, password }).then((result: ResultRequeste) => {
-        //         console.log(result.data);
-        //         if (result.data.error) {
-        //             Alert.alert(result.data.error)
-        //         } else {
-        //             Alert.alert('Deu certo')
-        //         }
-        //     }).catch((reject) => {
-        //         console.log(reject.error);
-        //     });
-        // } else {
-        //     return false;
-        // }
-
+    const Required = () => {
+        return(
+            <>
+                <S.Label style={{color: '#E75353'}}>*</S.Label>
+            </>
+        )
     }
 
     return (
         <Fragment>
-
-            <S.Container
-                behavior={Platform.OS === "ios" ? "padding" : "height"}
-            >
-                <S.Scroll>
-                    <S.Form>
+            <S.Container behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ paddingTop: StatusBar.currentHeight}} >
+                <S.Form>
+                    <S.Scroll showsVerticalScrollIndicator={false}>
                         <S.ViewTitle>
-                            <S.Title>Registre-se</S.Title>
+                            <S.Title>CADASTRAR</S.Title>
                         </S.ViewTitle>
                         <S.AreaInput>
-                            <S.Label>Nome</S.Label>
+                            <S.Label>Nome <Required/></S.Label>
                             <S.RowInput>
                                 <S.IconInput>
                                     <Icon name="user" size={20} color='#FFFF' />
@@ -147,7 +158,7 @@ export const Register = () => {
                         </S.AreaInput>
 
                         <S.AreaInput>
-                            <S.Label>E-mail</S.Label>
+                            <S.Label>E-mail <Required/></S.Label>
                             <S.RowInput>
                                 <S.IconInput>
                                     <Icon name="at-sign" size={20} color='#FFFF' />
@@ -159,7 +170,7 @@ export const Register = () => {
                                     autoCapitalize="none"
                                     autoCorrect={false}
                                     ref={emailInput}
-                                    onSubmitEditing={() => { passInput.current.focus(); }}
+                                    onSubmitEditing={() => { registrationInput.current.focus(); }}
                                     returnKeyType="next"
                                 />
                             </S.RowInput>
@@ -171,7 +182,31 @@ export const Register = () => {
                             }
                         </S.AreaInput>
                         <S.AreaInput>
-                            <S.Label>Senha</S.Label>
+                            <S.Label>Matricula <Required/></S.Label>
+                            <S.RowInput>
+                                <S.IconInput>
+                                    <Icon name="paperclip" size={20} color='#FFFF' />
+                                </S.IconInput>
+                                <S.Input
+                                    placeholder="Sua Matricula"
+                                    keyboardType="numeric"
+                                    onChangeText={(e) => setRegistration(e)}
+                                    autoCapitalize="none"
+                                    autoCorrect={false}
+                                    ref={registrationInput}
+                                    onSubmitEditing={() => { passInput.current.focus(); }}
+                                    returnKeyType="next"
+                                />
+                            </S.RowInput>
+                            {err && errors.registrationError ?
+                                <S.ViewError>
+                                    <S.LabelError numberOfLines={1}>{errors.registrationError}</S.LabelError>
+                                </S.ViewError>
+                                : null
+                            }
+                        </S.AreaInput>
+                        <S.AreaInput>
+                            <S.Label>Senha <Required/></S.Label>
                             <S.RowInput>
                                 <S.IconInput>
                                     <Icon name="lock" size={20} color='#FFFF' />
@@ -184,10 +219,8 @@ export const Register = () => {
                                     autoCapitalize="none"
                                     autoCorrect={false}
                                     ref={passInput}
-
                                     returnKeyType="go"
                                     onSubmitEditing={handleSubmit}
-
                                 />
                                 <S.ButtonEye onPress={() => { setVisible(!visible) }}>
                                     <Icon name={visible ? "eye" : "eye-off"} size={20} color='#FFFF' />
@@ -200,7 +233,7 @@ export const Register = () => {
                                 : null
                             }
                         </S.AreaInput>
-                        <S.AreaInput style={{ marginTop: -5 }} >
+                        <S.AreaInput style={{ marginTop: 5 }} >
                             <S.Row>
                                 <S.ButtonRadius select={acept} onPress={() => { setAcept(!acept) }}>
                                     <Icon name='check' size={14} color={`${acept ? "#FFF" : '#202020'}`} />
@@ -210,7 +243,9 @@ export const Register = () => {
                         </S.AreaInput>
                         <S.ViewButton>
                             <S.AreaButton>
-                                <S.ButtonBack>
+                                <S.ButtonBack
+                                    onPress={() => { navigation.goBack() }}
+                                >
                                     <Icon name='arrow-left' size={20} color='#00C880' />
                                 </S.ButtonBack>
                                 <S.ButtonRegister onPress={handleSubmit}>
@@ -220,8 +255,8 @@ export const Register = () => {
                                 </S.ButtonRegister>
                             </S.AreaButton>
                         </S.ViewButton>
-                    </S.Form>
-                </S.Scroll>
+                    </S.Scroll>
+                </S.Form>
             </S.Container>
         </Fragment>
     )
