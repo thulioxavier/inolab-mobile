@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import React, { Fragment, useRef, useState } from "react";
-import { Alert, Platform } from "react-native";
+import { Alert, Platform, ActivityIndicator } from "react-native";
 import Icon from 'react-native-vector-icons/Feather';
 import { RegisterUser } from "../../services/api";
 import *as S from './styles';
@@ -41,11 +41,17 @@ export const Register: React.FC = () => {
         registrationError: null,
     });
 
+    const [show, setShow] = useState<boolean>(false);
+
     const registrationInput = useRef();
     const emailInput = useRef();
     const passInput = useRef();
 
     const [err, setErr] = useState<boolean>(false);
+
+    const [erroModal, setErroModal] = useState<string>('');
+
+    const [loading, setLoading] = useState<boolean>(false);
 
     const Error = () => {
 
@@ -100,16 +106,24 @@ export const Register: React.FC = () => {
 
     const handleSubmit = async () => {
         if (!Error()) {
+            setLoading(true);
             await RegisterUser({ email, name, password })
                 .then((result: ResultRequeste) => {
                     if ((result.data?.data?.resultToken && result.data?.data?.resultUser)) {
                         navigation.navigate('Home')
+                        setLoading(false);
+
                     } else {
-                        Alert.alert(result.data.error ? result.data.error : 'Tente novamente mais tarde!' )
+                        setErroModal(result.data.error ? result.data.error : 'Tente novamente mais tarde!')
+                        setShow(!show)
+                        setLoading(false);
+
                     }
                 }).catch((reject) => {
                     console.log('Erro')
-                    console.log(reject.error);
+                    console.log(reject);
+                    setLoading(false);
+
                 });
         } else {
             return false;
@@ -117,23 +131,57 @@ export const Register: React.FC = () => {
     }
 
     const Required = () => {
-        return(
+        return (
             <>
-                <S.Label style={{color: '#E75353'}}>*</S.Label>
+                <S.Label style={{ color: '#E75353' }}>*</S.Label>
             </>
         )
     }
 
+    const AlertModal = () => (
+        <Fragment>
+            <S.Alert
+                animationType="fade"
+                visible={show}
+                transparent={true}
+                onRequestClose={() => { setShow(false) }}
+            >
+                <S.ModalContent >
+                    <S.ModalArea>
+                        <S.Label
+                            style={{
+                                fontSize: 16,
+                                textAlign: 'center',
+                                marginBottom: 20,
+                                fontWeight: '100'
+                            }}
+                        >{erroModal}</S.Label>
+                        <S.ViewButton>
+                            <S.AreaButton>
+                                <S.ButtonRegister onPress={() => { setShow(false) }}>
+                                    <S.Label style={{ color: '#FFFF' }}>
+                                        OK
+                                    </S.Label>
+                                </S.ButtonRegister>
+                            </S.AreaButton>
+                        </S.ViewButton>
+                    </S.ModalArea>
+                </S.ModalContent>
+            </S.Alert>
+        </Fragment>
+    )
+
+
     return (
         <Fragment>
-            <S.Container behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ paddingTop: StatusBar.currentHeight}} >
+            <S.Container behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ paddingTop: StatusBar.currentHeight }} >
                 <S.Form>
                     <S.Scroll showsVerticalScrollIndicator={false}>
                         <S.ViewTitle>
                             <S.Title>CADASTRAR</S.Title>
                         </S.ViewTitle>
                         <S.AreaInput>
-                            <S.Label>Nome <Required/></S.Label>
+                            <S.Label>Nome <Required /></S.Label>
                             <S.RowInput>
                                 <S.IconInput>
                                     <Icon name="user" size={20} color='#FFFF' />
@@ -158,7 +206,7 @@ export const Register: React.FC = () => {
                         </S.AreaInput>
 
                         <S.AreaInput>
-                            <S.Label>E-mail <Required/></S.Label>
+                            <S.Label>E-mail <Required /></S.Label>
                             <S.RowInput>
                                 <S.IconInput>
                                     <Icon name="at-sign" size={20} color='#FFFF' />
@@ -182,7 +230,7 @@ export const Register: React.FC = () => {
                             }
                         </S.AreaInput>
                         <S.AreaInput>
-                            <S.Label>Matricula <Required/></S.Label>
+                            <S.Label>Matricula <Required /></S.Label>
                             <S.RowInput>
                                 <S.IconInput>
                                     <Icon name="paperclip" size={20} color='#FFFF' />
@@ -206,7 +254,7 @@ export const Register: React.FC = () => {
                             }
                         </S.AreaInput>
                         <S.AreaInput>
-                            <S.Label>Senha <Required/></S.Label>
+                            <S.Label>Senha <Required /></S.Label>
                             <S.RowInput>
                                 <S.IconInput>
                                     <Icon name="lock" size={20} color='#FFFF' />
@@ -244,19 +292,27 @@ export const Register: React.FC = () => {
                         <S.ViewButton>
                             <S.AreaButton>
                                 <S.ButtonBack
+                                    disabled={loading}
                                     onPress={() => { navigation.goBack() }}
                                 >
                                     <Icon name='arrow-left' size={20} color='#00C880' />
                                 </S.ButtonBack>
-                                <S.ButtonRegister onPress={handleSubmit}>
-                                    <S.Label style={{ color: '#FFFF' }}>
-                                        CADASTRAR
-                                    </S.Label>
+                                <S.ButtonRegister onPress={handleSubmit} disabled={loading}>
+                                    {
+                                        !loading ?
+                                            <S.Label style={{ color: '#FFFF' }}>
+                                                CADASTRAR
+                                            </S.Label>
+                                            :
+                                            <ActivityIndicator color="#FFF" size="small" />
+                                    }
+
                                 </S.ButtonRegister>
                             </S.AreaButton>
                         </S.ViewButton>
                     </S.Scroll>
                 </S.Form>
+                {AlertModal()}
             </S.Container>
         </Fragment>
     )

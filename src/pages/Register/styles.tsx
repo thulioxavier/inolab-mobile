@@ -1,4 +1,4 @@
-import { KeyboardAvoidingView, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { KeyboardAvoidingView, Modal, ScrollView, Text, TextInput, TouchableOpacity, View, TouchableNativeFeedback} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styled from "styled-components";
 
@@ -12,6 +12,7 @@ export const Container = styled(KeyboardAvoidingView)`
 `;
 
 export const Scroll = styled(ScrollView)`
+
 `;
 
 export const Form = styled(SafeAreaView)`
@@ -169,3 +170,29 @@ export const LabelError = styled(Text)`
     color: #E75353;
     font-size: 12px;
 `; 
+
+
+export const Alert = styled(Modal)`
+
+`;
+
+export const ModalContent = styled(View)`
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #000000a2;
+`;
+
+export const ModalArea = styled(View)`
+    justify-content: center;
+    align-items: center;
+
+    padding: 5px;
+    width: 300px;
+    height: 200px;
+
+    border-radius: 5px;
+    
+    background-color: #ffffff;
+`;

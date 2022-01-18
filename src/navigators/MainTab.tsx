@@ -7,7 +7,7 @@ const Tab = createBottomTabNavigator();
 
 import { StyleSheet, View } from 'react-native';
 
-import { Login, Home, Register } from '../pages/index';
+import { Login, Home, Register, Podium } from '../pages/index';
 
 import *as S from './styles';
 
@@ -50,7 +50,7 @@ export default () => {
                 })}
 
             >
-                <Tab.Screen name="ranking" component={Login} options={{ tabBarLabel: 'Ranking' }} />
+                <Tab.Screen name="ranking" component={Podium} options={{ tabBarLabel: 'Ranking' }} />
                 <Tab.Screen name="Home" component={Home} options={{
                     tabBarLabel: 'Home',
                     tabBarIcon: ({focused}) => (
