@@ -14,13 +14,13 @@ export const Modules = ({ values = [] }: Props) => {
                     return (
                         <S.Card key={index} style={S.Styles.Shadow} >
                             <S.Row>
-                                <S.Title numberOfLines={1}>{item.title}</S.Title>
+                                <S.Title numberOfLines={1}>{item.name}</S.Title>
                                 <S.AreaMarkNew>
                                     <S.MarkNew />
                                 </S.AreaMarkNew>
                             </S.Row>
                             <S.Container>
-                                <S.SubTitle numberOfLines={1}>{item.matter}</S.SubTitle>
+                                <S.SubTitle numberOfLines={1}>{item.subject.name}</S.SubTitle>
                                 <S.Row>
                                     <S.ItemCardRow>
                                         <Icon name="coffee" size={14} color='#585858' style={{marginRight: 5}} />
@@ -32,10 +32,10 @@ export const Modules = ({ values = [] }: Props) => {
                                     </S.ItemCardRow>
                                 </S.Row>
                             </S.Container>
-                            <S.LabelPorc porc={`${item.porc-13}%`}>{`${item.porc}%`}</S.LabelPorc>
+                            {/* <S.LabelPorc porc={`${item.porc-13}%`}>{`${item.porc}%`}</S.LabelPorc>
                             <S.ProgressBack>   
                                 <S.Progress porc={`${item.porc}%`} />
-                            </S.ProgressBack>
+                            </S.ProgressBack> */}
                         </S.Card>
                     );
                 })}

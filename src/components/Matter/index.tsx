@@ -15,7 +15,7 @@ export const Matter = ({ values = [] }: Matter) => {
                         return (
                             <S.Item key={index}>
                                 <S.ItemTitle>
-                                    {item.title}
+                                    {item.name}
                                 </S.ItemTitle>
                             </S.Item>
                         );

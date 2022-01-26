@@ -1,113 +1,49 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import *as S from "./styles";
-import { VideoNews, Performance, Modules, Matter } from '../../components/index';
-
-import { Logo, LogoGreen } from "../../assets/icons";
+import { Performance, Modules, Matter } from '../../components/index';
 import Icon from 'react-native-vector-icons/Feather';
-
-const values = [
-    {
-        title: 'Logica de Programação'
-    },
-    {
-        title: 'LP2'
-    },
-    {
-        title: 'Matematica Discreta'
-    },
-    {
-        title: 'Materia 4'
-    },
-    {
-        title: 'Materia 5'
-    },
-    {
-        title: 'Materia 6'
-    },
-    {
-        title: 'Materia 7'
-    },
-    {
-        title: 'Materia 8'
-    },
-    {
-        title: 'Materia 9'
-    },
-]
-
-
-const valuesModules = [
-    {
-        title: 'Utilizando a estrutura condicional if/else',
-        matter: 'Logica de Programação',
-        porc: 25,
-    },
-    {
-        title: 'Normalização',
-        matter: 'Banco de Dados',
-        porc: 56,
-    },
-    {
-        title: 'Teste de conteudo',
-        matter: 'Materia 7',
-        porc: 78,
-    },
-    {
-        title: 'Teste de conteudo',
-        matter: 'Materia 1',
-        porc: 12,
-    },
-    {
-        title: 'Teste de conteudo',
-        matter: 'Materia 5',
-        porc: 4,
-    },
-    {
-        title: 'Teste de conteudo',
-        matter: 'Materia 8',
-        porc: 19,
-    },
-    {
-        title: 'Teste de conteudo',
-        matter: 'Materia 8',
-        porc: 98,
-    },
-    {
-        title: 'Teste de conteudo',
-        matter: 'Materia 8',
-        porc: 100,
-    },
-    {
-        title: 'Teste de conteudo',
-        matter: 'Materia 8',
-        porc: 0,
-    },
-]
-
-const videos = [
-    {
-        uri: 'https://www.youtube.com/watch?v=xegH4A6CH04',
-    },
-
-    {
-        uri: 'https://www.youtube.com/watch?v=VspRRDy_V8o',
-    },
-
-    {
-        uri: 'https://www.youtube.com/watch?v=AcP44hMcXNE',
-    },
-
-    {
-        uri: 'https://www.youtube.com/watch?v=-1M4gLLDxzs',
-    },
-]
-
+import { ListNewModules, ListSubjects } from "../../services/api";
 
 
 export const Home = () => {
 
-    const [name, setName] = useState('Thúlio');
-    const [focus, setFocus] = useState(false);
+    const [name, setName] = useState<string>('Thúlio');
+    const [focus, setFocus] = useState<boolean>(false);
+    const [subjects, setSubjects] = useState<any>([]);
+    const [newModules, setNewModules] = useState<any>([]);
+
+    const [loading, setLoading] = useState<{matter: boolean}>({
+        matter: true,
+    })
+
+    useEffect(()=>{
+        Subjects();
+    },[]);
+
+    useEffect(()=>{
+        GetNewModules();
+    },[]);
+
+    const Subjects = async () => {
+        const result: any = await ListSubjects();
+        setSubjects(result.data)
+        loading.matter = false,
+        setLoading({...loading});
+    }
+
+    const GetNewModules = async () => {
+        const result: any = await ListNewModules();
+        setNewModules(result.data);
+    }
+
+    const PlaceholderSubjects = () => {
+        return(
+            <Fragment>
+                <Matter values={[{name: 'carregando'}, {name: 'carregando'},{name: 'carregando'},{name: 'carregando'}]}/>
+            </Fragment>
+        )
+    }
+
     return (
         <Fragment>
 
@@ -132,9 +68,11 @@ export const Home = () => {
                         </S.ButtomSearch>
                     </S.ContentInput>
                     <S.SectionTitle>MATÉRIAS</S.SectionTitle>
-                    <Matter values={values} />
+                    {
+                        loading.matter ? <PlaceholderSubjects/> : <Matter values={subjects} />
+                    }
                     <S.SectionTitle>MÓDULUS NOVOS</S.SectionTitle>
-                    <Modules values={valuesModules} />
+                    <Modules values={newModules} />
                     <S.SectionTitle>DESEMPENHO</S.SectionTitle>
                     <Performance />
                 </S.Content>
