@@ -3,6 +3,7 @@ import *as S from "./styles";
 import { Performance, Modules, Matter } from '../../components/index';
 import Icon from 'react-native-vector-icons/Feather';
 import { ListNewModules, ListSubjects } from "../../services/api";
+import { Alert } from "react-native";
 
 
 export const Home = () => {
@@ -60,10 +61,10 @@ export const Home = () => {
 
                 <S.Content>
                     <S.ContentInput focus={focus} >
-                        <S.InputSearch placeholder="Buscar" onFocus={() => {
+                        <S.InputSearch editable={false} selectTextOnFocus={false} placeholder="Buscar" onFocus={() => {
                             setFocus(!focus)
                         }} />
-                        <S.ButtomSearch>
+                        <S.ButtomSearch disabled={true}>
                             <Icon name="search" size={24} color='#FAFAFA' />
                         </S.ButtomSearch>
                     </S.ContentInput>

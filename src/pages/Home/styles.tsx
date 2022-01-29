@@ -20,7 +20,7 @@ export const SectionTitle = styled(Text)`
     font-size: 14px;
     font-weight: bold;
     color: #464646;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     margin-top: 10px;
 `;
 
@@ -74,7 +74,7 @@ export const ButtomSearch = styled(TouchableOpacity)`
     height: 40px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
-    background-color: #00C880;
+    background-color: ${(props) => (props.disabled ? "#bdbdbd" : "#00C880 ")};
     padding: 5px;
 `;
 

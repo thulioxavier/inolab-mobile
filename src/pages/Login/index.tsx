@@ -72,20 +72,7 @@ export const Login: React.FC = () => {
     }
 
     const handleSubmit = async () => {
-        if (!Error()) {
-            await RegisterUser({ email, name, password })
-                .then((result: ResultRequeste) => {
-                    if (result.data.error) {
-                        Alert.alert(result.data.error)
-                    } else {
-                        navigation.navigate('Home')
-                    }
-                }).catch((reject) => {
-                    console.log(reject.error);
-                });
-        } else {
-            return false;
-        }
+        navigation.navigate('Home');
     }
 
     const Requere = () => {

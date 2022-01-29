@@ -26,8 +26,6 @@ export default () => {
                 }}
                 screenOptions={({ route }) => ({
                     tabBarStyle:{
-                        borderRadius: 5,
-                        margin: 5,
                         backgroundColor: '#202020',
                         position: 'relative', 
                     },
@@ -80,12 +78,12 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.2,
         shadowRadius: 5,
-        backgroundColor: '#00C880',
     },
 
     top: {
         marginBottom: 20,
         width: 50,
         height: 50,
+        backgroundColor: '#00C880',
     }
 })

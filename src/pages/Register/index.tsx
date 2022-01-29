@@ -31,7 +31,7 @@ export const Register: React.FC = () => {
     const [name, setName] = useState<string>('');
     const [registration, setRegistration] = useState<string>('');
     const [password, setPassword] = useState<string>('');
-    const [visible, setVisible] = useState<boolean>(true);
+    const [visible, setVisible] = useState<boolean>(true);0
     const [acept, setAcept] = useState<boolean>(false);
     const [errors, setErrors] = useState<object>({
         nameError: null,
@@ -107,7 +107,7 @@ export const Register: React.FC = () => {
     const handleSubmit = async () => {
         if (!Error()) {
             setLoading(true);
-            await RegisterUser({ email, name, password })
+            await RegisterUser({ email, name, password, registration })
                 .then((result: ResultRequeste) => {
                     if ((result.data?.data?.resultToken && result.data?.data?.resultUser)) {
                         navigation.navigate('Home')

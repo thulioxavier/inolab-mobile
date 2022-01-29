@@ -26,8 +26,8 @@ export const Row = styled(ScrollView)`
 `;
 
 export const Card = styled(TouchableOpacity)`
-    width: 110px;
-    height: 100px;
+    width: 85px;
+    height: 85px;
     padding: 5px 10px;
     background-color: #FFF;
     border-radius: 5px;
@@ -47,7 +47,7 @@ export const Label = styled(Text)`
 `;
 
 export const LabelTitle = styled(Text)`
-    font-size: 14px;
+    font-size: 13px;
     font-weight: bold;
     color: #333333;
 `;
