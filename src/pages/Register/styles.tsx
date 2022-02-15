@@ -16,6 +16,8 @@ export const Scroll = styled(ScrollView)`
 `;
 
 export const Form = styled(SafeAreaView)`
+    margin-top: 10px;
+    margin-bottom: 10px;
     width: 100%;
     
 `;
@@ -181,7 +183,7 @@ export const ModalContent = styled(View)`
     justify-content: center;
     align-items: center;
 
-    background-color: #000000a2;
+    background-color: #0000008d;
 `;
 
 export const ModalArea = styled(View)`
@@ -195,4 +197,11 @@ export const ModalArea = styled(View)`
     border-radius: 5px;
     
     background-color: #ffffff;
+`;
+
+export const ModalWebView = styled(View)`
+
+    padding: 5px;
+    width: 100%;
+    height: 90%;
 `;

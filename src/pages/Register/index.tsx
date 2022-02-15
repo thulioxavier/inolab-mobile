@@ -1,7 +1,10 @@
 import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import React, { Fragment, useRef, useState } from "react";
-import { Alert, Platform, ActivityIndicator } from "react-native";
+import { Alert, Platform, ActivityIndicator, Linking } from "react-native";
+// import * as Linking from 'expo-linking';
+
+import { WebView } from 'react-native-webview';
 import Icon from 'react-native-vector-icons/Feather';
 import { RegisterUser } from "../../services/api";
 import *as S from './styles';
@@ -31,7 +34,7 @@ export const Register: React.FC = () => {
     const [name, setName] = useState<string>('');
     const [registration, setRegistration] = useState<string>('');
     const [password, setPassword] = useState<string>('');
-    const [visible, setVisible] = useState<boolean>(true);0
+    const [visible, setVisible] = useState<boolean>(true); 0
     const [acept, setAcept] = useState<boolean>(false);
     const [errors, setErrors] = useState<object>({
         nameError: null,
@@ -41,8 +44,11 @@ export const Register: React.FC = () => {
         registrationError: null,
     });
 
+    const [urlAvatar, setUrlAvatar] = useState<string>('')
     const [show, setShow] = useState<boolean>(false);
-
+    const [showCreateAvatar, setShowCreateAvatar] = useState<boolean>(false);
+    const [showAvatarDown, setShowAvatarDown] = useState<boolean>(false);
+    const [prox, setProx] = useState<boolean>(false);
     const registrationInput = useRef();
     const emailInput = useRef();
     const passInput = useRef();
@@ -138,6 +144,11 @@ export const Register: React.FC = () => {
         )
     }
 
+    const handleOpenWithLinking = async () => {
+        console.log(urlAvatar, 'Avatar');
+        await Linking.openURL(urlAvatar.toString());
+    };
+
     const AlertModal = () => (
         <Fragment>
             <S.Alert
@@ -169,8 +180,93 @@ export const Register: React.FC = () => {
                 </S.ModalContent>
             </S.Alert>
         </Fragment>
-    )
+    );
 
+    const DownAvatar = () => (
+        <Fragment>
+            <S.Alert
+                animationType="fade"
+                visible={showAvatarDown}
+                transparent={true}
+                onRequestClose={() => { setShowAvatarDown(false) }}
+            >
+                <S.ModalContent >
+                    <S.ModalArea>
+                        <S.AreaInput>
+                            <S.Label>Avatar URL <Required /></S.Label>
+                            <S.RowInput>
+                                <S.IconInput>
+                                    <Icon name="download" size={20} color='#FFFF' />
+                                </S.IconInput>
+                                <S.Input
+                                    style={{ width: 235 }}
+                                    placeholder="https://d1a370nemizbjq"
+                                    keyboardType="url"
+                                    onChangeText={(e) => setUrlAvatar(e)}
+                                    autoCapitalize="none"
+                                    autoCorrect={false}
+                                    value={urlAvatar.replace('"', '')}
+                                />
+                            </S.RowInput>
+                        </S.AreaInput>
+                        <S.ViewButton>
+                            <S.AreaButton>
+                                <S.ButtonRegister onPress={() => { handleOpenWithLinking() }}>
+                                    <S.Label style={{ color: '#FFFF' }}>
+                                        Baixar Avatar
+                                    </S.Label>
+                                </S.ButtonRegister>
+                            </S.AreaButton>
+                        </S.ViewButton>
+                    </S.ModalArea>
+                </S.ModalContent>
+            </S.Alert>
+        </Fragment>
+    );
+    const CreateAvatar = () => (
+        <Fragment>
+            <S.Alert
+                animationType="fade"
+                visible={showCreateAvatar}
+                transparent={true}
+                onRequestClose={() => { setShowCreateAvatar(false) }}
+            >
+                <S.ModalContent >
+                    <S.ModalWebView>
+                        <WebView source={{
+                            uri: 'https://demo.readyplayer.me/pt-BR/avatar'
+                        }}
+
+                            onMessage={(event) => {
+                                setUrlAvatar(event.nativeEvent.data.replace('"', ''))
+                                setProx(true)
+                            }}
+
+                        />
+                    </S.ModalWebView>
+                    {
+                        prox ?
+                            <S.ViewButton>
+                                <S.AreaButton>
+                                    <S.ButtonRegister onPress={() => {
+                                        setShowCreateAvatar(!showCreateAvatar)
+                                        setShowAvatarDown(!showAvatarDown)
+                                        setProx(false)
+                                    }}>
+                                        <S.Label style={{ color: '#FFFF' }}>
+                                            Avançar
+                                        </S.Label>
+                                    </S.ButtonRegister>
+                                </S.AreaButton>
+                            </S.ViewButton>
+                            : null
+                    }
+
+
+                </S.ModalContent>
+            </S.Alert>
+        </Fragment>
+    );
 
     return (
         <Fragment>
@@ -180,6 +276,28 @@ export const Register: React.FC = () => {
                         <S.ViewTitle>
                             <S.Title>CADASTRAR</S.Title>
                         </S.ViewTitle>
+
+                        <S.ViewButton>
+                            <S.AreaButton>
+                                <S.ButtonBack
+                                    disabled={true}
+                                >
+                                    <Icon name='image' size={20} color='#00C880' />
+                                </S.ButtonBack>
+                                <S.ButtonRegister onPress={() => { setShowCreateAvatar(!showCreateAvatar) }}>
+                                    {
+                                        !loading ?
+                                            <S.Label style={{ color: '#FFFF' }}>
+                                                Criar Avatar
+                                            </S.Label>
+                                            :
+                                            <ActivityIndicator color="#FFF" size="small" />
+                                    }
+
+                                </S.ButtonRegister>
+                            </S.AreaButton>
+                        </S.ViewButton>
+
                         <S.AreaInput>
                             <S.Label>Nome <Required /></S.Label>
                             <S.RowInput>
@@ -187,7 +305,7 @@ export const Register: React.FC = () => {
                                     <Icon name="user" size={20} color='#FFFF' />
                                 </S.IconInput>
                                 <S.Input
-                                    placeholder="Username"
+                                    placeholder="Nome"
                                     keyboardType="default"
                                     onChangeText={(e) => setName(e)}
                                     autoCapitalize="words"
@@ -205,6 +323,103 @@ export const Register: React.FC = () => {
                             }
                         </S.AreaInput>
 
+                        <S.AreaInput>
+                            <S.Label>Sobrenome <Required /></S.Label>
+                            <S.RowInput>
+                                <S.IconInput>
+                                    <Icon name="user" size={20} color='#FFFF' />
+                                </S.IconInput>
+                                <S.Input
+                                    placeholder="Sobrenome"
+                                    keyboardType="default"
+                                    onChangeText={(e) => setName(e)}
+                                    autoCapitalize="words"
+                                    autoCorrect={false}
+                                    returnKeyType="next"
+                                    onSubmitEditing={() => { emailInput.current.focus(); }}
+                                    blurOnSubmit={false}
+                                />
+                            </S.RowInput>
+                            {err && errors.nameError ?
+                                <S.ViewError>
+                                    <S.LabelError>{errors.nameError}</S.LabelError>
+                                </S.ViewError>
+                                : null
+                            }
+                        </S.AreaInput>
+                        {/* <S.AreaInput>
+                            <S.Label>Sexo <Required /></S.Label>
+                            <S.RowInput>
+                                <S.IconInput>
+                                    <Icon name="user" size={20} color='#FFFF' />
+                                </S.IconInput>
+                                <S.Input
+                                    placeholder="Sexo"
+                                    keyboardType="default"
+                                    onChangeText={(e) => setName(e)}
+                                    autoCapitalize="words"
+                                    autoCorrect={false}
+                                    returnKeyType="next"
+                                    onSubmitEditing={() => { emailInput.current.focus(); }}
+                                    blurOnSubmit={false}
+                                />
+                            </S.RowInput>
+                            {err && errors.nameError ?
+                                <S.ViewError>
+                                    <S.LabelError>{errors.nameError}</S.LabelError>
+                                </S.ViewError>
+                                : null
+                            }
+                        </S.AreaInput>
+                        <S.AreaInput>
+                            <S.Label>Curso <Required /></S.Label>
+                            <S.RowInput>
+                                <S.IconInput>
+                                    <Icon name="user" size={20} color='#FFFF' />
+                                </S.IconInput>
+                                <S.Input
+                                    placeholder="Curso"
+                                    keyboardType="default"
+                                    onChangeText={(e) => setName(e)}
+                                    autoCapitalize="words"
+                                    autoCorrect={false}
+                                    returnKeyType="next"
+                                    onSubmitEditing={() => { emailInput.current.focus(); }}
+                                    blurOnSubmit={false}
+                                />
+                            </S.RowInput>
+                            {err && errors.nameError ?
+                                <S.ViewError>
+                                    <S.LabelError>{errors.nameError}</S.LabelError>
+                                </S.ViewError>
+                                : null
+                            }
+                        </S.AreaInput> */}
+
+                        <S.AreaInput>
+                            <S.Label>Matricula <Required /></S.Label>
+                            <S.RowInput>
+                                <S.IconInput>
+                                    <Icon name="database" size={20} color='#FFFF' />
+                                </S.IconInput>
+                                <S.Input
+                                    placeholder="Sua Matricula"
+                                    keyboardType="numeric"
+                                    onChangeText={(e) => setRegistration(e)}
+                                    autoCapitalize="none"
+                                    autoCorrect={false}
+                                    ref={registrationInput}
+                                    onSubmitEditing={() => { passInput.current.focus(); }}
+                                    returnKeyType="next"
+                                />
+                            </S.RowInput>
+                            {err && errors.registrationError ?
+                                <S.ViewError>
+                                    <S.LabelError numberOfLines={1}>{errors.registrationError}</S.LabelError>
+                                </S.ViewError>
+                                : null
+                            }
+                        </S.AreaInput>
                         <S.AreaInput>
                             <S.Label>E-mail <Required /></S.Label>
                             <S.RowInput>
@@ -229,30 +444,7 @@ export const Register: React.FC = () => {
                                 : null
                             }
                         </S.AreaInput>
-                        <S.AreaInput>
-                            <S.Label>Matricula <Required /></S.Label>
-                            <S.RowInput>
-                                <S.IconInput>
-                                    <Icon name="paperclip" size={20} color='#FFFF' />
-                                </S.IconInput>
-                                <S.Input
-                                    placeholder="Sua Matricula"
-                                    keyboardType="numeric"
-                                    onChangeText={(e) => setRegistration(e)}
-                                    autoCapitalize="none"
-                                    autoCorrect={false}
-                                    ref={registrationInput}
-                                    onSubmitEditing={() => { passInput.current.focus(); }}
-                                    returnKeyType="next"
-                                />
-                            </S.RowInput>
-                            {err && errors.registrationError ?
-                                <S.ViewError>
-                                    <S.LabelError numberOfLines={1}>{errors.registrationError}</S.LabelError>
-                                </S.ViewError>
-                                : null
-                            }
-                        </S.AreaInput>
+
                         <S.AreaInput>
                             <S.Label>Senha <Required /></S.Label>
                             <S.RowInput>
@@ -313,6 +505,8 @@ export const Register: React.FC = () => {
                     </S.Scroll>
                 </S.Form>
                 {AlertModal()}
+                {CreateAvatar()}
+                {DownAvatar()}
             </S.Container>
         </Fragment>
     )
