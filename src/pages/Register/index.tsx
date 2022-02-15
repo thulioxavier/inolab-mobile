@@ -32,12 +32,14 @@ export const Register: React.FC = () => {
     const navigation = useNavigation();
     const [email, setEmail] = useState<string>('');
     const [name, setName] = useState<string>('');
+    const [lastName, setLastName] = useState<string>('');
     const [registration, setRegistration] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [visible, setVisible] = useState<boolean>(true); 0
     const [acept, setAcept] = useState<boolean>(false);
     const [errors, setErrors] = useState<object>({
         nameError: null,
+        lastNameError: null,
         emailError: null,
         passwordError: null,
         aceptError: null,
@@ -50,6 +52,7 @@ export const Register: React.FC = () => {
     const [showAvatarDown, setShowAvatarDown] = useState<boolean>(false);
     const [prox, setProx] = useState<boolean>(false);
     const registrationInput = useRef();
+    const lastNameInput = useRef();
     const emailInput = useRef();
     const passInput = useRef();
 
@@ -67,6 +70,12 @@ export const Register: React.FC = () => {
             aux = true;
         } else {
             errors.nameError = null;
+        }
+        if (!lastName) {
+            errors.lastNameError = 'Campo Sobrenome é obrigatorio!';
+            aux = true;
+        } else {
+            errors.lastNameError = null;
         }
         if (!registration) {
             errors.registrationError = 'Campo matricula é obrigatorio!';
@@ -113,7 +122,7 @@ export const Register: React.FC = () => {
     const handleSubmit = async () => {
         if (!Error()) {
             setLoading(true);
-            await RegisterUser({ email, name, password, registration })
+            await RegisterUser({ email, name, password, registration, lastName })
                 .then((result: ResultRequeste) => {
                     if ((result.data?.data?.resultToken && result.data?.data?.resultUser)) {
                         navigation.navigate('Home')
@@ -181,7 +190,6 @@ export const Register: React.FC = () => {
             </S.Alert>
         </Fragment>
     );
-
     const DownAvatar = () => (
         <Fragment>
             <S.Alert
@@ -311,7 +319,7 @@ export const Register: React.FC = () => {
                                     autoCapitalize="words"
                                     autoCorrect={false}
                                     returnKeyType="next"
-                                    onSubmitEditing={() => { emailInput.current.focus(); }}
+                                    onSubmitEditing={() => { lastNameInput.current.focus(); }}
                                     blurOnSubmit={false}
                                 />
                             </S.RowInput>
@@ -332,70 +340,22 @@ export const Register: React.FC = () => {
                                 <S.Input
                                     placeholder="Sobrenome"
                                     keyboardType="default"
-                                    onChangeText={(e) => setName(e)}
+                                    onChangeText={(e) => setLastName(e)}
                                     autoCapitalize="words"
                                     autoCorrect={false}
                                     returnKeyType="next"
-                                    onSubmitEditing={() => { emailInput.current.focus(); }}
+                                    ref={lastNameInput}
+                                    onSubmitEditing={() => { registrationInput.current.focus(); }}
                                     blurOnSubmit={false}
                                 />
                             </S.RowInput>
-                            {err && errors.nameError ?
+                            {err && errors.lastNameError ?
                                 <S.ViewError>
-                                    <S.LabelError>{errors.nameError}</S.LabelError>
+                                    <S.LabelError>{errors.lastNameError}</S.LabelError>
                                 </S.ViewError>
                                 : null
                             }
                         </S.AreaInput>
-                        {/* <S.AreaInput>
-                            <S.Label>Sexo <Required /></S.Label>
-                            <S.RowInput>
-                                <S.IconInput>
-                                    <Icon name="user" size={20} color='#FFFF' />
-                                </S.IconInput>
-                                <S.Input
-                                    placeholder="Sexo"
-                                    keyboardType="default"
-                                    onChangeText={(e) => setName(e)}
-                                    autoCapitalize="words"
-                                    autoCorrect={false}
-                                    returnKeyType="next"
-                                    onSubmitEditing={() => { emailInput.current.focus(); }}
-                                    blurOnSubmit={false}
-                                />
-                            </S.RowInput>
-                            {err && errors.nameError ?
-                                <S.ViewError>
-                                    <S.LabelError>{errors.nameError}</S.LabelError>
-                                </S.ViewError>
-                                : null
-                            }
-                        </S.AreaInput>
-                        <S.AreaInput>
-                            <S.Label>Curso <Required /></S.Label>
-                            <S.RowInput>
-                                <S.IconInput>
-                                    <Icon name="user" size={20} color='#FFFF' />
-                                </S.IconInput>
-                                <S.Input
-                                    placeholder="Curso"
-                                    keyboardType="default"
-                                    onChangeText={(e) => setName(e)}
-                                    autoCapitalize="words"
-                                    autoCorrect={false}
-                                    returnKeyType="next"
-                                    onSubmitEditing={() => { emailInput.current.focus(); }}
-                                    blurOnSubmit={false}
-                                />
-                            </S.RowInput>
-                            {err && errors.nameError ?
-                                <S.ViewError>
-                                    <S.LabelError>{errors.nameError}</S.LabelError>
-                                </S.ViewError>
-                                : null
-                            }
-                        </S.AreaInput> */}
-
                         <S.AreaInput>
                             <S.Label>Matricula <Required /></S.Label>
                             <S.RowInput>
@@ -409,7 +369,7 @@ export const Register: React.FC = () => {
                                     autoCapitalize="none"
                                     autoCorrect={false}
                                     ref={registrationInput}
-                                    onSubmitEditing={() => { passInput.current.focus(); }}
+                                    onSubmitEditing={() => { emailInput.current.focus(); }}
                                     returnKeyType="next"
                                 />
                             </S.RowInput>
@@ -433,7 +393,7 @@ export const Register: React.FC = () => {
                                     autoCapitalize="none"
                                     autoCorrect={false}
                                     ref={emailInput}
-                                    onSubmitEditing={() => { registrationInput.current.focus(); }}
+                                    onSubmitEditing={() => { passInput.current.focus(); }}
                                     returnKeyType="next"
                                 />
                             </S.RowInput>
@@ -481,6 +441,7 @@ export const Register: React.FC = () => {
                                 <S.LabelButtonRadius style={err && errors.aceptError ? { color: '#E75353' } : null}>Aceitar termos de uso.</S.LabelButtonRadius>
                             </S.Row>
                         </S.AreaInput>
+
                         <S.ViewButton>
                             <S.AreaButton>
                                 <S.ButtonBack

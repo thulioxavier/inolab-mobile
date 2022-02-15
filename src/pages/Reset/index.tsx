@@ -1,6 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { Fragment, useRef, useState } from "react";
 import { Alert, Platform } from "react-native";
+import { ActivityIndicator } from "react-native-paper";
 import Icon from "react-native-vector-icons/Feather";
 import { RegisterUser } from "../../services/api";
 import * as S from "./styles";
@@ -22,13 +23,15 @@ type ErrorRegister = {
   passwordError: string | null;
 };
 
-export const Login: React.FC = () => {
+export const Reset: React.FC = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [visible, setVisible] = useState<boolean>(true);
   const [acept, setAcept] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+
   const [errors, setErrors] = useState<object>({
     emailError: null,
     passwordError: null,
@@ -69,20 +72,7 @@ export const Login: React.FC = () => {
   };
 
   const handleSubmit = async () => {
-    if (!Error()) {
-        await RegisterUser({ email, name, password })
-            .then((result: ResultRequeste) => {
-                if (result.data.error) {
-                    Alert.alert(result.data.error)
-                } else {
-                    navigation.navigate('Home')
-                }
-            }).catch((reject) => {
-                console.log(reject.error);
-            });
-    } else {
-        return false;
-    }
+    navigation.navigate("Home");
   };
 
   const Requere = () => {
@@ -98,7 +88,17 @@ export const Login: React.FC = () => {
       <S.Container behavior={Platform.OS === "ios" ? "padding" : "height"}>
         <S.Form>
           <S.ViewTitle>
-            <S.Title>ENTRAR</S.Title>
+            <S.Title>RECUPERAR SENHA</S.Title>
+            <S.Label
+              style={{
+                fontSize: 16,
+                fontWeight: "normal",
+                color: "#616161",
+                marginTop: 15,
+              }}
+            >
+              Um e-mail será enviado com a sua nova senha.
+            </S.Label>
           </S.ViewTitle>
           <S.AreaInput>
             <S.Label>
@@ -129,76 +129,23 @@ export const Login: React.FC = () => {
               </S.ViewError>
             ) : null}
           </S.AreaInput>
-          <S.AreaInput>
-            <S.Label>
-              Senha <Requere />
-            </S.Label>
-            <S.RowInput>
-              <S.IconInput>
-                <Icon name="lock" size={20} color="#FFFF" />
-              </S.IconInput>
-              <S.Input
-                style={{ width: "70%" }}
-                secureTextEntry={visible}
-                placeholder="Password"
-                onChangeText={(e) => setPassword(e)}
-                autoCapitalize="none"
-                autoCorrect={false}
-                ref={passInput}
-                returnKeyType="go"
-                onSubmitEditing={handleSubmit}
-              />
-              <S.ButtonEye
-                onPress={() => {
-                  setVisible(!visible);
-                }}
-              >
-                <Icon
-                  name={visible ? "eye" : "eye-off"}
-                  size={20}
-                  color="#FFFF"
-                />
-              </S.ButtonEye>
-            </S.RowInput>
-            {err && errors.passwordError ? (
-              <S.ViewError>
-                <S.LabelError>{errors.passwordError}</S.LabelError>
-              </S.ViewError>
-            ) : null}
-          </S.AreaInput>
-          <S.Div>
-            <S.ResetPass onPress={() => {navigation.navigate('Reset')}}>
-              <S.Label style={{ fontSize: 13, color: "#E75353" }}>
-                Esqueceu a senha?
-              </S.Label>
-            </S.ResetPass>
-          </S.Div>
-          <S.ViewButton>
-            <S.AreaButton>
-              <S.ButtonRegister onPress={handleSubmit}>
-                <S.Label style={{ color: "#FFFF" }}>ENTRAR</S.Label>
-              </S.ButtonRegister>
-            </S.AreaButton>
-          </S.ViewButton>
 
           <S.ViewButton>
             <S.AreaButton>
-              <S.ButtonRegister
+              <S.ButtonBack
+                disabled={loading}
                 onPress={() => {
-                  navigation.navigate("SingUp");
+                  navigation.goBack();
                 }}
-                color="#ffffff"
               >
-                <S.Label
-                  style={{ color: "#585858", fontWeight: "400", fontSize: 15 }}
-                >
-                  Ainda não tem uma conta?
-                  <S.Label style={{ color: "#141414", fontSize: 15 }}>
-                    {" "}
-                    Cadastre-se
-                    {" "}
-                  </S.Label>
-                </S.Label>
+                <Icon name="arrow-left" size={20} color="#00C880" />
+              </S.ButtonBack>
+              <S.ButtonRegister onPress={handleSubmit} disabled={loading}>
+                {!loading ? (
+                  <S.Label style={{ color: "#FFFF" }}>ENVIAR</S.Label>
+                ) : (
+                  <ActivityIndicator color="#FFF" size="small" />
+                )}
               </S.ButtonRegister>
             </S.AreaButton>
           </S.ViewButton>

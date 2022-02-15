@@ -55,4 +55,18 @@ export const ListContentsModelus = async (id_module: Number) => {
         json.error = {error}
         return json;
     }
+};
+
+export const GetContent = async (idContent: Number) => {
+    let json: JsonResponse = { data: Object, error: Object };
+    console.log(idContent);
+    try {
+        const result = await api.get(`/contents/${idContent}`);
+        json.data = result.data;
+        return json.data;
+    } catch (error) {
+        console.log(error, 'erro');
+        json.error = {error}
+        return json;
+    }
 }

@@ -18,7 +18,7 @@ export const Modules = ({ values = [] }: Props) => {
                         <S.Card key={index} style={S.Styles.Shadow}
                             onPress={() => {
                                 navigation.navigate(
-                                    "ViewContent",
+                                    "ViewContents",
                                     {
                                         id_module: item.id,
                                         name: item.name,

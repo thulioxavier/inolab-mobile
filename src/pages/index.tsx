@@ -3,7 +3,9 @@ import {Login} from './Login/index'
 import {Register} from './Register/index';
 import { Intro } from './Intro';
 import { Podium } from './Podium';
+import {ViewContents} from './ViewContents';
 import {ViewContent} from './ViewContent';
+import {Reset} from './Reset';
 
 export {
     Home,
@@ -11,5 +13,8 @@ export {
     Register,
     Intro,
     Podium,
+    ViewContents,
+    Reset,
     ViewContent
+
 }
