@@ -60,14 +60,14 @@ export const Home = () => {
                 </S.Header>
 
                 <S.Content>
-                    <S.ContentInput focus={focus} >
+                    {/* <S.ContentInput focus={focus} >
                         <S.InputSearch editable={false} selectTextOnFocus={false} placeholder="Buscar" onFocus={() => {
                             setFocus(!focus)
                         }} />
                         <S.ButtomSearch disabled={true}>
                             <Icon name="search" size={24} color='#FAFAFA' />
                         </S.ButtomSearch>
-                    </S.ContentInput>
+                    </S.ContentInput> */}
                     <S.SectionTitle>MATÉRIAS</S.SectionTitle>
                     {
                         loading.matter ? <PlaceholderSubjects/> : <Matter values={subjects} />

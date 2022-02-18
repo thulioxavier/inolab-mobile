@@ -94,7 +94,9 @@ export const LabelButtonRadius = styled(Text)`
 `;
 
 
+
 export const Input = styled(TextInput)`
+    flex: 1;
     width: 100%;
     height: 40px;
     padding: 2px 5px;

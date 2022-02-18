@@ -10,6 +10,19 @@ export const RegisterUser = async (data: Object) => {
     try {
         const result = await api.post('/user/', data);
         json.data = result.data;
+        return json.data;
+    } catch (error) {
+        console.log(error, 'erro');
+        json.error = {error}
+        return json;
+    }
+};
+
+export const LoginUser = async (data: Object) => {
+    let json: JsonResponse = { data: Object, error: Object };
+    try {
+        const result = await api.post('/user/login', data);
+        json.data = result.data;
         return json;
     } catch (error) {
         console.log(error, 'erro');

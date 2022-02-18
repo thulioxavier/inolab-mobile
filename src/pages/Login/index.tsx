@@ -1,8 +1,8 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { Fragment, useRef, useState } from "react";
-import { Alert, Platform } from "react-native";
+import React, { Fragment, useEffect, useRef, useState } from "react";
+import { Alert, Platform, ActivityIndicator } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
-import { RegisterUser } from "../../services/api";
+import { LoginUser } from "../../services/api";
 import * as S from "./styles";
 
 type Data = {
@@ -25,16 +25,18 @@ type ErrorRegister = {
 export const Login: React.FC = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState<string>("");
-  const [name, setName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [visible, setVisible] = useState<boolean>(true);
   const [acept, setAcept] = useState<boolean>(false);
+
+  const [errorLogin, setErrorLogin] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
+
   const [errors, setErrors] = useState<object>({
     emailError: null,
     passwordError: null,
   });
 
-  const nameInput = useRef();
   const emailInput = useRef();
   const passInput = useRef();
 
@@ -68,20 +70,35 @@ export const Login: React.FC = () => {
     return aux;
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      setErrorLogin(false);
+    }, 5000);
+  }, [errorLogin]);
+
   const handleSubmit = async () => {
     if (!Error()) {
-        await RegisterUser({ email, name, password })
-            .then((result: ResultRequeste) => {
-                if (result.data.error) {
-                    Alert.alert(result.data.error)
-                } else {
-                    navigation.navigate('Home')
-                }
-            }).catch((reject) => {
-                console.log(reject.error);
-            });
+      setLoading(true);
+      await LoginUser({ email, password })
+        .then((result: ResultRequeste) => {
+          if (!result.data.json) {
+            setLoading(false);
+            setErrorLogin(true);
+          } else if (result.data.json.data.status) {
+            navigation.navigate("Home");
+            setLoading(false);
+          } else {
+            setLoading(false);
+            setErrorLogin(true);
+          }
+        })
+        .catch((reject) => {
+          setLoading(false);
+          setErrorLogin(true);
+          console.log(reject.error);
+        });
     } else {
-        return false;
+      return false;
     }
   };
 
@@ -100,6 +117,7 @@ export const Login: React.FC = () => {
           <S.ViewTitle>
             <S.Title>ENTRAR</S.Title>
           </S.ViewTitle>
+
           <S.AreaInput>
             <S.Label>
               E-mail <Requere />
@@ -109,6 +127,7 @@ export const Login: React.FC = () => {
                 <Icon name="at-sign" size={20} color="#FFFF" />
               </S.IconInput>
               <S.Input
+                editable={!loading}
                 placeholder="Email Adress"
                 keyboardType="email-address"
                 onChangeText={(e) => setEmail(e)}
@@ -129,6 +148,7 @@ export const Login: React.FC = () => {
               </S.ViewError>
             ) : null}
           </S.AreaInput>
+
           <S.AreaInput>
             <S.Label>
               Senha <Requere />
@@ -138,6 +158,7 @@ export const Login: React.FC = () => {
                 <Icon name="lock" size={20} color="#FFFF" />
               </S.IconInput>
               <S.Input
+                editable={!loading}
                 style={{ width: "70%" }}
                 secureTextEntry={visible}
                 placeholder="Password"
@@ -166,8 +187,13 @@ export const Login: React.FC = () => {
               </S.ViewError>
             ) : null}
           </S.AreaInput>
+
           <S.Div>
-            <S.ResetPass onPress={() => {navigation.navigate('Reset')}}>
+            <S.ResetPass
+              onPress={() => {
+                navigation.navigate("Reset");
+              }}
+            >
               <S.Label style={{ fontSize: 13, color: "#E75353" }}>
                 Esqueceu a senha?
               </S.Label>
@@ -176,10 +202,25 @@ export const Login: React.FC = () => {
           <S.ViewButton>
             <S.AreaButton>
               <S.ButtonRegister onPress={handleSubmit}>
-                <S.Label style={{ color: "#FFFF" }}>ENTRAR</S.Label>
+                {!loading ? (
+                  <S.Label style={{ color: "#FFFF" }}>ENTRAR</S.Label>
+                ) : (
+                  <ActivityIndicator color="#FFF" size="small" />
+                )}
               </S.ButtonRegister>
             </S.AreaButton>
           </S.ViewButton>
+          {errorLogin ? (
+            <S.ViewButton>
+              <S.AreaButton>
+                <S.ErrorArea>
+                  <S.Label style={{ color: "#FAFAF0" }}>
+                    Falha ao se autenticar!!
+                  </S.Label>
+                </S.ErrorArea>
+              </S.AreaButton>
+            </S.ViewButton>
+          ) : null}
 
           <S.ViewButton>
             <S.AreaButton>
@@ -195,8 +236,7 @@ export const Login: React.FC = () => {
                   Ainda não tem uma conta?
                   <S.Label style={{ color: "#141414", fontSize: 15 }}>
                     {" "}
-                    Cadastre-se
-                    {" "}
+                    Cadastre-se{" "}
                   </S.Label>
                 </S.Label>
               </S.ButtonRegister>

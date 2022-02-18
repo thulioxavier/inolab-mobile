@@ -20,6 +20,7 @@ export const Form = styled(View)`
 `;
 
 export const AreaInput = styled(View)`
+    flex-direction: column;
     width: 100%;
     padding: 5px;
     margin-top: 8px;
@@ -36,6 +37,15 @@ export const RowInput = styled(View)`
     border: 1px solid #DDD;
     border-radius: 5px;
 `;
+
+
+export const Input = styled(TextInput)`
+    flex: 1;
+    width: 100%;
+    height: 40px;
+    padding: 2px 5px;
+`;
+
 
 export const ViewButton = styled(View)`
     width: 100%;
@@ -93,12 +103,6 @@ export const LabelButtonRadius = styled(Text)`
 `;
 
 
-export const Input = styled(TextInput)`
-    width: 100%;
-    height: 40px;
-    padding: 2px 5px;
-`;
-
 export const ButtonRadius = styled(TouchableOpacity)`
     display: flex;
     justify-content: center;
@@ -123,6 +127,18 @@ export const ViewTitle = styled(View)`
     width: 100%;
     justify-content: center;
     align-items: center;
+`;
+
+export const ErrorArea = styled(View)`
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 45px;
+
+    background-color: #E75353;
+
+    border-radius: 5px;
 `;
 
 export const P = styled(Text)`
