@@ -39,6 +39,7 @@ export const Progress = styled(View)`
 `;
 
 export const Title = styled(Text)`
+    width: 80%;
     font-size: 18px;
     font-weight: bold;
     color: #333333;    

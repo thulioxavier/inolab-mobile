@@ -298,25 +298,25 @@ export const Register: React.FC = () => {
             </S.ViewTitle>
 
             {/* <S.ViewButton>
-                            <S.AreaButton>
-                                <S.ButtonBack
-                                    disabled={true}
-                                >
-                                    <Icon name='image' size={20} color='#00C880' />
-                                </S.ButtonBack>
-                                <S.ButtonRegister onPress={() => { setShowCreateAvatar(!showCreateAvatar) }}>
-                                    {
-                                        !loading ?
-                                            <S.Label style={{ color: '#FFFF' }}>
-                                                Criar Avatar
-                                            </S.Label>
-                                            :
-                                            <ActivityIndicator color="#FFF" size="small" />
-                                    }
+                  <S.AreaButton>
+                      <S.ButtonBack
+                          disabled={true}
+                      >
+                          <Icon name='image' size={20} color='#00C880' />
+                      </S.ButtonBack>
+                      <S.ButtonRegister onPress={() => { setShowCreateAvatar(!showCreateAvatar) }}>
+                          {
+                              !loading ?
+                                  <S.Label style={{ color: '#FFFF' }}>
+                                      Criar Avatar
+                                  </S.Label>
+                                  :
+                                  <ActivityIndicator color="#FFF" size="small" />
+                          }
 
-                                </S.ButtonRegister>
-                            </S.AreaButton>
-                        </S.ViewButton> */}
+                      </S.ButtonRegister>
+                  </S.AreaButton>
+              </S.ViewButton> */}
 
             <S.AreaInput>
               <S.Label>

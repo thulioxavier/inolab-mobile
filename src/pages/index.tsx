@@ -6,6 +6,7 @@ import { Podium } from './Podium';
 import {ViewContents} from './ViewContents';
 import {ViewContent} from './ViewContent';
 import {Reset} from './Reset';
+import { Question } from './Question';
 
 export {
     Home,
@@ -15,6 +16,7 @@ export {
     Podium,
     ViewContents,
     Reset,
-    ViewContent
+    ViewContent,
+    Question,
 
 }

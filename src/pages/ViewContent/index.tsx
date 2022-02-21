@@ -1,10 +1,10 @@
 import React, { Fragment, useEffect, useState } from "react";
 import Icon from "react-native-vector-icons/Feather";
 import { useNavigation } from "@react-navigation/native";
-
+import * as Linking from "expo-linking";
 import * as S from "./styles";
-import { GetContent } from "../../services/api";
-import { Text } from "react-native-paper";
+import { GetContentById } from "../../services/api";
+import { Alert } from "react-native";
 
 export const ViewContent = ({ route }: any) => {
   const navigation = useNavigation();
@@ -13,7 +13,7 @@ export const ViewContent = ({ route }: any) => {
   const [select, setSelect] = useState<Object>({
     init: true,
     play: false,
-    exemple: false,
+    example: false,
     ref: false,
   });
 
@@ -24,8 +24,112 @@ export const ViewContent = ({ route }: any) => {
   }, []);
 
   const getContent = async () => {
-    const result = await GetContent(idContent);
-    setValues(result.data[0][0]);
+    try {
+      const result = await GetContentById(idContent);
+      if (result?.data?.status) {
+        setValues(result.data.response);
+      } else {
+        Alert.alert("Não foi possível lista as informações!");
+      }
+    } catch (error) {
+      Alert.alert("Não foi possível lista as informações!");
+    }
+  };
+
+  const Body = (abstract: string, body: string) => {
+    return (
+      <Fragment>
+        <S.Container style={{ marginBottom: 80 }}>
+          <S.SectionTitle>Resumo</S.SectionTitle>
+          <S.Label style={{ color: "black", textAlign: "justify" }}>
+            {abstract}
+          </S.Label>
+
+          <S.SectionTitle>{values?.title}</S.SectionTitle>
+
+          <S.Label style={{ color: "black", textAlign: "justify" }}>
+            {body}
+          </S.Label>
+        </S.Container>
+      </Fragment>
+    );
+  };
+
+  const PlayContent = (play: Array<object>) => {
+    return (
+      <Fragment>
+        {play?.map((item, key) => {
+          return (
+            <Fragment key={key}>
+              <S.ButtonLink
+                onPress={() => {
+                  openLink(item?.url);
+                }}
+              >
+                <Icon
+                  name="link"
+                  size={19}
+                  color="#00C880"
+                  style={{ marginRight: 5 }}
+                />
+                <S.Label
+                  style={{ fontWeight: "bold", color: "#484848" }}
+                  numberOfLines={1}
+                >
+                  {item?.title}
+                </S.Label>
+              </S.ButtonLink>
+            </Fragment>
+          );
+        })}
+      </Fragment>
+    );
+  };
+
+  const ExamplesContent = (examples: Array<object>) => {
+    return (
+      <Fragment>
+        {examples?.map((item, key) => {
+          return (
+            <Fragment key={key}>
+              <S.SectionTitle numberOfLines={1}>{item?.title}</S.SectionTitle>
+
+              <S.Label style={{ color: "black" }}> • {item?.body}</S.Label>
+            </Fragment>
+          );
+        })}
+      </Fragment>
+    );
+  };
+
+  const ReferencesContent = (references: Array<object>) => {
+    return (
+      <Fragment>
+        {references?.map((item, key) => {
+          return (
+            <Fragment key={key}>
+              <S.Label style={{ color: "black" }}> • {item?.body}</S.Label>
+            </Fragment>
+          );
+        })}
+      </Fragment>
+    );
+  };
+
+  const openLink = (link: string) => {
+    Linking.openURL(link);
+  };
+
+  const caseContentInfo = () => {
+    if (select.init) {
+      return Body(values?.abstract, values?.body);
+    } else if (select.play) {
+      return PlayContent(values?.content_Videos);
+    } else if (select.example) {
+      return ExamplesContent(values?.examples);
+    } else {
+      return ReferencesContent(values?.references);
+    }
   };
 
   return (
@@ -56,7 +160,7 @@ export const ViewContent = ({ route }: any) => {
               onPress={() => {
                 select.init = !select.init;
                 select.play = false;
-                select.exemple = false;
+                select.example = false;
                 select.ref = false;
                 setSelect({ ...select });
               }}
@@ -68,7 +172,7 @@ export const ViewContent = ({ route }: any) => {
               onPress={() => {
                 select.init = false;
                 select.play = !select.play;
-                select.exemple = false;
+                select.example = false;
                 select.ref = false;
                 setSelect({ ...select });
               }}
@@ -76,23 +180,23 @@ export const ViewContent = ({ route }: any) => {
               <S.Label select={select.play}>Mídia</S.Label>
             </S.TabButton>
             <S.TabButton
-              select={select.exemple}
+              select={select.example}
               onPress={() => {
                 select.init = false;
                 select.play = false;
-                select.exemple = !select.exemple;
+                select.example = !select.example;
                 select.ref = false;
                 setSelect({ ...select });
               }}
             >
-              <S.Label select={select.exemple}>Exemplo</S.Label>
+              <S.Label select={select.example}>Exemplo</S.Label>
             </S.TabButton>
             <S.TabButton
               select={select.ref}
               onPress={() => {
                 select.init = false;
                 select.play = false;
-                select.exemple = false;
+                select.example = false;
                 select.ref = !select.ref;
                 setSelect({ ...select });
               }}
@@ -100,8 +204,16 @@ export const ViewContent = ({ route }: any) => {
               <S.Label select={select.ref}>Referência</S.Label>
             </S.TabButton>
           </S.TabRow>
-
-          <Text>{values?.body}</Text>
+          {caseContentInfo()}
+          {select.init ? (
+            <S.ButtonPlay
+              onPress={() => {
+                navigation.navigate("Question");
+              }}
+            >
+              <S.Label style={{ fontSize: 16 }}>Iniciar</S.Label>
+            </S.ButtonPlay>
+          ) : null}
         </S.Content>
       </S.Container>
     </Fragment>

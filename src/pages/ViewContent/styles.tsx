@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Image, ScrollView, Text, TouchableOpacity, View, StyleSheet, TextInput} from 'react-native';
 
 export const Container = styled(View)`
-    display: flex;
+    flex: 1;
     width: 100%;
     background-color: #FFF;
     height: 100%;
@@ -10,7 +10,7 @@ export const Container = styled(View)`
 
 export const Content = styled(ScrollView)`
     padding: 0 5px;
-    display: flex;
+    flex: 1;
     width: 100%;
     height: 100%;
 `;
@@ -22,6 +22,32 @@ export const SectionTitle = styled(Text)`
     color: #5f5f5f;
     margin-bottom: 10px;
     margin-top: 10px;
+`;
+
+export const ButtonPlay = styled(TouchableOpacity)`
+    position: absolute;
+    width: 100px;
+    height: 45px;
+    align-items: center;
+    justify-content: center;
+    right: 10px;
+    bottom: 15px;
+    border-radius: 5px;
+    background-color: #00C880;
+`;
+
+export const ButtonLink = styled(TouchableOpacity)`
+    width: 100%;
+    height: 35px;
+    flex: 1;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    margin-top: 10px;
+    padding: 0 10px;
+
+    background-color: #f0f0f0;
 `;
 
 export const Header = styled(View)`
