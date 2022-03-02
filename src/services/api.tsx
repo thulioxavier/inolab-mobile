@@ -96,6 +96,19 @@ export const GetContentById = async (idContent: Number) => {
     }
 }
 
+export const GetQuestionsByContent = async (idContent: Number) => {
+    let json: JsonResponse = { data: Object, error: Object };
+    try {
+        const result = await api.get(`/question/content/${idContent}`);
+        json.data = result.data;
+        return json.data;
+    } catch (error) {
+        console.log(error, 'erro');
+        json.error = {error}
+        return json;
+    }
+}
+
 export const ShowInfoDash = async (idUser: Number = 1) => {
     let json: JsonResponse = { data: Object, error: Object };
     try {

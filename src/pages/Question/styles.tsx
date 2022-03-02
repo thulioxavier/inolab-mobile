@@ -38,9 +38,9 @@ export const ContentCardEmoji = styled(View)`
 `;
 
 export const H1 = styled(Text)`
-    font-size: 24px;
-    font-weight: 600;
-
+    font-size: 18px;
+    font-weight: bold;
+    color: #484848;
     margin-bottom: 10px;
 `;
 
@@ -87,6 +87,30 @@ export const Options = styled(TouchableOpacity)`
     background-color: ${({ background }) => (background)};
 `;
 
+export const LabelTitle = styled(Text)`
+    font-size: 16px;
+    font-weight: bold;
+    color: #484848;
+`;
+
+export const Circle = styled(View)`
+    width: 10px;
+    height: 10px;
+    border-radius: 50px;
+    margin-right: 5px;
+    background-color: #DDD;
+`;
+
+export const RowContent = styled(View)`
+    width: 100%;
+    padding: 5px;
+
+    flex: 1;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+`;
+
 export const QuestionContent = styled(View)`
     width: 100%;
     background-color: #F0F0F0;
@@ -123,6 +147,7 @@ export const ButtonNext = styled(TouchableOpacity)`
 
 export const Time = styled(Text)`
     color: #00C880;
+    font-weight: bold;
     font-size: 20px;
 
 `;

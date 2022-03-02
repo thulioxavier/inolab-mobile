@@ -208,7 +208,7 @@ export const ViewContent = ({ route }: any) => {
           {select.init ? (
             <S.ButtonPlay
               onPress={() => {
-                navigation.navigate("Question");
+                navigation.navigate("Question", {idContent: values?.id});
               }}
             >
               <S.Label style={{ fontSize: 16 }}>Iniciar</S.Label>

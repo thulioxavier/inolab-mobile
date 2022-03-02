@@ -17,7 +17,7 @@ export default function App() {
         screenOptions={{
           headerShown: false
         }}
-        initialRouteName={"SingIn"}
+        initialRouteName={"Home"}
       >
 
         <Stack.Screen name="Home" component={MainTab}/>
