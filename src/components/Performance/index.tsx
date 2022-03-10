@@ -43,7 +43,7 @@ export const Performance = () => {
 
   const getShowMetrics = async () => {
     try {
-      const result: any = await ShowInfoDash(1);
+      const result: any = await ShowInfoDash(1)
       if (result.data.status) {
         setValues(result?.data?.metrics);
         setChartDate(result?.data?.chart);
@@ -51,7 +51,9 @@ export const Performance = () => {
       } else {
         Alert.alert("Error");
       }
-    } catch (error) {}
+    } catch (error) {
+
+    }
   };
 
   const ShowInfo = () => {

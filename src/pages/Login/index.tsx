@@ -1,8 +1,11 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { Fragment, useEffect, useRef, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState, useContext } from "react";
 import { Alert, Platform, ActivityIndicator } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 import { LoginUser } from "../../services/api";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import UserContexts from "../../contexts/UserContexts";
+
 import * as S from "./styles";
 
 type Data = {
@@ -29,6 +32,8 @@ export const Login: React.FC = () => {
   const [visible, setVisible] = useState<boolean>(true);
   const [acept, setAcept] = useState<boolean>(false);
 
+  const {dispatch: userDispatch} = useContext(UserContexts );
+
   const [errorLogin, setErrorLogin] = useState(false);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -39,7 +44,6 @@ export const Login: React.FC = () => {
 
   const emailInput = useRef();
   const passInput = useRef();
-
   const [err, setErr] = useState<boolean>(false);
 
   const Error = () => {
@@ -80,12 +84,16 @@ export const Login: React.FC = () => {
     if (!Error()) {
       setLoading(true);
       await LoginUser({ email, password })
-        .then((result: ResultRequeste) => {
+        .then(async (result: ResultRequeste) => {
           if (!result.data.json) {
             setLoading(false);
             setErrorLogin(true);
           } else if (result.data.json.data.status) {
-            navigation.navigate("Home");
+
+            await AsyncStorage.setItem("@token", result.data.json.data.TOKEN)
+
+            // navigation.navigate("Home");'
+            console.log(result)
             setLoading(false);
           } else {
             setLoading(false);
