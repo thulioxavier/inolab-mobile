@@ -8,7 +8,6 @@ interface Props {
 }
 
 export const PodiumUser = ({ values = [] }: Props) => {
-    console.log(values)
 
     return (
         <Fragment>

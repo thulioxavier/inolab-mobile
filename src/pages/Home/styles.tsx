@@ -55,6 +55,14 @@ export const Hello = styled(Text)`
     color: #494949;
 `;
 
+export const Row = styled(View)`
+    flex: 1;
+    flex-direction: row;
+
+    justify-content: space-between;
+    align-items: center;
+`;
+
 export const ButtomHeader = styled(TouchableOpacity)`
     display: flex;
     justify-content: center;
@@ -62,7 +70,7 @@ export const ButtomHeader = styled(TouchableOpacity)`
     width: 40px;
     height: 40px;
 
-    background-color: ${(props) => (props.color ? props.color : '#00C880' )} ;
+    background-color: ${(props) => (props.color ? props.color : '#527C91' )} ;
     border-radius: 5px;
 `;
 
@@ -74,7 +82,7 @@ export const ButtomSearch = styled(TouchableOpacity)`
     height: 40px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
-    background-color: ${(props) => (props.disabled ? "#bdbdbd" : "#00C880 ")};
+    background-color: ${(props) => (props.disabled ? "#bdbdbd" : "#527C91 ")};
     padding: 5px;
 `;
 

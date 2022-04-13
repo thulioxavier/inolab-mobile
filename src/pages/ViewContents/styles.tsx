@@ -80,7 +80,7 @@ export const CardContent = styled(TouchableOpacity)`
     height: 120px;
 
     border-left-width: 8px;
-    border-left-color: #00C880;
+    border-left-color: #527C91;
     border-style: solid;
     margin-top: 5px;
     padding: 5px;
@@ -93,7 +93,7 @@ export const ButtomHeader = styled(TouchableOpacity)`
     width: 40px;
     height: 40px;
 
-    background-color: ${(props) => (props.color ? props.color : '#00C880' )} ;
+    background-color: ${(props) => (props.color ? props.color : '#527C91' )} ;
     border-radius: 5px;
 `;
 

@@ -1,12 +1,13 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { Fragment, useEffect, useRef, useState, useContext } from "react";
-import { Alert, Platform, ActivityIndicator } from "react-native";
+import { Alert, Platform, ActivityIndicator, Image } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 import { LoginUser } from "../../services/api";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import UserContexts from "../../contexts/UserContexts";
 
 import * as S from "./styles";
+import {Login as LoginImg } from "../../assets/icons";
 
 type Data = {
   error?: object;
@@ -31,8 +32,6 @@ export const Login: React.FC = () => {
   const [password, setPassword] = useState<string>("");
   const [visible, setVisible] = useState<boolean>(true);
   const [acept, setAcept] = useState<boolean>(false);
-
-  const {dispatch: userDispatch} = useContext(UserContexts );
 
   const [errorLogin, setErrorLogin] = useState(false);
   const [loading, setLoading] = useState<boolean>(false);
@@ -92,8 +91,7 @@ export const Login: React.FC = () => {
 
             await AsyncStorage.setItem("@token", result.data.json.data.TOKEN)
 
-            // navigation.navigate("Home");'
-            console.log(result)
+            navigation.navigate("Home");
             setLoading(false);
           } else {
             setLoading(false);
@@ -103,7 +101,6 @@ export const Login: React.FC = () => {
         .catch((reject) => {
           setLoading(false);
           setErrorLogin(true);
-          console.log(reject.error);
         });
     } else {
       return false;
@@ -113,7 +110,7 @@ export const Login: React.FC = () => {
   const Requere = () => {
     return (
       <>
-        <S.Label style={{ color: "#E75353" }}>*</S.Label>
+        <S.Label style={{ color: "#EB4A47" }}>*</S.Label>
       </>
     );
   };
@@ -122,8 +119,15 @@ export const Login: React.FC = () => {
     <Fragment>
       <S.Container behavior={Platform.OS === "ios" ? "padding" : "height"}>
         <S.Form>
+        <Image source={LoginImg} style={{
+              width: 250,
+              height: 250,
+              marginLeft: 'auto',
+              marginRight: 'auto',
+              resizeMode: 'contain'
+            }}/>
           <S.ViewTitle>
-            <S.Title>ENTRAR</S.Title>
+            <S.Title>Entrar</S.Title>
           </S.ViewTitle>
 
           <S.AreaInput>
@@ -132,7 +136,7 @@ export const Login: React.FC = () => {
             </S.Label>
             <S.RowInput>
               <S.IconInput>
-                <Icon name="at-sign" size={20} color="#FFFF" />
+                <Icon name="at-sign" size={24} color="#FFFF" />
               </S.IconInput>
               <S.Input
                 editable={!loading}
@@ -163,7 +167,7 @@ export const Login: React.FC = () => {
             </S.Label>
             <S.RowInput>
               <S.IconInput>
-                <Icon name="lock" size={20} color="#FFFF" />
+                <Icon name="lock" size={24} color="#FFFF" />
               </S.IconInput>
               <S.Input
                 editable={!loading}
@@ -184,7 +188,7 @@ export const Login: React.FC = () => {
               >
                 <Icon
                   name={visible ? "eye" : "eye-off"}
-                  size={20}
+                  size={24}
                   color="#FFFF"
                 />
               </S.ButtonEye>
@@ -202,7 +206,7 @@ export const Login: React.FC = () => {
                 navigation.navigate("Reset");
               }}
             >
-              <S.Label style={{ fontSize: 13, color: "#E75353" }}>
+              <S.Label style={{ fontSize: 13, color: "#EB4A47" }}>
                 Esqueceu a senha?
               </S.Label>
             </S.ResetPass>
@@ -211,7 +215,7 @@ export const Login: React.FC = () => {
             <S.AreaButton>
               <S.ButtonRegister onPress={handleSubmit}>
                 {!loading ? (
-                  <S.Label style={{ color: "#FFFF" }}>ENTRAR</S.Label>
+                  <S.Label style={{ color: "#FFFF" }}>Entrar</S.Label>
                 ) : (
                   <ActivityIndicator color="#FFF" size="small" />
                 )}

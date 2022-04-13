@@ -35,7 +35,7 @@ export const Progress = styled(View)`
     height: 10px;
 
     border-radius: 50px;
-    background-color: #00C880;
+    background-color: #527C91;
 `;
 
 export const Title = styled(Text)`
@@ -54,7 +54,7 @@ export const SubTitle = styled(Text)`
 export const Points = styled(Text)`
     font-size: 14px;
     font-weight: bold;
-    color: #00C880;
+    color: #527C91;
 `;
 
 export const ItemCardRow = styled(View)`
@@ -90,7 +90,7 @@ export const MarkNew = styled(View)`
     width: 15px;
     height: 15px;
     border-radius: 50px;
-    background-color: #00C880;
+    background-color: #527C91;
 `;
 
 export const Scrool = styled(ScrollView)`

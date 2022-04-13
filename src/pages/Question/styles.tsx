@@ -1,4 +1,4 @@
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import styled from "styled-components";
 
 export const Container = styled(View)`
@@ -37,10 +37,27 @@ export const ContentCardEmoji = styled(View)`
     margin-bottom: 20px;
 `;
 
+export const ButtomHeader = styled(TouchableOpacity)`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+
+    background-color: ${(props) => (props.color ? props.color : '#527C91' )} ;
+    border-radius: 5px;
+`;
+
+export const Hello = styled(Text)`
+    font-size: 18px;
+    font-weight: bold;
+    color: #494949;
+`;
+
 export const H1 = styled(Text)`
     font-size: 18px;
     font-weight: bold;
-    color: #484848;
+    color: #5e5e5e;
     margin-bottom: 10px;
 `;
 
@@ -93,9 +110,11 @@ export const LabelTitle = styled(Text)`
     color: #484848;
 `;
 
-export const Circle = styled(View)`
-    width: 10px;
-    height: 10px;
+export const Circle = styled(TouchableOpacity)`
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
     border-radius: 50px;
     margin-right: 5px;
     background-color: #DDD;
@@ -117,11 +136,12 @@ export const QuestionContent = styled(View)`
 
     padding: 5px;
     margin-bottom: 15px;
+    margin-top: 15px;
 `;
 
 export const QuestionContentScroll = styled(ScrollView)`
     width: 100%;
-    max-height: 200px;
+    max-height: 350px;
 `;
 
 export const AreaButton = styled(View)`
@@ -139,14 +159,14 @@ export const ButtonNext = styled(TouchableOpacity)`
     height: 45px;
     justify-content: center;
     align-items: center;
-    background-color: #00C880;
+    background-color: #527C91;
 
     border-radius: 5px;
 `;
 
 
 export const Time = styled(Text)`
-    color: #00C880;
+    color: #527C91;
     font-weight: bold;
     font-size: 20px;
 
@@ -172,3 +192,16 @@ export const Header = styled(View)`
 
 `;
 
+export const Styles = StyleSheet.create({
+    Shadow: {
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 5,
+            height: 5,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+
+        elevation: 5,
+    },
+})

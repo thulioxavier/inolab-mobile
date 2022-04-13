@@ -71,10 +71,10 @@ export const Performance = () => {
             <S.ModalHeader
               color={
                 selectData.icon === "arrow-up"
-                  ? "#00C880"
+                  ? "#527C91"
                   : selectData.icon === "activity"
                   ? "#ECAE52"
-                  : "#E75353"
+                  : "#EB4A47"
               }
             >
               <S.ButtonIconClose
@@ -100,10 +100,10 @@ export const Performance = () => {
                 size={35}
                 color={
                   selectData.icon === "arrow-up"
-                    ? "#00C880"
+                    ? "#527C91"
                     : selectData.icon === "activity"
                     ? "#ECAE52"
-                    : "#E75353"
+                    : "#EB4A47"
                 }
                 style={{ marginRight: 5 }}
               />
@@ -121,7 +121,7 @@ export const Performance = () => {
                             <Icon
                               name={item.status ? "arrow-up" : "arrow-down"}
                               size={14}
-                              color={item.status ? "#00C880" : "#E75353"}
+                              color={item.status ? "#527C91" : "#EB4A47"}
                               style={{ marginRight: 5 }}
                             />
                             <S.Label style={{fontWeight:'bold'}}>{item?.points}</S.Label>
@@ -176,14 +176,14 @@ export const Performance = () => {
               <Icon
                 name="arrow-up"
                 size={19}
-                color="#00C880"
+                color="#527C91"
                 style={{ marginRight: 5 }}
               />
               <S.Label
                 style={{
                   color:
                     values?.hits?.count < values?.mistakes.count
-                      ? "#E75353"
+                      ? "#EB4A47"
                       : "#555555",
                   fontWeight:
                     values?.hits?.count < values?.mistakes.count
@@ -212,7 +212,7 @@ export const Performance = () => {
               <Icon
                 name="arrow-down"
                 size={19}
-                color="#E75353"
+                color="#EB4A47"
                 style={{ marginRight: 5 }}
               />
               <S.Label>{values?.mistakes.count}</S.Label>
@@ -264,7 +264,7 @@ export const Performance = () => {
             <ContributionGraph
               values={chartDate}
               endDate={new Date(chartDate[chartDate.length - 1]?.date)}
-              numDays={100}
+              numDays={95}
               width={screenWidth}
               height={200}
               chartConfig={chartConfig}

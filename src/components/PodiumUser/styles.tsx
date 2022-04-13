@@ -37,5 +37,5 @@ export const Positon = styled(Text)`
 export const Lavel = styled(Text)`
     font-size: 12px;
     font-weight: bold;
-    color: #00C880;
+    color: #527C91;
 `;

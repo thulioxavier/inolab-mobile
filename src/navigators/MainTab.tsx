@@ -9,17 +9,14 @@ import { StyleSheet, View } from 'react-native';
 
 import { Login, Home, Register, Podium } from '../pages/index';
 
-import *as S from './styles';
-
 export default () => {
-
 
     return (
         <Fragment>
             <Tab.Navigator
                 initialRouteName="Home"
                 tabBarOptions={{
-                    activeTintColor: '#00C880',
+                    activeTintColor: '#527C91',
                     inactiveTintColor: '#fafafa',
                     showLabel: false,
                     keyboardHidesTabBar: true,
@@ -62,7 +59,6 @@ export default () => {
             </Tab.Navigator>
         </Fragment >
     );
-
 }
 
 const styles = StyleSheet.create({
@@ -84,6 +80,6 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         width: 50,
         height: 50,
-        backgroundColor: '#00C880',
+        backgroundColor: '#527C91',
     }
 })

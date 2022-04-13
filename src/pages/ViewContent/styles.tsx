@@ -6,6 +6,9 @@ export const Container = styled(View)`
     width: 100%;
     background-color: #FFF;
     height: 100%;
+
+    justify-content: center;
+    align-items: center;
 `;
 
 export const Content = styled(ScrollView)`
@@ -33,7 +36,7 @@ export const ButtonPlay = styled(TouchableOpacity)`
     right: 10px;
     bottom: 15px;
     border-radius: 5px;
-    background-color: #00C880;
+    background-color: #527C91;
 `;
 
 export const ButtonLink = styled(TouchableOpacity)`
@@ -72,7 +75,7 @@ export const TabRow = styled(View)`
 
     border-radius: 5px;
 
-    background-color: #00C880;
+    background-color: #527C91;
 `;
 
 export const TabButton = styled(TouchableOpacity)`
@@ -82,7 +85,7 @@ export const TabButton = styled(TouchableOpacity)`
     padding: 5px;
     border-radius: 5px;
 
-    background-color: ${(props) => (props.select ? '#484848' :  '#00C880')};
+    background-color: ${(props) => (props.select ? '#484848' :  '#527C91')};
     justify-content: center;
     align-items: center;
 `;
@@ -99,7 +102,7 @@ export const Icon = styled(Image)`
 
 export const Label = styled(Text)`
     font-size: 14px;
-    color:${(props) => (props.select ? '#00C880' :  '#FFFF')};
+    color:${(props) => (props.select ? '#527C91' :  '#FFFF')};
 `;
 
 export const ButtomHeader = styled(TouchableOpacity)`
@@ -109,7 +112,7 @@ export const ButtomHeader = styled(TouchableOpacity)`
     width: 40px;
     height: 40px;
 
-    background-color: ${(props) => (props.color ? props.color : '#00C880' )} ;
+    background-color: ${(props) => (props.color ? props.color : '#527C91' )} ;
     border-radius: 5px;
 `;
 

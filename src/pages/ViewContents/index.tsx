@@ -45,7 +45,7 @@ export const ViewContents = ({ route }: any) => {
             <Icon name="arrow-left" size={24} color="#333333" />
           </S.ButtomHeader>
           <S.Hello>Atividades</S.Hello>
-          <S.ButtomHeader color="#00C880" style={S.Styles.Shadow}>
+          <S.ButtomHeader color="#527C91" style={S.Styles.Shadow}>
             <Icon name="menu" size={24} color="#FAFAFA" />
           </S.ButtomHeader>
         </S.Header>

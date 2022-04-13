@@ -1,13 +1,9 @@
-import { KeyboardAvoidingView, Modal, ScrollView, Text, TextInput, TouchableOpacity, View, TouchableNativeFeedback} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { KeyboardAvoidingView, Modal, ScrollView, Text, TextInput, TouchableOpacity, View, SafeAreaView, StatusBar} from "react-native";
 import styled from "styled-components";
 
-export const Container = styled(KeyboardAvoidingView)`
-    width: 100%;
+export const Container = styled(SafeAreaView)`
     padding: 0 5px;
     flex: 1;
-    justify-content: center;
-    align-items: center;
     background-color: #FFFF;
 `;
 
@@ -15,16 +11,26 @@ export const Scroll = styled(ScrollView)`
 
 `;
 
-export const Form = styled(SafeAreaView)`
-    margin-top: 10px;
-    margin-bottom: 10px;
-    width: 100%;
-    
+export const Form = styled(KeyboardAvoidingView)`
+    flex: 1;
+    padding-top: ${StatusBar.currentHeight};
 `;
 export const AreaInput = styled(View)`
     width: 100%;
     padding: 5px;
     margin-top: 8px;
+`;
+
+export const NextRegister = styled(TouchableOpacity)`
+    max-width: 45px;
+    height: 45px;
+    background-color: ${({current}) => current ? '#527C91' : '#6d7579'} ;
+    border-radius: 50px;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
 `;
 
 export const RowInput = styled(View)`
@@ -61,7 +67,7 @@ export const IconInput = styled(View)`
     width: 40px;
     height: 40px;
 
-    background-color: #00C880;
+    background-color: #527C91;
 
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
@@ -76,7 +82,7 @@ export const ButtonEye = styled(TouchableOpacity)`
     width: 40px;
     height: 40px;
 
-    background-color: #00C880;
+    background-color: #527C91;
 
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
@@ -109,8 +115,8 @@ export const ButtonRadius = styled(TouchableOpacity)`
     align-items: center;
     width: 20px;
     height: 20px;
-    border:  ${(props) => (!props.select ? '1px solid #00C880' : 'none')};
-    background-color: ${(props) => (props.select ? '#00C880' : 'transparent')};
+    border:  ${(props) => (!props.select ? '1px solid #527C91' : 'none')};
+    background-color: ${(props) => (props.select ? '#527C91' : 'transparent')};
     border-radius: 5px;
 `;
 
@@ -147,7 +153,7 @@ export const ButtonBack = styled(TouchableOpacity)`
     align-items: center;
     width: 39px;
     height: 39px;
-    border: 1px solid #00C880;
+    border: 1px solid #527C91;
     background-color: #FFF;
     z-index: 999;
     border-top-left-radius: 5px;
@@ -161,7 +167,7 @@ export const ButtonRegister = styled(TouchableOpacity)`
     align-items: center;
     width: 100%;
     height: 39px;
-    background-color: #00C880;
+    background-color: #527C91;
     position: absolute;
     border-radius: 5px;
 `;
@@ -171,7 +177,7 @@ export const ViewError = styled(View)`
 `; 
 
 export const LabelError = styled(Text)`
-    color: #E75353;
+    color: #EB4A47;
     font-size: 12px;
 `; 
 

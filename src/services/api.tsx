@@ -99,7 +99,21 @@ export const GetContentById = async (idContent: Number) => {
 export const GetQuestionsByContent = async (idContent: Number) => {
     let json: JsonResponse = { data: Object, error: Object };
     try {
-        const result = await api.get(`/question/content/${idContent}`);
+        const result = await api.get(`/question/content/${idContent}/${1}`);
+        json.data = result.data;
+        return json.data;
+    } catch (error) {
+        console.log(error, 'erro');
+        json.error = {error}
+        return json;
+    }
+}
+
+export const PostAnswer = async (values: {}) => {
+    let json: JsonResponse = { data: Object, error: Object };
+    console.log(values);
+    try {
+        const result = await api.post(`/answer/`, values);
         json.data = result.data;
         return json.data;
     } catch (error) {

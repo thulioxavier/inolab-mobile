@@ -10,10 +10,10 @@ export const Content = styled(View)`
 export const Scrool = styled(ScrollView)``;
 
 export const Item = styled(TouchableOpacity)`
-    margin-right: 10px;
+    margin-right: 5px;
     padding: 5px 10px;
     border-radius: 5px;
-    background-color: #202020;
+    background-color: #527C91;
 `;
 
 export const ItemTitle = styled(Text)`

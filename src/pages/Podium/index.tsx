@@ -44,7 +44,7 @@ export const Podium = () => {
                             <S.AvatarOne size="75px" source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgcnTBdrKlUehvNHl5dFGKzukdSfxceDk64w&usqp=CAU' }} style={{ resizeMode: 'cover' }} />
                             <S.Label numberOfLines={1}>Anna</S.Label>
                         </S.AvatarContent>
-                        <S.PodiumCol color="#00C880" col="150px" style={{ borderTopRightRadius: 5, borderTopLeftRadius: 5 }} >
+                        <S.PodiumCol color="#527C91" col="150px" style={{ borderTopRightRadius: 5, borderTopLeftRadius: 5 }} >
                             <S.PodiumLabel size="60px">1</S.PodiumLabel>
                         </S.PodiumCol>
                     </S.PodiumArea>

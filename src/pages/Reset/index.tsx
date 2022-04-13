@@ -1,10 +1,12 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { Fragment, useRef, useState } from "react";
-import { Alert, Platform } from "react-native";
+import { Alert, Image, Platform } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 import Icon from "react-native-vector-icons/Feather";
 import { RegisterUser } from "../../services/api";
 import * as S from "./styles";
+
+import { Reset as ResetImg} from '../../assets/icons';
 
 type Data = {
   error?: object;
@@ -78,7 +80,7 @@ export const Reset: React.FC = () => {
   const Requere = () => {
     return (
       <>
-        <S.Label style={{ color: "#E75353" }}>*</S.Label>
+        <S.Label style={{ color: "#EB4A47" }}>*</S.Label>
       </>
     );
   };
@@ -87,8 +89,21 @@ export const Reset: React.FC = () => {
     <Fragment>
       <S.Container behavior={Platform.OS === "ios" ? "padding" : "height"}>
         <S.Form>
+          <Image
+            source={ResetImg}
+            style={
+              { 
+                width: 250,
+                height: 250,
+                marginLeft: 'auto',
+                marginRight: 'auto',
+                resizeMode: 'contain'
+              }
+            }
+          />
           <S.ViewTitle>
-            <S.Title>RECUPERAR SENHA</S.Title>
+
+            <S.Title>Recuperar Senha</S.Title>
             <S.Label
               style={{
                 fontSize: 16,
@@ -106,7 +121,7 @@ export const Reset: React.FC = () => {
             </S.Label>
             <S.RowInput>
               <S.IconInput>
-                <Icon name="at-sign" size={20} color="#FFFF" />
+                <Icon name="at-sign" size={24} color="#FFFF" />
               </S.IconInput>
               <S.Input
                 placeholder="Email Adress"
@@ -138,7 +153,7 @@ export const Reset: React.FC = () => {
                   navigation.goBack();
                 }}
               >
-                <Icon name="arrow-left" size={20} color="#00C880" />
+                <Icon name="arrow-left" size={24} color="#527C91" />
               </S.ButtonBack>
               <S.ButtonRegister onPress={handleSubmit} disabled={loading}>
                 {!loading ? (

@@ -41,7 +41,7 @@ export const ButtonView = styled(View)`
 `;
 
 export const ButtonLogin = styled(TouchableOpacity)`
-    background-color: #00C880;
+    background-color: #527C91;
     width: 40%;
     height: 40px;
     border-top-left-radius: 5px;

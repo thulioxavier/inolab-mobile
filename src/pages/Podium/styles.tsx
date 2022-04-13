@@ -30,7 +30,7 @@ export const Label = styled(Text)`
 export const Title = styled(Text)`
     font-size: 25px;
     font-weight: bold;
-    color: #00C880;
+    color: #527C91;
 `;
 
 export const PodiumContent = styled(View)`
@@ -54,7 +54,7 @@ export const PodiumArea = styled(View)`
 export const PodiumCol = styled(View)`
     min-height: ${(props) => (props.col ? props.col : '100%')};   
     max-height: ${(props) => (props.col ? props.col : '100%')};   
-    background-color: ${(props) => (props.color ? props.color :'#00C880')};
+    background-color: ${(props) => (props.color ? props.color :'#527C91')};
     width: 100%;
     flex: 1;
     justify-content: center;
@@ -88,7 +88,7 @@ export const AvatarOne = styled(Image)`
     height:  ${(props) => (props.size ? props.size : '50px')};;
     border-radius: 50px;
     background-color: black;
-    border: 5px solid #00C880;
+    border: 5px solid #527C91;
 `
 
 export const Coroa = styled(Image)`

@@ -4,12 +4,14 @@ import { useNavigation } from "@react-navigation/native";
 import * as Linking from "expo-linking";
 import * as S from "./styles";
 import { GetContentById } from "../../services/api";
-import { Alert } from "react-native";
+import { Alert, useWindowDimensions } from "react-native";
+import Html from 'react-native-render-html';
 
 export const ViewContent = ({ route }: any) => {
   const navigation = useNavigation();
   const { idContent, name } = route.params;
-
+  const { width } = useWindowDimensions();
+  console.log(route.params)
   const [select, setSelect] = useState<Object>({
     init: true,
     play: false,
@@ -25,7 +27,7 @@ export const ViewContent = ({ route }: any) => {
 
   const getContent = async () => {
     try {
-      const result = await GetContentById(idContent);
+      const result = await GetContentById(Number(idContent));
       if (result?.data?.status) {
         setValues(result.data.response);
       } else {
@@ -44,12 +46,8 @@ export const ViewContent = ({ route }: any) => {
           <S.Label style={{ color: "black", textAlign: "justify" }}>
             {abstract}
           </S.Label>
-
           <S.SectionTitle>{values?.title}</S.SectionTitle>
-
-          <S.Label style={{ color: "black", textAlign: "justify" }}>
-            {body}
-          </S.Label>
+          <Html contentWidth={width} source={{ html: body }} />
         </S.Container>
       </Fragment>
     );
@@ -69,7 +67,7 @@ export const ViewContent = ({ route }: any) => {
                 <Icon
                   name="link"
                   size={19}
-                  color="#00C880"
+                  color="#527C91"
                   style={{ marginRight: 5 }}
                 />
                 <S.Label
@@ -86,18 +84,12 @@ export const ViewContent = ({ route }: any) => {
     );
   };
 
-  const ExamplesContent = (examples: Array<object>) => {
+  const ExamplesContent = (examples: string) => {
     return (
       <Fragment>
-        {examples?.map((item, key) => {
-          return (
-            <Fragment key={key}>
-              <S.SectionTitle numberOfLines={1}>{item?.title}</S.SectionTitle>
-
-              <S.Label style={{ color: "black" }}> • {item?.body}</S.Label>
-            </Fragment>
-          );
-        })}
+        <S.Container style={{ marginBottom: 80 }}>
+          <Html contentWidth={width} source={{ html: examples }} />
+        </S.Container>
       </Fragment>
     );
   };
@@ -126,7 +118,7 @@ export const ViewContent = ({ route }: any) => {
     } else if (select.play) {
       return PlayContent(values?.content_Videos);
     } else if (select.example) {
-      return ExamplesContent(values?.examples);
+      return ExamplesContent(values?.example);
     } else {
       return ReferencesContent(values?.references);
     }
@@ -146,8 +138,7 @@ export const ViewContent = ({ route }: any) => {
             <Icon name="arrow-left" size={24} color="#333333" />
           </S.ButtomHeader>
           <S.Hello>Conteúdo</S.Hello>
-
-          <S.ButtomHeader color="#00C880" style={S.Styles.Shadow}>
+          <S.ButtomHeader color="#527C91" style={S.Styles.Shadow}>
             <Icon name="menu" size={24} color="#FAFAFA" />
           </S.ButtomHeader>
         </S.Header>
@@ -208,7 +199,7 @@ export const ViewContent = ({ route }: any) => {
           {select.init ? (
             <S.ButtonPlay
               onPress={() => {
-                navigation.navigate("Question", {idContent: values?.id});
+                navigation.navigate("Question", { idContent: values?.id });
               }}
             >
               <S.Label style={{ fontSize: 16 }}>Iniciar</S.Label>
