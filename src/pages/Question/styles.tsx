@@ -188,7 +188,7 @@ export const Header = styled(View)`
     width: 100%;
     height: 50px;
     margin-bottom: 5px;
-    background-color: #FFF;
+    background-color: #FAFAFA;
 
 `;
 

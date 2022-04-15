@@ -1,5 +1,6 @@
 import { ScrollView, Text, View, StyleSheet, TouchableOpacity, Modal } from "react-native";
 import styled from "styled-components";
+import { COLORS } from "../../utils";
 
 export const Container = styled(View)`
     display: flex;
@@ -42,19 +43,19 @@ export const Title = styled(Text)`
     width: 80%;
     font-size: 18px;
     font-weight: bold;
-    color: #333333;    
+    color: ${COLORS.black};    
 `;
 
 export const SubTitle = styled(Text)`
     font-size: 14px;
     margin-bottom: 15px;
-    color: #585858;
+    color: ${COLORS.black};
 `;
 
 export const Points = styled(Text)`
     font-size: 14px;
     font-weight: bold;
-    color: #527C91;
+    color: ${COLORS.black};
 `;
 
 export const ItemCardRow = styled(View)`
@@ -69,7 +70,7 @@ export const ItemCardRow = styled(View)`
 export const Count = styled(Text)`
     font-size: 14px;
     font-weight: bold;
-    color: #585858;
+    color: ${COLORS.black};
 `;
 
 export const AreaMarkNew = styled(View)`
@@ -90,7 +91,7 @@ export const MarkNew = styled(View)`
     width: 15px;
     height: 15px;
     border-radius: 50px;
-    background-color: #527C91;
+    background-color: ${COLORS.green};
 `;
 
 export const Scrool = styled(ScrollView)`

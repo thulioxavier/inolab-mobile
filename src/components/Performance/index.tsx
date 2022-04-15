@@ -12,6 +12,7 @@ import {
 
 import * as S from "./styles";
 import { AreaList } from "../../pages/ViewContents/styles";
+import { COLORS } from "../../utils";
 
 export const Performance = () => {
   useEffect(() => {
@@ -71,10 +72,10 @@ export const Performance = () => {
             <S.ModalHeader
               color={
                 selectData.icon === "arrow-up"
-                  ? "#527C91"
+                  ? COLORS.green
                   : selectData.icon === "activity"
-                  ? "#ECAE52"
-                  : "#EB4A47"
+                  ? COLORS.yellow
+                  : COLORS.red
               }
             >
               <S.ButtonIconClose
@@ -85,7 +86,7 @@ export const Performance = () => {
                 <Icon
                   name="x-circle"
                   size={25}
-                  color="#FFF"
+                  color={COLORS.white}
                   style={{ marginRight: 5 }}
                 />
               </S.ButtonIconClose>
@@ -100,10 +101,10 @@ export const Performance = () => {
                 size={35}
                 color={
                   selectData.icon === "arrow-up"
-                    ? "#527C91"
+                    ? COLORS.green
                     : selectData.icon === "activity"
-                    ? "#ECAE52"
-                    : "#EB4A47"
+                    ? COLORS.yellow
+                    : COLORS.red
                 }
                 style={{ marginRight: 5 }}
               />
@@ -121,7 +122,7 @@ export const Performance = () => {
                             <Icon
                               name={item.status ? "arrow-up" : "arrow-down"}
                               size={14}
-                              color={item.status ? "#527C91" : "#EB4A47"}
+                              color={item.status ? COLORS.green : COLORS.red}
                               style={{ marginRight: 5 }}
                             />
                             <S.Label style={{fontWeight:'bold'}}>{item?.points}</S.Label>
@@ -176,15 +177,15 @@ export const Performance = () => {
               <Icon
                 name="arrow-up"
                 size={19}
-                color="#527C91"
+                color={COLORS.green}
                 style={{ marginRight: 5 }}
               />
               <S.Label
                 style={{
                   color:
                     values?.hits?.count < values?.mistakes.count
-                      ? "#EB4A47"
-                      : "#555555",
+                      ? COLORS.red
+                      : COLORS.black,
                   fontWeight:
                     values?.hits?.count < values?.mistakes.count
                       ? "bold"
@@ -212,7 +213,7 @@ export const Performance = () => {
               <Icon
                 name="arrow-down"
                 size={19}
-                color="#EB4A47"
+                color={COLORS.red}
                 style={{ marginRight: 5 }}
               />
               <S.Label>{values?.mistakes.count}</S.Label>
@@ -235,7 +236,7 @@ export const Performance = () => {
               <Icon
                 name="activity"
                 size={19}
-                color="#ECAE52"
+                color={COLORS.yellow}
                 style={{ marginRight: 5 }}
               />
               <S.Label>{values?.hits?.points}</S.Label>
@@ -274,7 +275,7 @@ export const Performance = () => {
 
           {values?.hits?.count < values?.mistakes.count ? (
             <S.AlertPerformace>
-              <S.Label style={{ color: "#FFF" }}>
+              <S.Label style={{ color: COLORS.white }}>
                 O seu desenpenho está baixo!
               </S.Label>
             </S.AlertPerformace>

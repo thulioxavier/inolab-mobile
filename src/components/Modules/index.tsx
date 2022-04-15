@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import *as S from './styles';
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from "@react-navigation/native";
+import { COLORS } from "../../utils";
 
 interface Props {
     values: Array<Object>
@@ -34,11 +35,11 @@ export const Modules = ({ values = [] }: Props) => {
                                 <S.SubTitle numberOfLines={1}>{item.subjects.name}</S.SubTitle>
                                 <S.Row>
                                     <S.ItemCardRow>
-                                        <Icon name="coffee" size={14} color='#585858' style={{ marginRight: 5 }} />
-                                        <S.Count numberOfLines={0.5}>15/15</S.Count>
+                                        <Icon name="coffee" size={14} color={COLORS.blue} style={{ marginRight: 5 }} />
+                                        <S.Count numberOfLines={0.5}>15</S.Count>
                                     </S.ItemCardRow>
                                     <S.ItemCardRow>
-                                        <Icon name="gift" size={14} color='#585858' style={{ marginRight: 5 }} />
+                                        <Icon name="gift" size={14} color={COLORS.green} style={{ marginRight: 5 }} />
                                         <S.Points numberOfLines={0.5}>7896</S.Points>
                                     </S.ItemCardRow>
                                 </S.Row>

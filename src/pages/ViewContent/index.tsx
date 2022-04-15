@@ -129,7 +129,7 @@ export const ViewContent = ({ route }: any) => {
       <S.Container>
         <S.Header>
           <S.ButtomHeader
-            color="#FFF"
+            color="#FAFAFA"
             style={S.Styles.Shadow}
             onPress={() => {
               navigation.goBack();

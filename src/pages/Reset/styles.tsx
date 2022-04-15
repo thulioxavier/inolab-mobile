@@ -1,5 +1,6 @@
 import { KeyboardAvoidingView, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import styled from "styled-components";
+import { COLORS } from "../../utils";
 
 export const Container = styled(KeyboardAvoidingView)`
     width: 100%;
@@ -11,7 +12,6 @@ export const Container = styled(KeyboardAvoidingView)`
 `;
 
 export const Scroll = styled(ScrollView)`
-    background-color: #076ed454;
 `;
 
 export const Form = styled(View)`
@@ -60,7 +60,7 @@ export const IconInput = styled(View)`
     width: 40px;
     height: 40px;
 
-    background-color: #527C91;
+    background-color: ${COLORS.primary};
 
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
@@ -75,7 +75,7 @@ export const ButtonEye = styled(TouchableOpacity)`
     width: 40px;
     height: 40px;
 
-    background-color: #527C91;
+    background-color: ${COLORS.primary};
 
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
@@ -84,12 +84,12 @@ export const ButtonEye = styled(TouchableOpacity)`
 export const Label = styled(Text)`
     font-size: 14px;
     font-weight: bold;
-    color: #494949;
+    color: ${COLORS.black};
 `;
 
 export const LabelButtonRadius = styled(Text)`
     font-size: 13px;
-    color: #494949;
+    color: ${COLORS.black};
     margin-left: 5px;
 `;
 
@@ -130,14 +130,14 @@ export const ViewTitle = styled(View)`
 
 export const P = styled(Text)`
     font-size: 14px;
-    color: #3f3f3f;
+    color: ${COLORS.black};
 
 `;
 
 export const Title = styled(Text)`
     font-size: 20px;
     font-weight: bold;
-    color: #3f3f3f;
+    color: ${COLORS.black};
 `;
 
 export const ButtonBack = styled(TouchableOpacity)`
@@ -146,8 +146,8 @@ export const ButtonBack = styled(TouchableOpacity)`
     align-items: center;
     width: 39px;
     height: 39px;
-    border: 1px solid #527C91;
-    background-color: #FFF;
+    border: 1px solid ${COLORS.primary};
+    background-color: ${COLORS.white};
     z-index: 999;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
@@ -160,7 +160,7 @@ export const ButtonRegister = styled(TouchableOpacity)`
     align-items: center;
     width: 100%;
     height: 39px;
-    background-color: #527C91;
+    background-color: ${COLORS.primary};
     position: absolute;
     border-radius: 5px;
 `;
@@ -170,7 +170,7 @@ export const ViewError = styled(View)`
 `; 
 
 export const LabelError = styled(Text)`
-    color: #EB4A47;
+    color: ${COLORS.red};
     font-size: 12px;
 `; 
 

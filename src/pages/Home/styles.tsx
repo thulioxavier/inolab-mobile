@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 import { Image, ScrollView, Text, TouchableOpacity, View, StyleSheet, TextInput} from 'react-native';
+import { COLORS } from '../../utils';
 
 export const Container = styled(View)`
     display: flex;
     width: 100%;
-    background-color: #FFF;
+    background-color: #FAFAFA;
     height: 100%;
 `;
 
@@ -19,7 +20,7 @@ export const SectionTitle = styled(Text)`
     width: auto;
     font-size: 14px;
     font-weight: bold;
-    color: #464646;
+    color: ${COLORS.black};
     margin-bottom: 10px;
     margin-top: 10px;
 `;
@@ -34,7 +35,7 @@ export const Header = styled(View)`
     width: 100%;
     height: 50px;
     margin-bottom: 5px;
-    background-color: #FFF;
+    background-color: #FAFAFA;
 
 `;
 
@@ -100,7 +101,7 @@ export const ContentInput = styled(View)`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: #FFF;
+    background-color: #FAFAFA;
     border-radius: 5px;   
     border: ${(props) => (props.focus ? '1px solid #bebebe' : '1px solid #CCC')} ;
 `;  

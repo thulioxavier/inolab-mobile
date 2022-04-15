@@ -1,5 +1,6 @@
 import { KeyboardAvoidingView, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import styled from "styled-components";
+import { COLORS } from "../../utils";
 
 export const Container = styled(KeyboardAvoidingView)`
     flex: 1;
@@ -8,11 +9,11 @@ export const Container = styled(KeyboardAvoidingView)`
     align-items: center;
     margin-top: 24px;
     padding: 0 5px;
-    background-color: #ffffff;
+    background-color: ${COLORS.white};
 `;
 
 export const Scroll = styled(ScrollView)`
-    background-color: #076ed454;
+
 `;
 
 export const Form = styled(View)`
@@ -34,7 +35,7 @@ export const RowInput = styled(View)`
     align-items: center;
 
     margin-top: 4px;
-    border: 1px solid #DDD;
+    border: 1px solid ${COLORS.grey};
     border-radius: 5px;
 `;
 
@@ -69,7 +70,7 @@ export const IconInput = styled(View)`
     width: 40px;
     height: 40px;
 
-    background-color: #527C91;
+    background-color: ${COLORS.primary};
 
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
@@ -84,7 +85,7 @@ export const ButtonEye = styled(TouchableOpacity)`
     width: 40px;
     height: 40px;
 
-    background-color: #527C91;
+    background-color: ${COLORS.primary};
 
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
@@ -109,8 +110,8 @@ export const ButtonRadius = styled(TouchableOpacity)`
     align-items: center;
     width: 20px;
     height: 20px;
-    border:  ${(props) => (!props.select ? '1px solid #527C91' : 'none')};
-    background-color: ${(props) => (props.select ? '#527C91' : 'transparent')};
+    border:  ${(props) => (!props.select ? `1px solid ${COLORS.primary}` : 'none')};
+    background-color: ${(props) => (props.select ? COLORS.primary : 'transparent')};
     border-radius: 5px;
 `;
 
@@ -136,21 +137,21 @@ export const ErrorArea = styled(View)`
     width: 100%;
     height: 45px;
 
-    background-color: #EB4A47;
+    background-color: ${COLORS.red};
 
     border-radius: 5px;
 `;
 
 export const P = styled(Text)`
     font-size: 14px;
-    color: #3f3f3f;
+    color: ${COLORS.black};
 
 `;
 
 export const Title = styled(Text)`
     font-size: 20px;
     font-weight: bold;
-    color: #3f3f3f;
+    color: ${COLORS.black};
 `;
 
 export const ButtonBack = styled(TouchableOpacity)`
@@ -159,8 +160,8 @@ export const ButtonBack = styled(TouchableOpacity)`
     align-items: center;
     width: 39px;
     height: 39px;
-    border: 1px solid #527C91;
-    background-color: #FFF;
+    border: 1px solid ${COLORS.primary};
+    background-color: ${COLORS.white};
     z-index: 999;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
@@ -174,7 +175,7 @@ export const ButtonRegister = styled(TouchableOpacity)`
     align-items: center;
     width: 100%;
     height: 39px;
-    background-color: ${(props) => (props.color ? props.color : '#527C91')} ;
+    background-color: ${(props) => (props.color ? props.color : COLORS.primary)} ;
     border-radius: 5px;
 `;
 
@@ -183,7 +184,7 @@ export const ViewError = styled(View)`
 `; 
 
 export const LabelError = styled(Text)`
-    color: #EB4A47;
+    color: ${COLORS.red};
     font-size: 12px;
 `; 
 

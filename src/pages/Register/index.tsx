@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import React, { Fragment, useRef, useState } from "react";
-import { Alert, Platform, ActivityIndicator, Linking, Image } from "react-native";
+import { Alert, Platform, ActivityIndicator, Linking, Image, View } from "react-native";
 // import * as Linking from 'expo-linking';
 import SelectDropdown from 'react-native-select-dropdown'
 
@@ -11,6 +11,7 @@ import { RegisterUser } from "../../services/api";
 import * as S from "./styles";
 
 import { Register as RegisterImg, Register_2 } from '../../assets/icons';
+import { COLORS } from "../../utils";
 
 type Data = {
   error?: object;
@@ -163,7 +164,7 @@ export const Register: React.FC = () => {
   const Required = () => {
     return (
       <>
-        <S.Label style={{ color: "#EB4A47" }}>*</S.Label>
+        <S.Label style={{ color: COLORS.red }}>*</S.Label>
       </>
     );
   };
@@ -201,7 +202,7 @@ export const Register: React.FC = () => {
                     setShow(false);
                   }}
                 >
-                  <S.Label style={{ color: "#FFFF" }}>OK</S.Label>
+                  <S.Label style={{ color: COLORS.black }}>OK</S.Label>
                 </S.ButtonRegister>
               </S.AreaButton>
             </S.ViewButton>
@@ -307,16 +308,15 @@ export const Register: React.FC = () => {
       >
         <S.Form>
           <S.Scroll showsVerticalScrollIndicator={false} >
-
             <Image source={nextPage ? RegisterImg : Register_2} style={{
               width: 250,
               height: 250,
               marginLeft: 'auto',
               marginRight: 'auto',
-              resizeMode: 'contain'
+              resizeMode: 'cover'
             }} />
 
-            <S.ViewTitle>
+            <S.ViewTitle style={{marginTop: -30}}>
               <S.Title>Cadastre-se</S.Title>
             </S.ViewTitle>
 
@@ -326,11 +326,11 @@ export const Register: React.FC = () => {
             }}>
 
               <S.NextRegister current={nextPage === false} onPress={() => { setNextPage(false) }}>
-                <Icon name="clipboard" size={28} color="#FFFF" />
+                <Icon name="clipboard" size={28} color={COLORS.black} />
               </S.NextRegister>
 
               <S.NextRegister current={nextPage === true} onPress={() => { setNextPage(true) }}>
-                <Icon name="shield" size={28} color="#FFFF" />
+                <Icon name="shield" size={28} color={COLORS.black} />
               </S.NextRegister>
             </S.Row>
 
@@ -344,13 +344,14 @@ export const Register: React.FC = () => {
                     </S.Label>
                     <S.RowInput>
                       <S.IconInput>
-                        <Icon name="user" size={24} color="#FFFF" />
+                        <Icon name="user" size={24} color={COLORS.black} />
                       </S.IconInput>
                       <S.Input
                         editable={!loading}
                         placeholder="Nome"
                         keyboardType="default"
                         onChangeText={(e) => setName(e)}
+                        value={name}
                         autoCapitalize="words"
                         autoCorrect={false}
                         returnKeyType="next"
@@ -373,13 +374,14 @@ export const Register: React.FC = () => {
                     </S.Label>
                     <S.RowInput>
                       <S.IconInput>
-                        <Icon name="user" size={24} color="#FFFF" />
+                        <Icon name="user" size={24} color={COLORS.black} />
                       </S.IconInput>
                       <S.Input
                         editable={!loading}
                         placeholder="Sobrenome"
                         keyboardType="default"
                         onChangeText={(e) => setLastName(e)}
+                        value={lastName}
                         autoCapitalize="words"
                         autoCorrect={false}
                         returnKeyType="next"
@@ -404,7 +406,7 @@ export const Register: React.FC = () => {
 
                     <S.RowInput>
                       <S.IconInput>
-                        <Icon name="smile" size={24} color="#FFFF" />
+                        <Icon name="smile" size={24} color={COLORS.black} />
                       </S.IconInput>
                       <SelectDropdown
                         buttonStyle={{
@@ -428,6 +430,7 @@ export const Register: React.FC = () => {
                         onSelect={(selectedItem, index) => {
                           setSexo(selectedItem)
                         }}
+                        
                         buttonTextAfterSelection={(selectedItem, index) => {
                           // text represented after item is selected
                           // if data array is an array of objects then return selectedItem.property to render after item is selected
@@ -457,7 +460,7 @@ export const Register: React.FC = () => {
                           navigation.goBack();
                         }}
                       >
-                        <Icon name="arrow-left" size={24} color="#527C91" />
+                        <Icon name="arrow-left" size={24} color={COLORS.black} />
                       </S.ButtonBack>
                       <S.ButtonRegister onPress={() => {
                         if(name && lastName && sexo)
@@ -467,9 +470,9 @@ export const Register: React.FC = () => {
 
                       }} disabled={loading}>
                         {!loading ? (
-                          <S.Label style={{ color: "#FFFF" }}>Continuar</S.Label>
+                          <S.Label style={{ color: COLORS.black }}>Continuar</S.Label>
                         ) : (
-                          <ActivityIndicator color="#FFF" size="small" />
+                          <ActivityIndicator color="#FAFAFA" size="small" />
                         )}
                       </S.ButtonRegister>
                     </S.AreaButton>
@@ -484,13 +487,14 @@ export const Register: React.FC = () => {
                     </S.Label>
                     <S.RowInput>
                       <S.IconInput>
-                        <Icon name="database" size={24} color="#FFFF" />
+                        <Icon name="database" size={24} color={COLORS.black} />
                       </S.IconInput>
                       <S.Input
                         editable={!loading}
                         placeholder="Sua Matricula"
                         keyboardType="numeric"
                         onChangeText={(e) => setRegistration(e)}
+                        value={registration}
                         autoCapitalize="none"
                         autoCorrect={false}
                         ref={registrationInput}
@@ -517,13 +521,14 @@ export const Register: React.FC = () => {
                     </S.Label>
                     <S.RowInput>
                       <S.IconInput>
-                        <Icon name="at-sign" size={24} color="#FFFF" />
+                        <Icon name="at-sign" size={24} color={COLORS.black} />
                       </S.IconInput>
                       <S.Input
                         editable={!loading}
                         placeholder="Email Adress"
                         keyboardType="email-address"
                         onChangeText={(e) => setEmail(e)}
+                        value={email}
                         autoCapitalize="none"
                         autoCorrect={false}
                         ref={emailInput}
@@ -548,7 +553,7 @@ export const Register: React.FC = () => {
                     </S.Label>
                     <S.RowInput>
                       <S.IconInput>
-                        <Icon name="lock" size={24} color="#FFFF" />
+                        <Icon name="lock" size={24} color={COLORS.black} />
                       </S.IconInput>
                       <S.Input
                         editable={!loading}
@@ -556,6 +561,7 @@ export const Register: React.FC = () => {
                         secureTextEntry={visible}
                         placeholder="Password"
                         onChangeText={(e) => setPassword(e)}
+                        value={password}
                         autoCapitalize="none"
                         autoCorrect={false}
                         ref={passInput}
@@ -570,7 +576,7 @@ export const Register: React.FC = () => {
                         <Icon
                           name={visible ? "eye" : "eye-off"}
                           size={24}
-                          color="#FFFF"
+                          color={COLORS.black}
                         />
                       </S.ButtonEye>
                     </S.RowInput>
@@ -591,11 +597,11 @@ export const Register: React.FC = () => {
                         <Icon
                           name="check"
                           size={14}
-                          color={`${acept ? "#FFF" : "#202020"}`}
+                          color={COLORS.black}
                         />
                       </S.ButtonRadius>
                       <S.LabelButtonRadius
-                        style={err && errors.aceptError ? { color: "#EB4A47" } : null}
+                        style={err && errors.aceptError ? { color: COLORS.red } : null}
                       >
                         Aceitar termos de uso.
                       </S.LabelButtonRadius>
@@ -610,13 +616,13 @@ export const Register: React.FC = () => {
                           navigation.goBack();
                         }}
                       >
-                        <Icon name="arrow-left" size={24} color="#527C91" />
+                        <Icon name="arrow-left" size={24} color={COLORS.black} />
                       </S.ButtonBack>
                       <S.ButtonRegister onPress={handleSubmit} disabled={loading}>
                         {!loading ? (
-                          <S.Label style={{ color: "#FFFF" }}>Cadastrar</S.Label>
+                          <S.Label style={{ color: COLORS.black }}>Cadastrar</S.Label>
                         ) : (
-                          <ActivityIndicator color="#FFF" size="small" />
+                          <ActivityIndicator color={COLORS.black} size="small" />
                         )}
                       </S.ButtonRegister>
                     </S.AreaButton>

@@ -8,6 +8,7 @@ import UserContexts from "../../contexts/UserContexts";
 
 import * as S from "./styles";
 import {Login as LoginImg } from "../../assets/icons";
+import { COLORS } from "../../utils";
 
 type Data = {
   error?: object;
@@ -110,7 +111,7 @@ export const Login: React.FC = () => {
   const Requere = () => {
     return (
       <>
-        <S.Label style={{ color: "#EB4A47" }}>*</S.Label>
+        <S.Label style={{ color: COLORS.red }}>*</S.Label>
       </>
     );
   };
@@ -136,13 +137,14 @@ export const Login: React.FC = () => {
             </S.Label>
             <S.RowInput>
               <S.IconInput>
-                <Icon name="at-sign" size={24} color="#FFFF" />
+                <Icon name="at-sign" size={24} color={COLORS.black} />
               </S.IconInput>
               <S.Input
                 editable={!loading}
                 placeholder="Email Adress"
                 keyboardType="email-address"
                 onChangeText={(e) => setEmail(e)}
+                value={email}
                 autoCapitalize="none"
                 autoCorrect={false}
                 ref={emailInput}
@@ -167,7 +169,7 @@ export const Login: React.FC = () => {
             </S.Label>
             <S.RowInput>
               <S.IconInput>
-                <Icon name="lock" size={24} color="#FFFF" />
+                <Icon name="lock" size={24} color={COLORS.black} />
               </S.IconInput>
               <S.Input
                 editable={!loading}
@@ -175,6 +177,7 @@ export const Login: React.FC = () => {
                 secureTextEntry={visible}
                 placeholder="Password"
                 onChangeText={(e) => setPassword(e)}
+                value={password}
                 autoCapitalize="none"
                 autoCorrect={false}
                 ref={passInput}
@@ -189,7 +192,7 @@ export const Login: React.FC = () => {
                 <Icon
                   name={visible ? "eye" : "eye-off"}
                   size={24}
-                  color="#FFFF"
+                  color={COLORS.black}
                 />
               </S.ButtonEye>
             </S.RowInput>
@@ -206,7 +209,7 @@ export const Login: React.FC = () => {
                 navigation.navigate("Reset");
               }}
             >
-              <S.Label style={{ fontSize: 13, color: "#EB4A47" }}>
+              <S.Label style={{ fontSize: 13, color: COLORS.red }}>
                 Esqueceu a senha?
               </S.Label>
             </S.ResetPass>
@@ -215,9 +218,9 @@ export const Login: React.FC = () => {
             <S.AreaButton>
               <S.ButtonRegister onPress={handleSubmit}>
                 {!loading ? (
-                  <S.Label style={{ color: "#FFFF" }}>Entrar</S.Label>
+                  <S.Label style={{ color: COLORS.black }}>Entrar</S.Label>
                 ) : (
-                  <ActivityIndicator color="#FFF" size="small" />
+                  <ActivityIndicator color={COLORS.black} size="small" />
                 )}
               </S.ButtonRegister>
             </S.AreaButton>
@@ -226,7 +229,7 @@ export const Login: React.FC = () => {
             <S.ViewButton>
               <S.AreaButton>
                 <S.ErrorArea>
-                  <S.Label style={{ color: "#FAFAF0" }}>
+                  <S.Label style={{ color: COLORS.white }}>
                     Falha ao se autenticar!!
                   </S.Label>
                 </S.ErrorArea>
@@ -240,13 +243,13 @@ export const Login: React.FC = () => {
                 onPress={() => {
                   navigation.navigate("SingUp");
                 }}
-                color="#ffffff"
+                color={COLORS.white}
               >
                 <S.Label
-                  style={{ color: "#585858", fontWeight: "400", fontSize: 15 }}
+                  style={{ color: COLORS.black, fontWeight: "400", fontSize: 15 }}
                 >
                   Ainda não tem uma conta?
-                  <S.Label style={{ color: "#141414", fontSize: 15 }}>
+                  <S.Label style={{ color: COLORS.black, fontSize: 15 }}>
                     {" "}
                     Cadastre-se{" "}
                   </S.Label>

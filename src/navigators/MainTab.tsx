@@ -8,6 +8,7 @@ const Tab = createBottomTabNavigator();
 import { StyleSheet, View } from 'react-native';
 
 import { Login, Home, Register, Podium } from '../pages/index';
+import { COLORS } from "../utils";
 
 export default () => {
 
@@ -16,14 +17,14 @@ export default () => {
             <Tab.Navigator
                 initialRouteName="Home"
                 tabBarOptions={{
-                    activeTintColor: '#527C91',
-                    inactiveTintColor: '#fafafa',
+                    activeTintColor: COLORS.yellow,
+                    inactiveTintColor: '#525252',
                     showLabel: false,
                     keyboardHidesTabBar: true,
                 }}
                 screenOptions={({ route }) => ({
                     tabBarStyle:{
-                        backgroundColor: '#202020',
+                        backgroundColor: '#fafafa',
                         position: 'relative', 
                     },
                     headerShown: false,
@@ -49,8 +50,8 @@ export default () => {
                 <Tab.Screen name="Home" component={Home} options={{
                     tabBarLabel: 'Home',
                     tabBarIcon: ({focused}) => (
-                        < View style={[styles.iconTabRound, focused ?styles.top : null]} >
-                            <Icon name="home" size={26} color={ focused ? '#202020' :'#fafafa'} />
+                        < View style={[styles.top, !focused ? styles.topFocus : null ]} >
+                            <Icon name="home" size={26} color={ !focused ? '#fafafa' :'#525252'} />
                         </View>
                     )
                 }} />
@@ -65,21 +66,39 @@ const styles = StyleSheet.create({
     iconTabRound: {
         width: 45,
         height: 45,
-        borderRadius: 5,
+        borderRadius: 100,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    topFocus: {
+        width: 50,
+        height: 50,
+        borderRadius: 100,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 20,
         elevation: 6,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.2,
         shadowRadius: 5,
+        backgroundColor: '#525252',
     },
-
     top: {
-        marginBottom: 20,
         width: 50,
         height: 50,
-        backgroundColor: '#527C91',
+        borderRadius: 100,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 20,
+        elevation: 6,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 5,
+        backgroundColor: COLORS.yellow,
     }
 })

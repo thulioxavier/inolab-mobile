@@ -7,6 +7,7 @@ import { RegisterUser } from "../../services/api";
 import * as S from "./styles";
 
 import { Reset as ResetImg} from '../../assets/icons';
+import { COLORS } from "../../utils";
 
 type Data = {
   error?: object;
@@ -80,7 +81,7 @@ export const Reset: React.FC = () => {
   const Requere = () => {
     return (
       <>
-        <S.Label style={{ color: "#EB4A47" }}>*</S.Label>
+        <S.Label style={{ color: COLORS.red }}>*</S.Label>
       </>
     );
   };
@@ -108,7 +109,7 @@ export const Reset: React.FC = () => {
               style={{
                 fontSize: 16,
                 fontWeight: "normal",
-                color: "#616161",
+                color: COLORS.black,
                 marginTop: 15,
               }}
             >
@@ -121,7 +122,7 @@ export const Reset: React.FC = () => {
             </S.Label>
             <S.RowInput>
               <S.IconInput>
-                <Icon name="at-sign" size={24} color="#FFFF" />
+                <Icon name="at-sign" size={24} color={COLORS.black} />
               </S.IconInput>
               <S.Input
                 placeholder="Email Adress"
@@ -153,13 +154,13 @@ export const Reset: React.FC = () => {
                   navigation.goBack();
                 }}
               >
-                <Icon name="arrow-left" size={24} color="#527C91" />
+                <Icon name="arrow-left" size={24} color={COLORS.black} />
               </S.ButtonBack>
               <S.ButtonRegister onPress={handleSubmit} disabled={loading}>
                 {!loading ? (
-                  <S.Label style={{ color: "#FFFF" }}>ENVIAR</S.Label>
+                  <S.Label style={{ color: COLORS.black }}>Enviar</S.Label>
                 ) : (
-                  <ActivityIndicator color="#FFF" size="small" />
+                  <ActivityIndicator color={COLORS.black} size="small" />
                 )}
               </S.ButtonRegister>
             </S.AreaButton>

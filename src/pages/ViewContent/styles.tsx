@@ -4,7 +4,7 @@ import { Image, ScrollView, Text, TouchableOpacity, View, StyleSheet, TextInput}
 export const Container = styled(View)`
     flex: 1;
     width: 100%;
-    background-color: #FFF;
+    background-color: #FAFAFA;
     height: 100%;
 
     justify-content: center;
@@ -63,7 +63,7 @@ export const Header = styled(View)`
     width: 100%;
     height: 50px;
     margin-bottom: 5px;
-    background-color: #FFF;
+    background-color: #FAFAFA;
 
 `;
 

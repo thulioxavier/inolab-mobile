@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import { ListNewModules, ListSubjects } from "../../services/api";
 import { Alert, Image, Text, View } from "react-native";
 import { homeScreen } from "../../assets/icons";
+import { COLORS } from "../../utils";
 
 
 export const Home = () => {
@@ -51,12 +52,12 @@ export const Home = () => {
 
             <S.Container>
                 <S.Header>
-                    <S.ButtomHeader color="#FFF" style={S.Styles.Shadow}>
-                        <Icon name="menu" size={24} color='#333333' />
+                    <S.ButtomHeader color={COLORS.white} style={S.Styles.Shadow}>
+                        <Icon name="menu" size={24} color={COLORS.black} />
                     </S.ButtomHeader>
                     <S.Hello>Olá, {name}! </S.Hello>
-                    <S.ButtomHeader color="#527C91" style={S.Styles.Shadow}>
-                        <Icon name="bell" size={24} color='#FAFAFA' />
+                    <S.ButtomHeader color={COLORS.white} style={S.Styles.Shadow}>
+                        <Icon name="bell" size={24} color={COLORS.black} />
                     </S.ButtomHeader>
                 </S.Header>
 
@@ -64,8 +65,8 @@ export const Home = () => {
 
                     <S.Row>
                         <View>
-                            <Text style={{fontSize: 30, fontWeight: 'bold', marginBottom: 5, color: '#484848'}}>InoLab</Text>
-                            <Text style={{fontSize: 14, color: '#484848'}}>Desafiando seu conhecimento.</Text>
+                            <Text style={{fontSize: 30, fontWeight: 'bold', marginBottom: 5, color: COLORS.black}}>InoLab</Text>
+                            <Text style={{fontSize: 14, color: COLORS.black}}>Desafiando seu conhecimento.</Text>
                         </View>
                         <Image source={homeScreen}
                             style={{

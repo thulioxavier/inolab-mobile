@@ -5,18 +5,19 @@ import MainTab from './src/navigators/MainTab';
 import { StatusBar } from 'expo-status-bar';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Intro, Login, Register, ViewContents, ViewContent, Reset, Question } from './src/pages';
+import { COLORS } from './src/utils';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
       <NavigationContainer>
-        <StatusBar style="light" backgroundColor='#324B49' />
+        <StatusBar style="dark" backgroundColor={COLORS.white} />
         <Stack.Navigator
           screenOptions={{
             headerShown: false
           }}
-          initialRouteName={"Home"}
+          initialRouteName={"SingIn"}
         >
 
           <Stack.Screen name="Home" component={MainTab} />
