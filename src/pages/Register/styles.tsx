@@ -25,7 +25,7 @@ export const AreaInput = styled(View)`
 export const NextRegister = styled(TouchableOpacity)`
     max-width: 45px;
     height: 45px;
-    background-color: ${({current}) => current ? COLORS.yellow : COLORS.grey} ;
+    background-color: ${({current}) => current ? COLORS.primary : COLORS.grey} ;
     border-radius: 50px;
     flex: 1;
     justify-content: center;
@@ -117,7 +117,7 @@ export const ButtonRadius = styled(TouchableOpacity)`
     width: 20px;
     height: 20px;
     border:  ${(props) => (!props.select ? `1px solid ${COLORS.black}` : 'none')};
-    background-color: ${(props) => (props.select ? COLORS.yellow : 'transparent')};
+    background-color: ${(props) => (props.select ? COLORS.primary : 'transparent')};
     border-radius: 5px;
 `;
 
@@ -154,7 +154,7 @@ export const ButtonBack = styled(TouchableOpacity)`
     align-items: center;
     width: 39px;
     height: 39px;
-    border: 1px solid ${COLORS.yellow};
+    border: 1px solid ${COLORS.primary};
     background-color: ${COLORS.white};
     z-index: 999;
     border-top-left-radius: 5px;
@@ -168,7 +168,7 @@ export const ButtonRegister = styled(TouchableOpacity)`
     align-items: center;
     width: 100%;
     height: 39px;
-    background-color: ${COLORS.yellow};
+    background-color: ${COLORS.primary};
     position: absolute;
     border-radius: 5px;
 `;

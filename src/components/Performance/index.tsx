@@ -44,7 +44,7 @@ export const Performance = () => {
 
   const getShowMetrics = async () => {
     try {
-      const result: any = await ShowInfoDash(1)
+      const result: any = await ShowInfoDash(2)
       if (result.data.status) {
         setValues(result?.data?.metrics);
         setChartDate(result?.data?.chart);
@@ -74,7 +74,7 @@ export const Performance = () => {
                 selectData.icon === "arrow-up"
                   ? COLORS.green
                   : selectData.icon === "activity"
-                  ? COLORS.yellow
+                  ? COLORS.primary
                   : COLORS.red
               }
             >
@@ -103,7 +103,7 @@ export const Performance = () => {
                   selectData.icon === "arrow-up"
                     ? COLORS.green
                     : selectData.icon === "activity"
-                    ? COLORS.yellow
+                    ? COLORS.primary
                     : COLORS.red
                 }
                 style={{ marginRight: 5 }}
@@ -236,7 +236,7 @@ export const Performance = () => {
               <Icon
                 name="activity"
                 size={19}
-                color={COLORS.yellow}
+                color={COLORS.primary}
                 style={{ marginRight: 5 }}
               />
               <S.Label>{values?.hits?.points}</S.Label>

@@ -4,14 +4,19 @@ import { useNavigation } from "@react-navigation/native";
 import * as Linking from "expo-linking";
 import * as S from "./styles";
 import { GetContentById } from "../../services/api";
-import { Alert, useWindowDimensions } from "react-native";
+import { Alert, Image, useWindowDimensions } from "react-native";
 import Html from 'react-native-render-html';
-
+import { Header } from "../../components";
+import { COLORS } from "../../utils";
+import { Game } from "../../assets/icons";
+import * as Animatable from 'react-native-animatable';
 export const ViewContent = ({ route }: any) => {
   const navigation = useNavigation();
   const { idContent, name } = route.params;
   const { width } = useWindowDimensions();
-  console.log(route.params)
+
+  const [visible, setVisible] = useState<boolean>(false);
+
   const [select, setSelect] = useState<Object>({
     init: true,
     play: false,
@@ -67,11 +72,11 @@ export const ViewContent = ({ route }: any) => {
                 <Icon
                   name="link"
                   size={19}
-                  color="#527C91"
+                  color={COLORS.black}
                   style={{ marginRight: 5 }}
                 />
                 <S.Label
-                  style={{ fontWeight: "bold", color: "#484848" }}
+                  style={{ fontWeight: "bold", color: COLORS.black }}
                   numberOfLines={1}
                 >
                   {item?.title}
@@ -112,6 +117,72 @@ export const ViewContent = ({ route }: any) => {
     Linking.openURL(link);
   };
 
+  const ShowInfo = () => {
+    return (
+      <Fragment>
+        <S.ModalR
+          animationType="fade"
+          visible={visible}
+          transparent={true}
+          onRequestClose={() => {
+            setVisible(false);
+          }}
+        >
+          <S.ModalContent>
+            <S.ModalHeader color={COLORS.primary} >
+              <S.ButtonIconClose
+                onPress={() => {
+                  setVisible(false);
+                }}
+              >
+                <Icon
+                  name="x-circle"
+                  size={25}
+                  color={COLORS.white}
+                  style={{ marginRight: 5 }}
+                />
+              </S.ButtonIconClose>
+            </S.ModalHeader>
+
+            <S.ModalArea>
+              <Animatable.Text animation="fadeIn" useNativeDriver style={{ marginBottom: 10 }}>
+                <S.LabelTitle style={{ fontSize: 18 }}>
+                  E vamos lá!
+                </S.LabelTitle>
+              </Animatable.Text>
+
+              <Animatable.View animation="pulse" easing="ease-out" useNativeDriver iterationCount="infinite">
+                <Image source={Game} style={{
+                  marginRight: 'auto',
+                  marginLeft: 'auto',
+                  width: 210,
+                  height: 100,
+                  resizeMode: 'cover',
+                }} />
+
+              </Animatable.View>
+              <S.ButtonPlayModal
+                onPress={() => {
+                  setVisible(false)
+                  navigation.navigate("Question", { idContent: values?.id });
+                }}
+              >
+                <Animatable.Text animation="rotate" easing="ease-out" useNativeDriver iterationCount={5}>
+                  <Icon
+                    name="play"
+                    size={30}
+                    color={COLORS.black}
+                  />
+                </Animatable.Text>
+              </S.ButtonPlayModal>
+
+            </S.ModalArea>
+          </S.ModalContent>
+        </S.ModalR>
+      </Fragment>
+    );
+  };
+
   const caseContentInfo = () => {
     if (select.init) {
       return Body(values?.abstract, values?.body);
@@ -127,22 +198,7 @@ export const ViewContent = ({ route }: any) => {
   return (
     <Fragment>
       <S.Container>
-        <S.Header>
-          <S.ButtomHeader
-            color="#FAFAFA"
-            style={S.Styles.Shadow}
-            onPress={() => {
-              navigation.goBack();
-            }}
-          >
-            <Icon name="arrow-left" size={24} color="#333333" />
-          </S.ButtomHeader>
-          <S.Hello>Conteúdo</S.Hello>
-          <S.ButtomHeader color="#527C91" style={S.Styles.Shadow}>
-            <Icon name="menu" size={24} color="#FAFAFA" />
-          </S.ButtomHeader>
-        </S.Header>
-
+        <Header iconLeft="arrow-left" btnLeft={() => { navigation.goBack() }} btnRight={() => { }} leftColor={COLORS.white100} rightColor={COLORS.primary} iconRight="menu" title="Conteúdo" />
         <S.Content>
           <S.SectionTitle numberOfLines={1}>{name}</S.SectionTitle>
           <S.TabRow>
@@ -199,13 +255,21 @@ export const ViewContent = ({ route }: any) => {
           {select.init ? (
             <S.ButtonPlay
               onPress={() => {
-                navigation.navigate("Question", { idContent: values?.id });
+                setVisible(true)
+                // navigation.navigate("Question", { idContent: values?.id });
               }}
             >
-              <S.Label style={{ fontSize: 16 }}>Iniciar</S.Label>
+              <Animatable.Text animation="pulse" easing="ease-out" useNativeDriver iterationCount="infinite">
+                <Icon
+                  name="play"
+                  size={30}
+                  color={COLORS.black}
+                />
+              </Animatable.Text>
             </S.ButtonPlay>
           ) : null}
         </S.Content>
+        {ShowInfo()}
       </S.Container>
     </Fragment>
   );

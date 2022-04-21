@@ -111,7 +111,6 @@ export const ButtonIconClose = styled(TouchableOpacity)`
 `;
 
 export const ModalHeader = styled(View)`
-
   align-items: flex-end;
   
   width: 300px;

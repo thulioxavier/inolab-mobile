@@ -17,7 +17,7 @@ export default () => {
             <Tab.Navigator
                 initialRouteName="Home"
                 tabBarOptions={{
-                    activeTintColor: COLORS.yellow,
+                    activeTintColor: COLORS.primary,
                     inactiveTintColor: '#525252',
                     showLabel: false,
                     keyboardHidesTabBar: true,
@@ -99,6 +99,6 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.2,
         shadowRadius: 5,
-        backgroundColor: COLORS.yellow,
+        backgroundColor: COLORS.primary,
     }
 })

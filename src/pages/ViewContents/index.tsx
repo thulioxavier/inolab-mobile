@@ -5,6 +5,8 @@ import Icon from "react-native-vector-icons/Feather";
 
 import * as S from "./styles";
 import { useNavigation } from "@react-navigation/native";
+import { COLORS } from "../../utils";
+import { Header } from "../../components";
 
 export const ViewContents = ({ route }: any) => {
   const navigation = useNavigation();
@@ -34,21 +36,15 @@ export const ViewContents = ({ route }: any) => {
   return (
     <Fragment>
       <S.Container>
-        <S.Header>
-          <S.ButtomHeader
-            color="#FAFAFA"
-            style={S.Styles.Shadow}
-            onPress={() => {
-              navigation.goBack();
-            }}
-          >
-            <Icon name="arrow-left" size={24} color="#333333" />
-          </S.ButtomHeader>
-          <S.Hello>Atividades</S.Hello>
-          <S.ButtomHeader color="#527C91" style={S.Styles.Shadow}>
-            <Icon name="menu" size={24} color="#FAFAFA" />
-          </S.ButtomHeader>
-        </S.Header>
+        <Header 
+          iconRight="menu"
+          iconLeft="arrow-left"
+          title="Conteúdos"
+          btnLeft={() => {navigation.goBack()}}
+          btnRight={() => {}}
+          leftColor={COLORS.white100} rightColor={COLORS.yellow}
+        />
+        
         <S.AreaList>
           <S.TitlePage numberOfLines={1}>{name}</S.TitlePage>
           <FlatList
@@ -56,15 +52,13 @@ export const ViewContents = ({ route }: any) => {
             renderItem={({ item }) => {
               return (
                 <Fragment>
-                  <S.CardArea>
-                    <S.CardContent onPress={() => {viewContent(Number(item.id), item.title)}}>
+                    <S.CardContent  style={S.Styles.Shadow} onPress={() => {viewContent(Number(item.id), item.title)}}>
                       <S.Title numberOfLines={1}>{item.title}</S.Title>
                       <S.SubTitle numberOfLines={1}>
                         {item.modules.name}
                       </S.SubTitle>
                       <S.Abstract numberOfLines={3}>{item.abstract}</S.Abstract>
                     </S.CardContent>
-                  </S.CardArea>
                 </Fragment>
               );
             }}

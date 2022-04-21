@@ -1,10 +1,11 @@
 import styled from 'styled-components';
-import { Image, ScrollView, Text, TouchableOpacity, View, StyleSheet, TextInput} from 'react-native';
+import { Image, ScrollView, Text, TouchableOpacity, View, StyleSheet, TextInput, Modal} from 'react-native';
+import { COLORS } from '../../utils';
 
 export const Container = styled(View)`
     flex: 1;
     width: 100%;
-    background-color: #FAFAFA;
+    background-color: ${COLORS.white};
     height: 100%;
 
     justify-content: center;
@@ -22,21 +23,81 @@ export const SectionTitle = styled(Text)`
     width: auto;
     font-size: 16px;
     font-weight: 700;
-    color: #5f5f5f;
+    color: ${COLORS.black};
     margin-bottom: 10px;
     margin-top: 10px;
+`;
+export const ButtonIconClose = styled(TouchableOpacity)`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+
+  width: 35px;
+  height: 35px;
+`;
+
+export const LabelTitle = styled(Text)`
+  font-size: 13px;
+  font-weight: bold;
+  color: #333333;
+`;
+
+export const ModalHeader = styled(View)`
+  align-items: flex-end;
+  
+  width: 300px;
+  height: 35px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  background-color: ${({color}: any) => (color)};
+
+`;
+
+export const ModalArea = styled(View)`
+    justify-content: center;
+    align-items: center;
+
+    padding: 5px;
+    width: 300px;
+
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    
+    background-color: #ffffff;
+`;
+
+export const ModalR = styled(Modal)``;
+
+export const ModalContent = styled(View)`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  background-color: #0000002d;
+`;
+
+export const ButtonPlayModal = styled(TouchableOpacity)`
+    width: 50px;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    background-color: ${COLORS.primary};
+
+    margin-top: 20px;
+    margin-bottom: 10px;
 `;
 
 export const ButtonPlay = styled(TouchableOpacity)`
     position: absolute;
-    width: 100px;
-    height: 45px;
+    width: 50px;
+    height: 50px;
+    flex: 1;
     align-items: center;
     justify-content: center;
     right: 10px;
     bottom: 15px;
-    border-radius: 5px;
-    background-color: #527C91;
+    border-radius: 50px;
+    background-color: ${COLORS.primary};
 `;
 
 export const ButtonLink = styled(TouchableOpacity)`
@@ -49,8 +110,8 @@ export const ButtonLink = styled(TouchableOpacity)`
 
     margin-top: 10px;
     padding: 0 10px;
+    background-color: ${COLORS.white};
 
-    background-color: #f0f0f0;
 `;
 
 export const Header = styled(View)`
@@ -63,7 +124,7 @@ export const Header = styled(View)`
     width: 100%;
     height: 50px;
     margin-bottom: 5px;
-    background-color: #FAFAFA;
+    background-color: ${COLORS.white};
 
 `;
 
@@ -75,7 +136,7 @@ export const TabRow = styled(View)`
 
     border-radius: 5px;
 
-    background-color: #527C91;
+    background-color: ${COLORS.yellow100};
 `;
 
 export const TabButton = styled(TouchableOpacity)`
@@ -84,15 +145,14 @@ export const TabButton = styled(TouchableOpacity)`
 
     padding: 5px;
     border-radius: 5px;
-
-    background-color: ${(props) => (props.select ? '#484848' :  '#527C91')};
+    background-color: ${(props) => (props.select ? COLORS.primary :  COLORS.yellow100)};
     justify-content: center;
     align-items: center;
 `;
 export const Hello = styled(Text)`
     font-size: 18px;
     font-weight: bold;
-    color: #494949;
+    color: ${COLORS.black};
 `;
 export const Icon = styled(Image)`
     width: 50px;
@@ -102,20 +162,10 @@ export const Icon = styled(Image)`
 
 export const Label = styled(Text)`
     font-size: 14px;
-    color:${(props) => (props.select ? '#527C91' :  '#FFFF')};
+    color:${COLORS.black};
+    font-weight: ${(props) => (props.select ? 'bold' :  'normal')};
+
 `;
-
-export const ButtomHeader = styled(TouchableOpacity)`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    height: 40px;
-
-    background-color: ${(props) => (props.color ? props.color : '#527C91' )} ;
-    border-radius: 5px;
-`;
-
 
 export const Styles = StyleSheet.create({
     Shadow: {

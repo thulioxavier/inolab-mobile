@@ -12,7 +12,6 @@ export const RegisterUser = async (data: Object) => {
         json.data = result.data;
         return json.data;
     } catch (error) {
-        console.log(error, 'erro');
         json.error = {error}
         return json;
     }
@@ -25,7 +24,6 @@ export const LoginUser = async (data: Object) => {
         json.data = result.data;
         return json;
     } catch (error) {
-        console.log(error, 'erro');
         json.error = {error}
         return json;
     }
@@ -38,7 +36,6 @@ export const ListSubjects = async () => {
         json.data = result.data;
         return json.data;
     } catch (error) {
-        console.log(error, 'erro');
         json.error = {error}
         return json;
     }
@@ -51,7 +48,6 @@ export const ListNewModules = async () => {
         json.data = result.data;
         return json.data;
     } catch (error) {
-        console.log(error, 'erro');
         json.error = {error}
         return json;
     }
@@ -64,7 +60,6 @@ export const ListContentsModelus = async (id_module: Number) => {
         json.data = result.data;
         return json.data;
     } catch (error) {
-        console.log(error, 'erro');
         json.error = {error}
         return json;
     }
@@ -77,7 +72,6 @@ export const GetContent = async (idContent: Number) => {
         json.data = result.data;
         return json.data;
     } catch (error) {
-        console.log(error, 'erro');
         json.error = {error}
         return json;
     }
@@ -90,7 +84,6 @@ export const GetContentById = async (idContent: Number) => {
         json.data = result.data;
         return json.data;
     } catch (error) {
-        console.log(error, 'erro');
         json.error = {error}
         return json;
     }
@@ -99,11 +92,10 @@ export const GetContentById = async (idContent: Number) => {
 export const GetQuestionsByContent = async (idContent: Number) => {
     let json: JsonResponse = { data: Object, error: Object };
     try {
-        const result = await api.get(`/question/content/${idContent}/${1}`);
+        const result = await api.get(`/question/content/${idContent}/${2}`);
         json.data = result.data;
         return json.data;
     } catch (error) {
-        console.log(error, 'erro');
         json.error = {error}
         return json;
     }
@@ -111,13 +103,11 @@ export const GetQuestionsByContent = async (idContent: Number) => {
 
 export const PostAnswer = async (values: {}) => {
     let json: JsonResponse = { data: Object, error: Object };
-    console.log(values);
     try {
         const result = await api.post(`/answer/`, values);
         json.data = result.data;
         return json.data;
     } catch (error) {
-        console.log(error, 'erro');
         json.error = {error}
         return json;
     }
@@ -134,7 +124,22 @@ export const ShowInfoDash = async (idUser: Number = 1) => {
         json.data = result.data;
         return json.data;
     } catch (error) {
-        console.log(error, 'erro');
+        json.error = {error}
+        return json;
+    }
+}
+
+export const SelectDateAnswer = async (date: any ,idUser: Number = 1) => {
+    let json: JsonResponse = { data: Object, error: Object };
+    try {
+        const result = await api.get(`/user/answer-date/${date}/${idUser}`,{
+            headers:{
+                user: idUser.toString()
+            }
+        });
+        json.data = result.data;
+        return json.data;
+    } catch (error) {
         json.error = {error}
         return json;
     }

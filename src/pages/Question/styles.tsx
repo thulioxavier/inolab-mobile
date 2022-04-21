@@ -1,9 +1,10 @@
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import styled from "styled-components";
+import { COLORS } from "../../utils";
 
 export const Container = styled(View)`
     flex: 1;
-    background-color: #FFFF;
+    background-color: ${COLORS.white};
 `;
 
 export const Content = styled(View)`
@@ -51,13 +52,13 @@ export const ButtomHeader = styled(TouchableOpacity)`
 export const Hello = styled(Text)`
     font-size: 18px;
     font-weight: bold;
-    color: #494949;
+    color: ${COLORS.black};
 `;
 
 export const H1 = styled(Text)`
     font-size: 18px;
     font-weight: bold;
-    color: #5e5e5e;
+    color: ${COLORS.black};
     margin-bottom: 10px;
 `;
 
@@ -79,14 +80,13 @@ export const IconOptions = styled(Text)`
 export const LabelQuestion = styled(Text)`
     font-size: 14px;
     line-height: 20px;
-    color: #484848;
+    color: ${COLORS.black};
 `;
 
 export const LabelOptions = styled(Text)`
     font-size: 14px;
     width: 80%;
     line-height: 20px;
-    font-weight: bold;
 `;
 
 export const Options = styled(TouchableOpacity)`
@@ -107,33 +107,31 @@ export const Options = styled(TouchableOpacity)`
 export const LabelTitle = styled(Text)`
     font-size: 16px;
     font-weight: bold;
-    color: #484848;
+    color: ${COLORS.black};
 `;
 
 export const Circle = styled(TouchableOpacity)`
     justify-content: center;
     align-items: center;
-    width: 30px;
-    height: 30px;
+    width: ${({current}) => current ? '40px' : '30px'};
+    height: ${({current}) => current ? '40px' : '30px'};
     border-radius: 50px;
-    margin-right: 5px;
-    background-color: #DDD;
 `;
 
-export const RowContent = styled(View)`
-    width: 100%;
-    padding: 5px;
-
-    flex: 1;
-    flex-direction: row;
+export const AreaCircle = styled(View)`
+    height: 60px;
+    width: ${({width}) => width};
     justify-content: center;
     align-items: center;
+`
+
+export const RowContent = styled(ScrollView)`
 `;
 
 export const QuestionContent = styled(View)`
     width: 100%;
-    background-color: #F0F0F0;
-
+    background-color: ${COLORS.white100};
+    border-radius: 5px;
     padding: 5px;
     margin-bottom: 15px;
     margin-top: 15px;
@@ -159,23 +157,22 @@ export const ButtonNext = styled(TouchableOpacity)`
     height: 45px;
     justify-content: center;
     align-items: center;
-    background-color: #527C91;
+    background-color: ${COLORS.black};
 
     border-radius: 5px;
 `;
 
 
 export const Time = styled(Text)`
-    color: #527C91;
+    color: ${COLORS.black};
     font-weight: bold;
     font-size: 20px;
 
 `;
 
 export const QuestionsCount = styled(Text)`
-    font-size: 20px;
-    font-weight: bold;
-    color: #484848;
+    font-size: 18px;
+    color: ${COLORS.black};
 `;
 
 export const Header = styled(View)`
@@ -188,7 +185,7 @@ export const Header = styled(View)`
     width: 100%;
     height: 50px;
     margin-bottom: 5px;
-    background-color: #FAFAFA;
+    background-color: ${COLORS.white};
 
 `;
 

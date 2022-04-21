@@ -118,4 +118,52 @@ export const Styles = StyleSheet.create({
 
         elevation: 5,
     },
-})
+});
+
+export const HeaderCardAnswer = styled(View)`
+    width: 100%;
+    background-color: ${COLORS.primary};
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding: 5px 10px;
+`;
+
+export const BodyCardAnswer = styled(View)`
+    flex: 1;
+    flex-direction: column;
+    width: 100%;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 5px 10px;
+`;
+
+export const HeaderText = styled(Text)`
+    font-size: 15px;
+    font-weight: bold;
+    color: ${COLORS.black};
+`;
+
+export const StatusPoints = styled(View)`
+    width: 14px;
+    height: 14px;
+    background-color: ${({correct}) => correct ? COLORS.green : COLORS.red};
+`;
+
+export const AreaText = styled(View)`
+    flex: 1;
+    align-items: center;
+    flex-direction: row;
+`;
+
+export const BodyText = styled(Text)`
+    font-size: 14px;
+    color: ${COLORS.black};
+`;
+
+export const CardAnswer = styled(View)`
+    flex: 1;
+    flex-direction: column;
+    margin: 10px 5px;
+    border-radius: 5px;
+    background-color: #FFFF;
+`;

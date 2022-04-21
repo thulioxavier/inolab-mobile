@@ -7,6 +7,7 @@ import Register_2 from './register_2.png';
 import Login from './login.png';
 import Reset from './resetpass.png';
 import homeScreen from './homeScreen.png';
+import Game from './game.png';
 
 export {
     Logo,
@@ -17,5 +18,6 @@ export {
     Login,
     Reset,
     Register_2,
-    homeScreen
+    homeScreen,
+    Game
 }

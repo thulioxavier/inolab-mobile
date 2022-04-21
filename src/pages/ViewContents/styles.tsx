@@ -1,11 +1,12 @@
 import { SafeAreaView, Text, TouchableOpacity, View, StyleSheet } from "react-native";
 import styled from "styled-components";
+import { COLORS } from "../../utils";
 
 
 
 export const Container = styled(View)`
     flex: 1;
-    background-color: #FFFF;
+    background-color: ${COLORS.white};
     
 `;
 
@@ -18,32 +19,29 @@ export const Header = styled(View)`
     align-items: center;
     width: 100%;
     height: 50px;
-    background-color: #ffffff;
+    background-color: ${COLORS.white};
 `;
 
 export const Hello = styled(Text)`
     font-size: 18px;
     font-weight: bold;
-    color: #494949;
+    color: ${COLORS.black};
 `;
 
 export const TitlePage = styled(Text)`
-    padding: 5px 0;
-    font-weight: 400;
+    padding: 5px 5px;
+    font-weight: bold;
     font-size: 18px;
-    color: #494949;
+    color: ${COLORS.black};
 `;
 export const AreaList = styled(SafeAreaView)`
     flex: 1;   
-    width: 100%;
-    padding: 5px;
-    background-color: #FFFF;
 `;
 
 export const Title = styled(Text)`
     font-size: 20px;
     font-weight: bold;
-    color: #333333;    
+    color: ${COLORS.black};    
 
     justify-content: center;
     align-items: center;
@@ -53,7 +51,7 @@ export const SubTitle = styled(Text)`
     font-size: 14px;
     font-weight: bold;
     margin-bottom: 2px;
-    color: #585858;
+    color: ${COLORS.black};
 `;
 
 export const Abstract = styled(Text)`
@@ -61,7 +59,7 @@ export const Abstract = styled(Text)`
     margin-bottom: 15px;
 
     text-align: justify;
-    color: #585858;
+    color: ${COLORS.black};
 `;
 
 export const CardArea = styled(View)`
@@ -70,20 +68,21 @@ export const CardArea = styled(View)`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
     margin-bottom: 5px;
+    border-radius: 5px;
 `;
 
 export const CardContent = styled(TouchableOpacity)`
     flex: 1;
-    width: 98%;
+    width: 97%;
     height: 120px;
-
     border-left-width: 8px;
-    border-left-color: #527C91;
+    border-left-color: ${COLORS.primary};
     border-style: solid;
-    margin-top: 5px;
     padding: 5px;
+    border-radius: 5px;
+    background-color: ${COLORS.white100};
+    margin: 5px;
 `;
 
 export const ButtomHeader = styled(TouchableOpacity)`
@@ -93,7 +92,7 @@ export const ButtomHeader = styled(TouchableOpacity)`
     width: 40px;
     height: 40px;
 
-    background-color: ${(props) => (props.color ? props.color : '#527C91' )} ;
+    background-color: ${(props) => (props.color ? props.color : COLORS.primary )} ;
     border-radius: 5px;
 `;
 
