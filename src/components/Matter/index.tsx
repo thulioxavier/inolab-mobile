@@ -13,7 +13,7 @@ export const Matter = ({ values = [] }: Matter) => {
                 <S.Scrool horizontal={true} showsHorizontalScrollIndicator={false}>
                     {values.map((item, index) => {
                         return (
-                            <S.Item key={index}>
+                            <S.Item style={S.Styles.Shadow} key={index}>
                                 <S.ItemTitle>
                                     {item.name}
                                 </S.ItemTitle>

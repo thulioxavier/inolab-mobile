@@ -68,6 +68,7 @@ export const HomeDayScroll = (props: any) => {
                                 }}
                             >
                                 <S.DayItem
+                                    style={S.Styles.Shadow}
                                     selected={index == selectedDay - 1}
                                     day={(index + 1) == new Date().getDate() && props.selectedMonth == new Date().getMonth()}
                                     back={ (props.selectedMonth < new Date().getMonth()) ||((index + 1) < new Date().getDate() && props.selectedMonth <= new Date().getMonth())}

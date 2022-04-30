@@ -42,7 +42,7 @@ export const ViewContents = ({ route }: any) => {
           title="Conteúdos"
           btnLeft={() => {navigation.goBack()}}
           btnRight={() => {}}
-          leftColor={COLORS.white100} rightColor={COLORS.yellow}
+          leftColor={COLORS.white100} rightColor={COLORS.primary}
         />
         
         <S.AreaList>

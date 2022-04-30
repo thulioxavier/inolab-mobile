@@ -43,7 +43,14 @@ export const ViewContent = ({ route }: any) => {
     }
   };
 
+
   const Body = (abstract: string, body: string) => {
+    const tagsStyles = {
+      div: {
+        margin: '10px'
+      },
+
+    };
     return (
       <Fragment>
         <S.Container style={{ marginBottom: 80 }}>
@@ -51,8 +58,11 @@ export const ViewContent = ({ route }: any) => {
           <S.Label style={{ color: "black", textAlign: "justify" }}>
             {abstract}
           </S.Label>
-          <S.SectionTitle>{values?.title}</S.SectionTitle>
-          <Html contentWidth={width} source={{ html: body }} />
+          <S.SectionTitle>Conteúdo</S.SectionTitle>
+          <Html contentWidth={width - 20}
+            tagsStyles={tagsStyles}
+            enableExperimentalMarginCollapsing={true}
+            source={{ html: "<div> " + body + "</div>" }} />
         </S.Container>
       </Fragment>
     );
@@ -90,10 +100,19 @@ export const ViewContent = ({ route }: any) => {
   };
 
   const ExamplesContent = (examples: string) => {
+    const tagsStyles = {
+      div: {
+        margin: '10px'
+      },
+
+    };
     return (
       <Fragment>
         <S.Container style={{ marginBottom: 80 }}>
-          <Html contentWidth={width} source={{ html: examples }} />
+          <Html contentWidth={width - 20}
+            tagsStyles={tagsStyles}
+            enableExperimentalMarginCollapsing={true}
+            source={{ html: "<div>" +examples+ "<div/>" }} />
         </S.Container>
       </Fragment>
     );
@@ -200,7 +219,7 @@ export const ViewContent = ({ route }: any) => {
       <S.Container>
         <Header iconLeft="arrow-left" btnLeft={() => { navigation.goBack() }} btnRight={() => { }} leftColor={COLORS.white100} rightColor={COLORS.primary} iconRight="menu" title="Conteúdo" />
         <S.Content>
-          <S.SectionTitle numberOfLines={1}>{name}</S.SectionTitle>
+          <S.SectionTitle>{name}</S.SectionTitle>
           <S.TabRow>
             <S.TabButton
               select={select.init}
@@ -212,7 +231,7 @@ export const ViewContent = ({ route }: any) => {
                 setSelect({ ...select });
               }}
             >
-              <S.Label select={select.init}>Introdução</S.Label>
+              <S.Label select={select.init}>Conteúdo</S.Label>
             </S.TabButton>
             <S.TabButton
               select={select.play}

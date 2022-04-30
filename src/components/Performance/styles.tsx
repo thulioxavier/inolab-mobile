@@ -8,6 +8,7 @@ import {
   Modal,
 } from "react-native";
 import styled from "styled-components";
+import { COLORS } from "../../utils";
 
 export const Content = styled(View)`
   width: 100%;
@@ -51,10 +52,10 @@ export const Card = styled(TouchableOpacity)`
   width: 85px;
   height: 85px;
   padding: 5px 10px;
-  background-color: #fff;
+  background-color: ${COLORS.white100};
   border-radius: 5px;
-  color: #fff;
-  display: flex;
+  flex: 1;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   margin-top: 5px;

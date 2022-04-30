@@ -18,7 +18,7 @@ export const Content = styled(ScrollView)`
 
 export const SectionTitle = styled(Text)`
     width: auto;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
     color: ${COLORS.black};
     margin-bottom: 10px;
@@ -122,7 +122,7 @@ export const Styles = StyleSheet.create({
 
 export const HeaderCardAnswer = styled(View)`
     width: 100%;
-    background-color: ${COLORS.primary};
+    background-color: ${COLORS.grey};
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     padding: 5px 10px;
@@ -139,7 +139,6 @@ export const BodyCardAnswer = styled(View)`
 
 export const HeaderText = styled(Text)`
     font-size: 15px;
-    font-weight: bold;
     color: ${COLORS.black};
 `;
 

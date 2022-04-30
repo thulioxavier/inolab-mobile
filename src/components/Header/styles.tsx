@@ -53,7 +53,7 @@ export const Icon = styled(Image)`
 export const Hello = styled(Text)`
     font-size: 18px;
     font-weight: bold;
-    color: #494949;
+    color: ${COLORS.black};
 `;
 
 export const Row = styled(View)`

@@ -1,4 +1,4 @@
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import styled from "styled-components";
 import { COLORS } from "../../utils";
 
@@ -26,3 +26,18 @@ export const MonthItem = styled(View)`
     justify-content: center;
     align-items: center;
 `;
+
+
+export const Styles = StyleSheet.create({
+    Shadow: {
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 5,
+            height: 5,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+
+        elevation: 5,
+    }
+})

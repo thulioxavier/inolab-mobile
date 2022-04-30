@@ -115,6 +115,13 @@ export const Circle = styled(TouchableOpacity)`
     align-items: center;
     width: ${({current}) => current ? '40px' : '30px'};
     height: ${({current}) => current ? '40px' : '30px'};
+
+    background-color: ${({current, status, key, statusQuestion}) =>  ((status !== undefined || status !== null) && statusQuestion) ? 
+        ( (status && current) ? COLORS.primary : 
+            (!status && current ) ? 
+                COLORS.red : 
+                    COLORS.grey) 
+        : (current) ? COLORS.primary : COLORS.grey};
     border-radius: 50px;
 `;
 
@@ -123,7 +130,20 @@ export const AreaCircle = styled(View)`
     width: ${({width}) => width};
     justify-content: center;
     align-items: center;
-`
+`;
+
+export const DiffBar = styled(View)`
+    width: 16.6666666667%;
+    height: 10px;
+    background-color: ${({color}) => color};
+    /* margin-right: 3px; */
+`;
+
+export const RowDiff = styled(View)`
+    flex: 1;
+    flex-direction: row;
+    width: 100%;
+`;
 
 export const RowContent = styled(ScrollView)`
 `;
@@ -153,15 +173,23 @@ export const AreaButton = styled(View)`
 `;
 
 export const ButtonNext = styled(TouchableOpacity)`
-    width: 120px;
-    height: 45px;
+    flex: 1;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-color: ${COLORS.black};
-
+    max-width: 50%;
+    height: 50px;
+    background-color: ${COLORS.primary};
     border-radius: 5px;
+    padding: 5px;
 `;
 
+export const BtnText = styled(Text)`
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+`;
 
 export const Time = styled(Text)`
     color: ${COLORS.black};
@@ -173,6 +201,26 @@ export const Time = styled(Text)`
 export const QuestionsCount = styled(Text)`
     font-size: 18px;
     color: ${COLORS.black};
+`;
+
+export const PointsView = styled(View)`
+    flex: 1;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: auto;
+    max-width: 50%;
+    padding: 0 10px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: ${ ({status}) => status ? COLORS.green : COLORS.red};
+`; 
+
+export const PointsText = styled(Text)`
+    font-size: 18px;
+    font-weight: bold;
+    color: ${ ({status}) => status ? COLORS.black : COLORS.white};
+
 `;
 
 export const Header = styled(View)`

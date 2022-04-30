@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useRef, useState } from "react";
-import { ActivityIndicator, Dimensions, Platform, useWindowDimensions, Vibration } from "react-native";
+import { ActivityIndicator, Dimensions, Platform, Text, useWindowDimensions, Vibration } from "react-native";
 import { GetQuestionsByContent, PostAnswer } from "../../services/api";
 import * as S from "./styles";
 import { useClock } from 'react-native-timer-hooks';
@@ -13,13 +13,15 @@ const ArrayBackground = [COLORS.primary, COLORS.red, COLORS.green, COLORS.blue];
 
 const ArrayEmojis = ["😂", "🤔", "🤓", "😱"];
 
+const Degrade = [COLORS.blue, COLORS.green, COLORS.yellow, COLORS.orangeBringth, COLORS.orange, COLORS.red]
+
 export const Question = ({ route }: any) => {
 
     const { width } = useWindowDimensions();
     const navigation = useNavigation();
     const screenWidth = Math.round(Dimensions.get('window').width);
     let QuestionW = ((screenWidth - 10) / 8);
-    let offsetW = Math.round(((screenWidth-10) - QuestionW) / 2);
+    let offsetW = Math.round(((screenWidth - 10) - QuestionW) / 2);
     const [indexOptionSelect, setIndexOptionSelect] = useState<number | null>(null);
     const [values, setValues] = useState<any>([]);
     const [loadingGet, setLoadingGet] = useState<boolean>(false);
@@ -32,7 +34,9 @@ export const Question = ({ route }: any) => {
     const [ref, setRef] = useState<any>(0);
     const QuestionRef = useRef<any>(ref);
     const { idContent, name } = route.params;
-
+    const [points, setPoints] = useState<number>(0);
+    const [currentStatus, setCurrrentStatus] = useState<boolean | undefined | null>(undefined);
+    const [diff, setDiff] = useState<Array<any> | null | undefined>();
     if (counter == 60) {
         setMin(min + 1)
         reset()
@@ -129,10 +133,21 @@ export const Question = ({ route }: any) => {
                 if (item.answers.length > 0) {
                     auxCount++
                 }
+
+                if (item?.answers[0]?.status == true) {
+                    setCurrrentStatus(true);
+                    setPoints(item.answers[0]?.points);
+                } else if (item?.answers[0]?.status == false) {
+                    setPoints(item.answers[0]?.points * -1);
+                    setCurrrentStatus(false);
+                }
             });
 
             setCurrentStatusQuestion(auxCount > 0);
             setLoadingGetStatus(false);
+
+            Dif();
+
         }, 10);
 
     }, [currentQuestion, values]);
@@ -155,7 +170,7 @@ export const Question = ({ route }: any) => {
                 }
 
                 await PostAnswer(answer_res).then((response) => {
-
+                    getQuestions();
                 }).catch((reject) => {
                     console.log(reject);
 
@@ -165,6 +180,14 @@ export const Question = ({ route }: any) => {
         } catch (error) {
 
         }
+    }
+
+    const Dif = () => {
+        let aux = []
+        for (let index = 0; index <=values[currentQuestion]?.difficulty; index++) {
+            aux.push(index);
+        }
+        setDiff(aux);
     }
 
     const handleScrollEnd = (posX: any) => {
@@ -178,6 +201,13 @@ export const Question = ({ route }: any) => {
         QuestionRef.current.scrollTo({ x: ref, y: 0, animated: true });
         setCurrentQuestion(parseInt(question))
     }
+
+    const tagsStyles = {
+        div: {
+            margin: '10px'
+        },
+
+    };
 
     return (
         <Fragment>
@@ -201,13 +231,13 @@ export const Question = ({ route }: any) => {
                     ) : (
                         <S.Scroll>
                             <S.Content>
+
                                 <S.RowContent
                                     ref={QuestionRef}
                                     horizontal={true}
                                     showsHorizontalScrollIndicator={false}
                                     decelerationRate="fast"
                                     snapToInterval={QuestionW}
-                                    contentContainerStyle={{ paddingLeft: offsetW, paddingRight: offsetW }}
                                     style={{ marginTop: 10 }}>
                                     {
                                         values?.map((item: any, key: number) => {
@@ -216,8 +246,10 @@ export const Question = ({ route }: any) => {
                                                     <S.AreaCircle width={QuestionW}>
 
                                                         <S.Circle
-                                                            current={(currentQuestion) === key}
-                                                            style={[{ backgroundColor: (currentQuestion) === key ? COLORS.primary : (currentQuestion) > key ? COLORS.yellow100 : COLORS.grey }, S.Styles.Shadow]}
+                                                            current={Number(currentQuestion) === key}
+                                                            status={currentStatus}
+                                                            statusQuestion={currentStatusQuestion}
+                                                            key={Number(key)}
                                                             onPress={() => { scrollToDay(key) }}
                                                         >
                                                             <S.LabelQuestion style={{ fontWeight: 'bold' }}>{key + 1}</S.LabelQuestion>
@@ -230,12 +262,30 @@ export const Question = ({ route }: any) => {
 
                                 </S.RowContent>
                                 <S.RowHeader>
+
                                     <S.QuestionsCount>Questão: {currentQuestion + 1}/{values.length}</S.QuestionsCount>
-                                    {/* <S.Time style={{color: values[currentQuestion]?.time < time ? "#EB4A47" : "#527C91"}}>{min < 10 ? "0"+min : min}:{counter}</S.Time> */}
+                                    {
+                                        currentStatusQuestion ? (
+                                            <S.PointsView status={currentStatus}>
+                                                <Icon name={currentStatus ? "thumbs-up" : "thumbs-down"} size={18} color={COLORS.white} />
+                                                <S.PointsText>{points}</S.PointsText>
+                                            </S.PointsView>
+                                        ) : null
+                                    }
                                 </S.RowHeader>
+
+                                <S.RowDiff>
+                                    {diff?.map((item: any, index: any) => {
+                                          return(
+                                              <Fragment>
+                                                  <S.DiffBar color={Degrade[index]}/>
+                                              </Fragment>
+                                          )  
+                                    })}
+                                </S.RowDiff>
                                 <S.QuestionContent style={S.Styles.Shadow}>
                                     <S.QuestionContentScroll nestedScrollEnabled>
-                                        <RenderHTML contentWidth={width} source={{ html: values[currentQuestion]?.body }} />
+                                        <RenderHTML tagsStyles={tagsStyles} enableExperimentalMarginCollapsing={true} contentWidth={width - 20} source={{ html: "<div>" + values[currentQuestion]?.body + "<div/>" }} />
                                     </S.QuestionContentScroll>
                                 </S.QuestionContent>
 
@@ -283,7 +333,7 @@ export const Question = ({ route }: any) => {
                                                         <Fragment key={key}>
                                                             <S.Options
                                                                 disabled={currentStatusQuestion}
-                                                                background={COLORS.green}
+                                                                background={COLORS.green100}
                                                                 onPress={() => {
                                                                     setIndexOptionSelect(key);
                                                                 }}
@@ -337,8 +387,11 @@ export const Question = ({ route }: any) => {
                                 <S.AreaButton>
                                     <S.ButtonNext onPress={() => {
                                         nextQuestion()
-                                    }}>
-                                        <S.H1 style={{ color: COLORS.white, marginBottom: 0, fontSize: 18 }}> {currentQuestion !== values.length ? 'Próximo' : 'Concluir'}</S.H1>
+                                    }}
+                                        style={S.Styles.Shadow}
+                                    >
+                                        <S.BtnText> {(currentQuestion + 1) !== values.length ? 'Próximo' : 'Concluir'}</S.BtnText>
+                                        <Icon name="chevrons-right" size={24} style={{ marginBottom: -2 }} />
                                     </S.ButtonNext>
                                 </S.AreaButton>
                             </S.Content>

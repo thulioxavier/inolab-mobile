@@ -74,7 +74,7 @@ export const Performance = () => {
                 selectData.icon === "arrow-up"
                   ? COLORS.green
                   : selectData.icon === "activity"
-                  ? COLORS.primary
+                  ? COLORS.blue
                   : COLORS.red
               }
             >
@@ -87,8 +87,7 @@ export const Performance = () => {
                   name="x-circle"
                   size={25}
                   color={COLORS.white}
-                  style={{ marginRight: 5 }}
-                />
+                  />
               </S.ButtonIconClose>
             </S.ModalHeader>
 
@@ -103,10 +102,9 @@ export const Performance = () => {
                   selectData.icon === "arrow-up"
                     ? COLORS.green
                     : selectData.icon === "activity"
-                    ? COLORS.primary
+                    ? COLORS.blue
                     : COLORS.red
                 }
-                style={{ marginRight: 5 }}
               />
               {selectData.icon === "activity" ? (
                 <>
@@ -123,8 +121,7 @@ export const Performance = () => {
                               name={item.status ? "arrow-up" : "arrow-down"}
                               size={14}
                               color={item.status ? COLORS.green : COLORS.red}
-                              style={{ marginRight: 5 }}
-                            />
+                                          />
                             <S.Label style={{fontWeight:'bold'}}>{item?.points}</S.Label>
                             <S.Label style={{textAlign: 'left'}} numberOfLines={1}>{""} - {item?.questions?.title}</S.Label>
                           </S.ItemHistory>
@@ -178,7 +175,6 @@ export const Performance = () => {
                 name="arrow-up"
                 size={19}
                 color={COLORS.green}
-                style={{ marginRight: 5 }}
               />
               <S.Label
                 style={{
@@ -214,7 +210,6 @@ export const Performance = () => {
                 name="arrow-down"
                 size={19}
                 color={COLORS.red}
-                style={{ marginRight: 5 }}
               />
               <S.Label>{values?.mistakes.count}</S.Label>
             </S.Card>
@@ -236,8 +231,7 @@ export const Performance = () => {
               <Icon
                 name="activity"
                 size={19}
-                color={COLORS.primary}
-                style={{ marginRight: 5 }}
+                color={COLORS.blue}
               />
               <S.Label>{values?.hits?.points}</S.Label>
             </S.Card>
@@ -248,7 +242,6 @@ export const Performance = () => {
                 name="grid"
                 size={19}
                 color="#526eec"
-                style={{ marginRight: 5 }}
               />
               <S.Label></S.Label>
             </S.Card>

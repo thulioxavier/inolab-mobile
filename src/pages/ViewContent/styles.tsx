@@ -7,7 +7,6 @@ export const Container = styled(View)`
     width: 100%;
     background-color: ${COLORS.white};
     height: 100%;
-
     justify-content: center;
     align-items: center;
 `;
@@ -20,8 +19,9 @@ export const Content = styled(ScrollView)`
 `;
 
 export const SectionTitle = styled(Text)`
-    width: auto;
-    font-size: 16px;
+    width: 100%;
+    font-size: 18px;
+    text-align: center;
     font-weight: 700;
     color: ${COLORS.black};
     margin-bottom: 10px;
@@ -39,7 +39,7 @@ export const ButtonIconClose = styled(TouchableOpacity)`
 export const LabelTitle = styled(Text)`
   font-size: 13px;
   font-weight: bold;
-  color: #333333;
+  color: ${COLORS.black};
 `;
 
 export const ModalHeader = styled(View)`
@@ -136,7 +136,7 @@ export const TabRow = styled(View)`
 
     border-radius: 5px;
 
-    background-color: ${COLORS.yellow100};
+    background-color: ${COLORS.green100};
 `;
 
 export const TabButton = styled(TouchableOpacity)`
@@ -145,7 +145,7 @@ export const TabButton = styled(TouchableOpacity)`
 
     padding: 5px;
     border-radius: 5px;
-    background-color: ${(props) => (props.select ? COLORS.primary :  COLORS.yellow100)};
+    background-color: ${(props) => (props.select ? COLORS.primary :  COLORS.grey)};
     justify-content: center;
     align-items: center;
 `;

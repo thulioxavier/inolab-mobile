@@ -1,4 +1,4 @@
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import styled from "styled-components";
 import { COLORS } from "../../utils";
 
@@ -29,8 +29,22 @@ export const DayItem = styled(View)`
     width: 90%;
     height: ${({selected}) => selected ? '40px' :'40px'};
     border: ${({day}) => day ? `2px solid ${COLORS.primary}` : 'none'};
-    background-color: ${({selected, back, next, day}) =>  back ? (selected ? COLORS.primary : COLORS.yellow100 ): selected ? COLORS.primary : (day && !selected) ? COLORS.white : COLORS.grey};
+    background-color: ${({selected, back, next, day}) =>  back ? (selected ? COLORS.primary : COLORS.green100 ): selected ? COLORS.primary : (day && !selected) ? COLORS.white : COLORS.grey};
     border-radius: 50px;
     justify-content: center;
     align-items: center;
 `;
+
+export const Styles = StyleSheet.create({
+    Shadow: {
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 5,
+            height: 5,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+
+        elevation: 5,
+    }
+})
