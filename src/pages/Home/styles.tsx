@@ -88,7 +88,7 @@ export const ButtomSearch = styled(TouchableOpacity)`
 `;
 
 export const InputSearch = styled(TextInput)`
-    width: 85%;
+    width: 100%;
     height: 40px;
     color: #484848;
     padding: 5px;

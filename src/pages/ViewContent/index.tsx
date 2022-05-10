@@ -47,7 +47,8 @@ export const ViewContent = ({ route }: any) => {
   const Body = (abstract: string, body: string) => {
     const tagsStyles = {
       div: {
-        margin: '10px'
+        margin: '5px',
+        padding: '8px',
       },
 
     };
@@ -102,7 +103,8 @@ export const ViewContent = ({ route }: any) => {
   const ExamplesContent = (examples: string) => {
     const tagsStyles = {
       div: {
-        margin: '10px'
+        margin: '5px',
+        padding: '5px',
       },
 
     };

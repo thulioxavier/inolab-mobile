@@ -3,9 +3,10 @@ import *as S from "./styles";
 import { Performance, Modules, Matter, HomeMonthScroll, HomeDayScroll, Header } from '../../components/index';
 import Icon from 'react-native-vector-icons/Feather';
 import { ListNewModules, ListSubjects, SelectDateAnswer } from "../../services/api";
-import { Alert, Image, Text, View } from "react-native";
+import { Alert, Animated, Image, Text, View } from "react-native";
 import { homeScreen } from "../../assets/icons";
 import { COLORS } from "../../utils";
+import * as Animatable from 'react-native-animatable';
 
 
 export const Home = () => {
@@ -64,21 +65,29 @@ export const Home = () => {
         <Fragment>
 
             <S.Container>
-                <Header title={`Olá, ${name}! `} btnLeft={() => {}} btnRight={()=>{}} iconRight="bell" iconLeft="menu" leftColor={COLORS.white100} rightColor={COLORS.primary}/>
+
+                <Header title={`Olá, ${name}! `} btnLeft={() => { }} btnRight={() => { }} iconRight="bell" iconLeft="menu" leftColor={COLORS.white100} rightColor={COLORS.primary} />
+
                 <S.Content>
                     <S.Row>
                         <View>
                             <Text style={{ fontSize: 30, fontWeight: 'bold', marginBottom: 5, color: COLORS.black }}>InoLab</Text>
-                            <Text style={{ fontSize: 14, color: COLORS.black }}>Desafiando seu conhecimento.</Text>
+                            <Animatable.View animation="bounceInDown" easing="ease-out" useNativeDriver iterationCount={1}>
+                                <Text style={{ fontSize: 14, color: COLORS.black }}>Desafiando seu conhecimento.</Text>
+                            </Animatable.View>
                         </View>
-                        <Image source={homeScreen}
-                            style={{
-                                width: 150,
-                                height: 150,
-                                resizeMode: 'cover',
-                                marginLeft: 'auto'
-                            }}
-                        />
+                        <Animatable.View animation="pulse" easing="ease-out" useNativeDriver iterationCount={5}>
+
+                            <Image source={homeScreen}
+                                style={{
+                                    width: 150,
+                                    height: 150,
+                                    resizeMode: 'cover',
+                                    marginLeft: 'auto'
+                                }}
+                            />
+                        </Animatable.View>
+
                     </S.Row>
                     <S.SectionTitle>Matérias</S.SectionTitle>
                     {
