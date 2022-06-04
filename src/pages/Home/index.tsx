@@ -48,8 +48,9 @@ export const Home = () => {
         setNewModules(result.data);
     }
 
+    //segundo parametro id user
     const selectDateInfo = async () => {
-        const result: any = await SelectDateAnswer(`${new Date().getFullYear()}-${Number(selectedMonth + 1) < 10 ? '0' + (selectedMonth + 1) : (selectedMonth + 1)}-${selectedDay < 10 ? '0' + selectedDay : selectedDay}`, 2);
+        const result: any = await SelectDateAnswer(`${new Date().getFullYear()}-${Number(selectedMonth + 1) < 10 ? '0' + (selectedMonth + 1) : (selectedMonth + 1)}-${selectedDay < 10 ? '0' + selectedDay : selectedDay}`, 1);
         setAnswerDate(result.data);
     }
 

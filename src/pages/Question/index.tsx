@@ -9,7 +9,7 @@ import Icon from "react-native-vector-icons/Feather";
 import { COLORS } from "../../utils";
 import { Header } from "../../components";
 
-const ArrayBackground = [COLORS.primary, COLORS.red, COLORS.green, COLORS.blue];
+const ArrayBackground = [COLORS.primary, COLORS.red, COLORS.orangeBringth, COLORS.blue];
 
 const ArrayEmojis = ["😂", "🤔", "🤓", "😱"];
 
@@ -156,27 +156,22 @@ export const Question = ({ route }: any) => {
 
         try {
 
-            if (indexOptionSelect) {
-
-                let option = values[currentQuestion]?.options[indexOptionSelect];
-
-                let answer_res = {
-                    id_option: option.id,
-                    id_question: option.id_question,
-                    status: option.correct,
-                    time_spent: time,
-                    difficulty: values[currentQuestion]?.difficulty,
-                    id_user: 2,
-                }
-
-                await PostAnswer(answer_res).then((response) => {
-                    getQuestions();
-                }).catch((reject) => {
-                    console.log(reject);
-
-                });
-
+            let option = values[Number(currentQuestion)].options[Number(indexOptionSelect)];
+            let answer_res = {
+                id_option: option.id,
+                id_question: option.id_question,
+                status: option.correct,
+                time_spent: time,
+                difficulty: values[currentQuestion]?.difficulty,
+                id_user: 1,
             }
+
+            await PostAnswer(answer_res).then((response) => {
+                getQuestions();
+            }).catch((reject) => {
+                console.log(reject);
+            });
+
         } catch (error) {
 
         }
@@ -184,7 +179,7 @@ export const Question = ({ route }: any) => {
 
     const Dif = () => {
         let aux = []
-        for (let index = 0; index <=values[currentQuestion]?.difficulty; index++) {
+        for (let index = 0; index <= values[currentQuestion]?.difficulty; index++) {
             aux.push(index);
         }
         setDiff(aux);
@@ -276,11 +271,11 @@ export const Question = ({ route }: any) => {
 
                                 <S.RowDiff>
                                     {diff?.map((item: any, index: any) => {
-                                          return(
-                                              <Fragment>
-                                                  <S.DiffBar color={Degrade[index]}/>
-                                              </Fragment>
-                                          )  
+                                        return (
+                                            <Fragment>
+                                                <S.DiffBar color={Degrade[index]} />
+                                            </Fragment>
+                                        )
                                     })}
                                 </S.RowDiff>
                                 <S.QuestionContent style={S.Styles.Shadow}>
