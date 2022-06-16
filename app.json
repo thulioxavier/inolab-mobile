@@ -10,6 +10,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "extra":{
+      "flipperHack": "React Native packeger is running"
+    },
     "updates": {
       "fallbackToCacheTimeout": 0
     },

@@ -8,7 +8,7 @@ import { Modal } from './Modal';
 import { HomeDayStatus } from './HomeDayStatus';
 import { HomeDayScroll } from './HomeDayScroll';
 import { HomeMonthScroll } from './HomeMonthScroll';
-
+import { InputText } from './InputText';
 export {
     Matter,
     Modules,
@@ -19,5 +19,6 @@ export {
     Modal,
     HomeDayStatus,
     HomeDayScroll,
-    HomeMonthScroll
+    HomeMonthScroll,
+    InputText
 }

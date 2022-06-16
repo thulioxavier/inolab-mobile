@@ -1,22 +1,22 @@
-import styled from 'styled-components';
-import { Image, ScrollView, Text, TouchableOpacity, View, StyleSheet, TextInput} from 'react-native';
+import styled from 'styled-components/native';
+import { StyleSheet } from 'react-native';
 import { COLORS } from '../../utils';
 
-export const Container = styled(View)`
+export const Container = styled.View`
     display: flex;
     width: 100%;
-    background-color: #FAFAFA;
+    background-color: #FFFF;
     height: 100%;
 `;
 
-export const Content = styled(ScrollView)`
+export const Content = styled.ScrollView`
     padding: 0 5px;
     display: flex;
     width: 100%;
     height: 100%;
 `;
 
-export const SectionTitle = styled(Text)`
+export const SectionTitle = styled.Text`
     width: auto;
     font-size: 16px;
     font-weight: bold;
@@ -25,7 +25,7 @@ export const SectionTitle = styled(Text)`
     margin-top: 10px;
 `;
 
-export const Header = styled(View)`
+export const Header = styled.View`
     margin-top: 24px;
     padding: 0 5px;
     display: flex;
@@ -35,28 +35,28 @@ export const Header = styled(View)`
     width: 100%;
     height: 50px;
     margin-bottom: 5px;
-    background-color: #FAFAFA;
+    background-color: #FFFF;
 
 `;
 
-export const Logo = styled(Image)`
+export const Logo = styled.Image`
     width: 100px;
     height: 40px;
 `;
 
-export const Icon = styled(Image)`
+export const Icon = styled.Image`
     width: 50px;
     height: 50px;
 `;
 
 
-export const Hello = styled(Text)`
+export const Hello = styled.Text`
     font-size: 18px;
     font-weight: bold;
     color: #494949;
 `;
 
-export const Row = styled(View)`
+export const Row = styled.View`
     flex: 1;
     flex-direction: row;
 
@@ -64,18 +64,18 @@ export const Row = styled(View)`
     align-items: center;
 `;
 
-export const ButtomHeader = styled(TouchableOpacity)`
+export const ButtomHeader = styled.TouchableOpacity`
     display: flex;
     justify-content: center;
     align-items: center;
     width: 40px;
     height: 40px;
 
-    background-color: ${(props) => (props.color ? props.color : '#527C91' )} ;
+    background-color: ${(props) => (props.color ? props.color : '#527C91')} ;
     border-radius: 5px;
 `;
 
-export const ButtomSearch = styled(TouchableOpacity)`
+export const ButtomSearch = styled.TouchableOpacity`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -87,7 +87,7 @@ export const ButtomSearch = styled(TouchableOpacity)`
     padding: 5px;
 `;
 
-export const InputSearch = styled(TextInput)`
+export const InputSearch = styled.TextInput`
     width: 100%;
     height: 40px;
     color: #484848;
@@ -96,7 +96,7 @@ export const InputSearch = styled(TextInput)`
 `;
 
 
-export const ContentInput = styled(View)`
+export const ContentInput = styled.View`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -104,7 +104,7 @@ export const ContentInput = styled(View)`
     background-color: #FAFAFA;
     border-radius: 5px;   
     border: ${(props) => (props.focus ? '1px solid #bebebe' : '1px solid #CCC')} ;
-`;  
+`;
 
 export const Styles = StyleSheet.create({
     Shadow: {
@@ -120,7 +120,7 @@ export const Styles = StyleSheet.create({
     },
 });
 
-export const HeaderCardAnswer = styled(View)`
+export const HeaderCardAnswer = styled.View`
     width: 100%;
     background-color: ${COLORS.grey};
     border-top-left-radius: 5px;
@@ -128,7 +128,7 @@ export const HeaderCardAnswer = styled(View)`
     padding: 5px 10px;
 `;
 
-export const BodyCardAnswer = styled(View)`
+export const BodyCardAnswer = styled.View`
     flex: 1;
     flex-direction: column;
     width: 100%;
@@ -137,29 +137,29 @@ export const BodyCardAnswer = styled(View)`
     padding: 5px 10px;
 `;
 
-export const HeaderText = styled(Text)`
+export const HeaderText = styled.Text`
     font-size: 15px;
     color: ${COLORS.black};
 `;
 
-export const StatusPoints = styled(View)`
+export const StatusPoints = styled.View`
     width: 14px;
     height: 14px;
-    background-color: ${({correct}) => correct ? COLORS.green : COLORS.red};
+    background-color: ${({ correct }) => correct ? COLORS.green : COLORS.red};
 `;
 
-export const AreaText = styled(View)`
+export const AreaText = styled.View`
     flex: 1;
     align-items: center;
     flex-direction: row;
 `;
 
-export const BodyText = styled(Text)`
+export const BodyText = styled.Text`
     font-size: 14px;
     color: ${COLORS.black};
 `;
 
-export const CardAnswer = styled(View)`
+export const CardAnswer = styled.View`
     flex: 1;
     flex-direction: column;
     margin: 10px 5px;

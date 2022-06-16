@@ -42,7 +42,8 @@ export const RowInput = styled(View)`
     align-items: center;
 
     margin-top: 4px;
-    border: 1px solid ${COLORS.grey};
+    /* border: 1px solid ${COLORS.grey}; */
+    background-color: #f6f6f6;
     border-radius: 5px;
 `;
 
@@ -154,8 +155,8 @@ export const ButtonBack = styled(TouchableOpacity)`
     align-items: center;
     width: 39px;
     height: 39px;
-    border: 1px solid ${COLORS.primary};
-    background-color: ${COLORS.white};
+    /* border: 1px solid ${COLORS.black}; */
+    background-color: ${COLORS.black};
     z-index: 999;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;

@@ -5,7 +5,7 @@ import { COLORS } from '../../utils';
 export const Container = styled(View)`
     display: flex;
     width: 100%;
-    background-color: #FAFAFA;
+    background-color: ${COLORS.white100};
     height: 100%;
 `;
 
@@ -34,8 +34,8 @@ export const Header = styled(View)`
     align-items: center;
     width: 100%;
     height: 50px;
-    margin-bottom: 5px;
-    background-color: #FAFAFA;
+    background-color: ${COLORS.white100};
+
 
 `;
 

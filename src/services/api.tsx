@@ -22,10 +22,10 @@ export const LoginUser = async (data: Object) => {
     try {
         const result = await api.post('/user/login', data);
         json.data = result.data;
-        return json;
+        return json.data;
     } catch (error) {
         json.error = {error}
-        return json;
+        return json.error;
     }
 };
 
@@ -89,10 +89,10 @@ export const GetContentById = async (idContent: Number) => {
     }
 }
 
-export const GetQuestionsByContent = async (idContent: Number) => {
+export const GetQuestionsByContent = async (idContent: Number, userId: Number) => {
     let json: JsonResponse = { data: Object, error: Object };
     try {
-        const result = await api.get(`/question/content/${idContent}/${1}`);
+        const result = await api.get(`/question/content/${idContent}/${userId}`);
         json.data = result.data;
         return json.data;
     } catch (error) {
@@ -113,7 +113,7 @@ export const PostAnswer = async (values: {}) => {
     }
 }
 
-export const ShowInfoDash = async (idUser: Number = 1) => {
+export const ShowInfoDash = async (idUser: Number) => {
     let json: JsonResponse = { data: Object, error: Object };
     try {
         const result = await api.get(`/dash/`,{
@@ -129,7 +129,7 @@ export const ShowInfoDash = async (idUser: Number = 1) => {
     }
 }
 
-export const SelectDateAnswer = async (date: any ,idUser: Number = 1) => {
+export const SelectDateAnswer = async (date: any ,idUser: Number) => {
     let json: JsonResponse = { data: Object, error: Object };
     try {
         const result = await api.get(`/user/answer-date/${date}/${idUser}`,{

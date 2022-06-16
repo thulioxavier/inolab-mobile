@@ -8,7 +8,7 @@ const Tab = createBottomTabNavigator();
 
 import { StyleSheet, View } from 'react-native';
 
-import { Login, Home, Register, Podium } from '../pages/index';
+import { Login, Home, Register, Podium, Profiles } from '../pages/index';
 import { COLORS } from "../utils";
 
 export default () => {
@@ -17,24 +17,24 @@ export default () => {
         <Fragment>
             <Tab.Navigator
 
-                initialRouteName="HomeToAPP"
+                initialRouteName="profile"
 
                 screenOptions={({ route }) => ({
 
                     tabBarShowLabel: false,
                     tabBarHideOnKeyboard: true,
-                    tabBarInactiveTintColor: '#a0a0a0',
+                    tabBarInactiveTintColor: '#f6f6f6',
                     tabBarActiveTintColor: COLORS.primary,
 
                     tabBarStyle: {
-                        backgroundColor: COLORS.white,
-                        position: 'absolute',
+                        backgroundColor: COLORS.black,
+                        // position: 'absolute',
                         // borderTopRightRadius: 10,
                         // borderTopLeftRadius: 10,
-                        borderRadius: 10,
-                        bottom: 10,
-                        left: 5,
-                        right: 5,
+                        // borderRadius: 10,
+                        // bottom: 10,
+                        // left: 5,
+                        // right: 5,
                         ...styles.shadon
 
                     },
@@ -70,13 +70,13 @@ export default () => {
                     tabBarIcon: ({ focused }) => (
                         <Animatable.View animation="swing"  useNativeDriver iterationCount={1}>
                             < View style={[styles.top, !focused ? styles.topFocus : null]} >
-                                <Icon name="home" size={26} color={!focused ? '#fafafa' : '#525252'} />
+                                <Icon name="home" size={26} color={focused ? '#202020' : '#fafafa'} />
                             </View>
                         </Animatable.View>
                     )
                 }} />
 
-                <Tab.Screen name="profile" component={Register} options={{ tabBarLabel: 'Profile' }} />
+                <Tab.Screen name="profile" component={Profiles} options={{ tabBarLabel: 'Profile' }} />
             </Tab.Navigator>
         </Fragment >
     );
@@ -85,7 +85,7 @@ export default () => {
 const styles = StyleSheet.create({
 
     shadon: {
-        shadowColor: '#000',
+        shadowColor: '#0000',
         shadowOffset: {
             width: 0,
             height: 10,
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.2,
         shadowRadius: 5,
-        backgroundColor: '#525252',
+        backgroundColor: '#484848',
     },
     top: {
         width: 50,

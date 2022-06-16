@@ -13,6 +13,7 @@ import {
 import * as S from "./styles";
 import { AreaList } from "../../pages/ViewContents/styles";
 import { COLORS } from "../../utils";
+import { useUser } from "../../hooks/user.hook";
 
 export const Performance = () => {
   useEffect(() => {
@@ -42,9 +43,10 @@ export const Performance = () => {
     useShadowColorFromDataset: false, // optional
   };
 
+  const {user} = useUser()
   const getShowMetrics = async () => {
     try {
-      const result: any = await ShowInfoDash(1)
+      const result: any = await ShowInfoDash(user.id)
       if (result.data.status) {
         setValues(result?.data?.metrics);
         setChartDate(result?.data?.chart);

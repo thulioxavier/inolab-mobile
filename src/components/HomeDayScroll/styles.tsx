@@ -15,13 +15,13 @@ export const DayButton = styled(TouchableOpacity)`
 
 export const DayText = styled(Text)`
     font-weight: ${({selected}) => selected ? 'bold' :'normal'};
-    color: ${COLORS.black};
+    color: ${({selected}) => selected ? COLORS.black : COLORS.black };
 `;
 
 export const WeekDayText = styled(Text)`
     font-size: 10px;
     font-weight: ${({selected}) => selected ? 'bold' :'normal'};
-    color: ${COLORS.black};
+    color: ${({selected}) => selected ? COLORS.black : COLORS.black };
 `;
 
 export const DayItem = styled(View)`
@@ -29,7 +29,7 @@ export const DayItem = styled(View)`
     width: 90%;
     height: ${({selected}) => selected ? '40px' :'40px'};
     border: ${({day}) => day ? `2px solid ${COLORS.primary}` : 'none'};
-    background-color: ${({selected, back, next, day}) =>  back ? (selected ? COLORS.primary : COLORS.green100 ): selected ? COLORS.primary : (day && !selected) ? COLORS.white : COLORS.grey};
+    background-color: ${({selected, back, next, day}) =>  back ? (selected ? COLORS.primary : COLORS.yellow50 ): selected ? COLORS.primary : (day && !selected) ? COLORS.white : COLORS.grey};
     border-radius: 50px;
     justify-content: center;
     align-items: center;
@@ -37,13 +37,13 @@ export const DayItem = styled(View)`
 
 export const Styles = StyleSheet.create({
     Shadow: {
-        shadowColor: "#000",
+        shadowColor: "#0000007a",
         shadowOffset: {
-            width: 5,
+            width: 1,
             height: 5,
         },
         shadowOpacity: 0.25,
-        shadowRadius: 3.84,
+        shadowRadius: 50,
 
         elevation: 5,
     }

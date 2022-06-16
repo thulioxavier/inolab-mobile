@@ -8,6 +8,7 @@ import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/Feather";
 import { COLORS } from "../../utils";
 import { Header } from "../../components";
+import { useUser } from "../../hooks/user.hook";
 
 const ArrayBackground = [COLORS.primary, COLORS.red, COLORS.orangeBringth, COLORS.blue];
 
@@ -37,6 +38,9 @@ export const Question = ({ route }: any) => {
     const [points, setPoints] = useState<number>(0);
     const [currentStatus, setCurrrentStatus] = useState<boolean | undefined | null>(undefined);
     const [diff, setDiff] = useState<Array<any> | null | undefined>();
+
+    const {user} = useUser()
+
     if (counter == 60) {
         setMin(min + 1)
         reset()
@@ -58,7 +62,7 @@ export const Question = ({ route }: any) => {
     const getQuestions = async () => {
         setLoadingGet(true);
         try {
-            await GetQuestionsByContent(idContent).then((response) => {
+            await GetQuestionsByContent(idContent, user.id).then((response) => {
 
                 if (response.data.status) {
                     setValues(response.data.data);
@@ -163,7 +167,7 @@ export const Question = ({ route }: any) => {
                 status: option.correct,
                 time_spent: time,
                 difficulty: values[currentQuestion]?.difficulty,
-                id_user: 1,
+                id_user: user.id,
             }
 
             await PostAnswer(answer_res).then((response) => {

@@ -10,8 +10,8 @@ const COLORS = {
     yellow50: '#ffd574',
     white: '#FAFAFA',
     white100: '#FFFF',
-    black: '#525252',
-    grey: '#e4e4e4',
+    black: '#202020',
+    grey: '#F6F6F6',
     orange: '#ec703f',
     orangeBringth: '#ffb432'
 }

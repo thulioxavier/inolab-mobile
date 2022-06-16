@@ -1,9 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import React, { Fragment, useRef, useState } from "react";
-import { Alert, Platform, ActivityIndicator, Linking, Image, View } from "react-native";
-// import * as Linking from 'expo-linking';
-import SelectDropdown from 'react-native-select-dropdown'
+import { Platform, ActivityIndicator, Linking, Image } from "react-native";
 
 import { WebView } from "react-native-webview";
 import Icon from "react-native-vector-icons/Feather";
@@ -19,16 +17,6 @@ type Data = {
   resultUser?: object;
 };
 
-type ResultRequeste = {
-  data: (Data & object) | string;
-  error: object;
-};
-
-type ErrorRegister = {
-  nameError: string | null;
-  emailError: string | null;
-  passwordError: string | null;
-};
 
 export const Register: React.FC = () => {
   const navigation = useNavigation();
@@ -39,7 +27,6 @@ export const Register: React.FC = () => {
   const [password, setPassword] = useState<string>("");
   const [visible, setVisible] = useState<boolean>(true);
   const [sexo, setSexo] = useState();
-  const countries = ["Feminino", "Masculino", "Não Binário", "Não Informar"]
 
   const [acept, setAcept] = useState<boolean>(false);
   const [errors, setErrors] = useState<object>({
@@ -78,12 +65,7 @@ export const Register: React.FC = () => {
     } else {
       errors.nameError = null;
     }
-    if (!sexo) {
-      errors.sexoError = "Campo Gênero é obrigatorio!";
-      aux = true;
-    } else {
-      errors.sexoError = null;
-    }
+
     if (!lastName) {
       errors.lastNameError = "Campo Sobrenome é obrigatorio!";
       aux = true;
@@ -143,7 +125,6 @@ export const Register: React.FC = () => {
           password,
           registration,
           lastName,
-          sexo
         });
         if (result.data.status) {
           navigation.navigate("Home");
@@ -167,11 +148,7 @@ export const Register: React.FC = () => {
         <S.Label style={{ color: COLORS.red }}>*</S.Label>
       </>
     );
-  };
-
-  const handleOpenWithLinking = async () => {
-    await Linking.openURL(urlAvatar.toString());
-  };
+  }
 
   const AlertModal = () => (
     <Fragment>
@@ -211,94 +188,6 @@ export const Register: React.FC = () => {
       </S.Alert>
     </Fragment>
   );
-  const DownAvatar = () => (
-    <Fragment>
-      <S.Alert
-        animationType="fade"
-        visible={showAvatarDown}
-        transparent={true}
-        onRequestClose={() => {
-          setShowAvatarDown(false);
-        }}
-      >
-        <S.ModalContent>
-          <S.ModalArea>
-            <S.AreaInput>
-              <S.Label>
-                Avatar URL <Required />
-              </S.Label>
-              <S.RowInput>
-                <S.IconInput>
-                  <Icon name="download" size={24} color="#FFFF" />
-                </S.IconInput>
-                <S.Input
-                  style={{ width: 235 }}
-                  placeholder="https://d1a370nemizbjq"
-                  keyboardType="url"
-                  onChangeText={(e) => setUrlAvatar(e)}
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                  value={urlAvatar.replace('"', "")}
-                />
-              </S.RowInput>
-            </S.AreaInput>
-            <S.ViewButton>
-              <S.AreaButton>
-                <S.ButtonRegister
-                  onPress={() => {
-                    handleOpenWithLinking();
-                  }}
-                >
-                  <S.Label style={{ color: "#FFFF" }}>Baixar Avatar</S.Label>
-                </S.ButtonRegister>
-              </S.AreaButton>
-            </S.ViewButton>
-          </S.ModalArea>
-        </S.ModalContent>
-      </S.Alert>
-    </Fragment>
-  );
-  const CreateAvatar = () => (
-    <Fragment>
-      <S.Alert
-        animationType="fade"
-        visible={showCreateAvatar}
-        transparent={true}
-        onRequestClose={() => {
-          setShowCreateAvatar(false);
-        }}
-      >
-        <S.ModalContent>
-          <S.ModalWebView>
-            <WebView
-              source={{
-                uri: "https://demo.readyplayer.me/pt-BR/avatar",
-              }}
-              onMessage={(event) => {
-                setUrlAvatar(event.nativeEvent.data.replace('"', ""));
-                setProx(true);
-              }}
-            />
-          </S.ModalWebView>
-          {prox ? (
-            <S.ViewButton>
-              <S.AreaButton>
-                <S.ButtonRegister
-                  onPress={() => {
-                    setShowCreateAvatar(!showCreateAvatar);
-                    setShowAvatarDown(!showAvatarDown);
-                    setProx(false);
-                  }}
-                >
-                  <S.Label style={{ color: "#FFFF" }}>Avançar</S.Label>
-                </S.ButtonRegister>
-              </S.AreaButton>
-            </S.ViewButton>
-          ) : null}
-        </S.ModalContent>
-      </S.Alert>
-    </Fragment>
-  );
 
   return (
     <Fragment>
@@ -316,7 +205,7 @@ export const Register: React.FC = () => {
               resizeMode: 'cover'
             }} />
 
-            <S.ViewTitle style={{marginTop: -30}}>
+            <S.ViewTitle style={{ marginTop: -30 }}>
               <S.Title>Cadastre-se</S.Title>
             </S.ViewTitle>
 
@@ -399,59 +288,6 @@ export const Register: React.FC = () => {
                     ) : null}
                   </S.AreaInput>
 
-                  <S.AreaInput>
-                    <S.Label>
-                      Gênero <Required />
-                    </S.Label>
-
-                    <S.RowInput>
-                      <S.IconInput>
-                        <Icon name="smile" size={24} color={COLORS.black} />
-                      </S.IconInput>
-                      <SelectDropdown
-                        buttonStyle={{
-                          flex: 1,
-                          width: "100%",
-                          height: 40,
-                          paddingVertical: 2,
-                          paddingHorizontal: 5,
-                          backgroundColor: 'transparent'
-                        }}
-
-                        buttonTextStyle={{
-                          textAlign: 'left',
-                          fontSize: 14,
-                          color: '#9b9b9b',
-
-
-                        }}
-                        defaultButtonText="Gênero"
-                        data={countries}
-                        onSelect={(selectedItem, index) => {
-                          setSexo(selectedItem)
-                        }}
-                        
-                        buttonTextAfterSelection={(selectedItem, index) => {
-                          // text represented after item is selected
-                          // if data array is an array of objects then return selectedItem.property to render after item is selected
-                          return selectedItem
-                        }}
-                        rowTextForSelection={(item, index) => {
-                          // text represented for each item in dropdown
-                          // if data array is an array of objects then return item.property to represent item in dropdown
-                          return item
-                        }}
-                      />
-                    </S.RowInput>
-                    {err && errors.sexoError ? (
-                      <S.ViewError>
-                        <S.LabelError numberOfLines={1}>
-                          {errors.sexoError}
-                        </S.LabelError>
-                      </S.ViewError>
-                    ) : null}
-                  </S.AreaInput>
-
                   <S.ViewButton style={{ marginTop: 30, marginBottom: 30 }}>
                     <S.AreaButton>
                       <S.ButtonBack
@@ -460,12 +296,13 @@ export const Register: React.FC = () => {
                           navigation.goBack();
                         }}
                       >
-                        <Icon name="arrow-left" size={24} color={COLORS.black} />
+                        <Icon name="arrow-left" size={24} color={COLORS.primary} />
                       </S.ButtonBack>
                       <S.ButtonRegister onPress={() => {
-                        if(name && lastName && sexo)
+                        if (name && lastName) {
                           setNextPage(true);
-                        
+                        }
+
                         Error();
 
                       }} disabled={loading}>
@@ -586,6 +423,7 @@ export const Register: React.FC = () => {
                       </S.ViewError>
                     ) : null}
                   </S.AreaInput>
+
                   <S.AreaInput style={{ marginTop: 5 }}>
                     <S.Row>
                       <S.ButtonRadius
@@ -613,10 +451,11 @@ export const Register: React.FC = () => {
                       <S.ButtonBack
                         disabled={loading}
                         onPress={() => {
-                          navigation.goBack();
+                          setNextPage(false);
+                          Error();
                         }}
                       >
-                        <Icon name="arrow-left" size={24} color={COLORS.black} />
+                        <Icon name="arrow-left" size={24} color={COLORS.primary} />
                       </S.ButtonBack>
                       <S.ButtonRegister onPress={handleSubmit} disabled={loading}>
                         {!loading ? (
@@ -633,8 +472,6 @@ export const Register: React.FC = () => {
           </S.Scroll>
         </S.Form>
         {AlertModal()}
-        {CreateAvatar()}
-        {DownAvatar()}
       </S.Container>
     </Fragment>
   );

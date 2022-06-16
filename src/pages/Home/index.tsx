@@ -1,13 +1,12 @@
 import React, { Fragment, useEffect, useState } from "react";
 import *as S from "./styles";
 import { Performance, Modules, Matter, HomeMonthScroll, HomeDayScroll, Header } from '../../components/index';
-import Icon from 'react-native-vector-icons/Feather';
 import { ListNewModules, ListSubjects, SelectDateAnswer } from "../../services/api";
-import { Alert, Animated, Image, Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
 import { homeScreen } from "../../assets/icons";
 import { COLORS } from "../../utils";
 import * as Animatable from 'react-native-animatable';
-
+import { useUser } from "../../hooks/user.hook";
 
 export const Home = () => {
 
@@ -15,15 +14,15 @@ export const Home = () => {
 
     const [selectedMonth, setSelectedMonth] = useState<any>(today.getMonth());
     const [selectedDay, setSelectedDay] = useState<any>(today.getDate());
-    const [name, setName] = useState<string>('Thúlio');
-    const [focus, setFocus] = useState<boolean>(false);
     const [subjects, setSubjects] = useState<any>([]);
     const [newModules, setNewModules] = useState<any>([]);
 
-    const [answerDate, setAnswerDate] = useState<Object>(Object)
+    const [answerDate, setAnswerDate] = useState<any>(Object)
     const [loading, setLoading] = useState<{ matter: boolean }>({
         matter: true,
-    })
+    });
+
+    const { user } = useUser()
 
     useEffect(() => {
         Subjects();
@@ -32,6 +31,7 @@ export const Home = () => {
     useEffect(() => {
         GetNewModules();
     }, []);
+
     useEffect(() => {
         selectDateInfo();
     }, [selectedDay, selectedMonth]);
@@ -50,7 +50,7 @@ export const Home = () => {
 
     //segundo parametro id user
     const selectDateInfo = async () => {
-        const result: any = await SelectDateAnswer(`${new Date().getFullYear()}-${Number(selectedMonth + 1) < 10 ? '0' + (selectedMonth + 1) : (selectedMonth + 1)}-${selectedDay < 10 ? '0' + selectedDay : selectedDay}`, 1);
+        const result: any = await SelectDateAnswer(`${new Date().getFullYear()}-${Number(selectedMonth + 1) < 10 ? '0' + (selectedMonth + 1) : (selectedMonth + 1)}-${selectedDay < 10 ? '0' + selectedDay : selectedDay}`, Number(user.id));
         setAnswerDate(result.data);
     }
 
@@ -67,7 +67,7 @@ export const Home = () => {
 
             <S.Container>
 
-                <Header title={`Olá, ${name}! `} btnLeft={() => { }} btnRight={() => { }} iconRight="bell" iconLeft="menu" leftColor={COLORS.white100} rightColor={COLORS.primary} />
+                <Header title={`Olá, ${user.name}! `} btnLeft={() => { }} btnRight={() => { }} iconRight="bell" iconLeft="menu" leftColor={COLORS.white100} rightColor={COLORS.primary} />
 
                 <S.Content>
                     <S.Row>

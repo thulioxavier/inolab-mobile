@@ -1,5 +1,5 @@
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import styled from "styled-components";
+import styled from "styled-components/native";
 import { COLORS } from "../../utils";
 
 export const MonthScroll = styled(ScrollView)`
@@ -7,18 +7,18 @@ export const MonthScroll = styled(ScrollView)`
     height: 60px;
 `;
 
-export const MonthButton = styled(TouchableOpacity)`
+export const MonthButton = styled.TouchableOpacity`
     justify-content: center;
     align-items: center;
     width: ${({width}) => width};
 `;
 
-export const MonthText = styled(Text)`
+export const MonthText = styled.Text`
     font-weight: ${({selected}) => selected ? 'bold' :'normal'};
-    color: ${COLORS.black};
+    color:  ${({selected}) => selected ? COLORS.black : COLORS.black};
 `;
 
-export const MonthItem = styled(View)`
+export const MonthItem = styled.View`
     width: 90%;
     height: ${({selected}) => selected ? '40px' :'30px'};
     background-color: ${({selected}) => selected ? COLORS.primary :COLORS.grey};
@@ -30,13 +30,13 @@ export const MonthItem = styled(View)`
 
 export const Styles = StyleSheet.create({
     Shadow: {
-        shadowColor: "#000",
+        shadowColor: "#0000007a",
         shadowOffset: {
-            width: 5,
+            width: 1,
             height: 5,
         },
         shadowOpacity: 0.25,
-        shadowRadius: 3.84,
+        shadowRadius: 50,
 
         elevation: 5,
     }
