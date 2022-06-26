@@ -5,12 +5,15 @@ import { COLORS } from "../../utils";
 export const DayScroll = styled(ScrollView)`
     width: 100%;
     height: 50px;
+    background-color: #FFF;
 `;
 
 export const DayButton = styled(TouchableOpacity)`
     justify-content: center;
     align-items: center;
     width: ${({width}) => width};
+    background-color: #FFF;
+
 `;
 
 export const DayText = styled(Text)`

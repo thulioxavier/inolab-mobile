@@ -14,6 +14,8 @@ export const Content = styled.ScrollView`
     display: flex;
     width: 100%;
     height: 100%;
+    background-color: #FFFF;
+
 `;
 
 export const SectionTitle = styled.Text`
@@ -101,7 +103,7 @@ export const ContentInput = styled.View`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: #FAFAFA;
+    background-color: #f0f0f5;
     border-radius: 5px;   
     border: ${(props) => (props.focus ? '1px solid #bebebe' : '1px solid #CCC')} ;
 `;

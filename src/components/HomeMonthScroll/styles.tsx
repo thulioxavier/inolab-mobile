@@ -5,17 +5,22 @@ import { COLORS } from "../../utils";
 export const MonthScroll = styled(ScrollView)`
     width: 100%;
     height: 60px;
+    background-color: #FFF;
+
 `;
 
 export const MonthButton = styled.TouchableOpacity`
     justify-content: center;
     align-items: center;
     width: ${({width}) => width};
+    background-color: #FFF;
+
 `;
 
 export const MonthText = styled.Text`
     font-weight: ${({selected}) => selected ? 'bold' :'normal'};
     color:  ${({selected}) => selected ? COLORS.black : COLORS.black};
+    
 `;
 
 export const MonthItem = styled.View`
@@ -25,6 +30,7 @@ export const MonthItem = styled.View`
     border-radius: 40px;
     justify-content: center;
     align-items: center;
+    
 `;
 
 

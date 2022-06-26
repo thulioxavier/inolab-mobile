@@ -5,7 +5,7 @@ import { COLORS } from '../../utils';
 export const Container = styled(View)`
     flex: 1;
     width: 100%;
-    background-color: ${COLORS.white};
+    background-color: ${COLORS.white100};
     height: 100%;
     justify-content: center;
     align-items: center;

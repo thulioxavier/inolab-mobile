@@ -309,7 +309,7 @@ export const Register: React.FC = () => {
                         {!loading ? (
                           <S.Label style={{ color: COLORS.black }}>Continuar</S.Label>
                         ) : (
-                          <ActivityIndicator color="#FAFAFA" size="small" />
+                          <ActivityIndicator color="#f0f0f5" size="small" />
                         )}
                       </S.ButtonRegister>
                     </S.AreaButton>

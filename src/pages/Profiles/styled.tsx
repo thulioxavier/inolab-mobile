@@ -11,6 +11,10 @@ export const Scroll = styled.ScrollView`
     width: 100%;
 `;
 
+export const Form  = styled.View`
+    margin-bottom: 30px;
+`;
+
 export const Label = styled.Text`
     font-size: 30px;
     margin-top: 15px;

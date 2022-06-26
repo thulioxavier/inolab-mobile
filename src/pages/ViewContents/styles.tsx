@@ -6,7 +6,7 @@ import { COLORS } from "../../utils";
 
 export const Container = styled(View)`
     flex: 1;
-    background-color: ${COLORS.white};
+    background-color: ${COLORS.white100};
     
 `;
 

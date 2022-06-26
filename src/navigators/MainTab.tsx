@@ -70,7 +70,7 @@ export default () => {
                     tabBarIcon: ({ focused }) => (
                         <Animatable.View animation="swing"  useNativeDriver iterationCount={1}>
                             < View style={[styles.top, !focused ? styles.topFocus : null]} >
-                                <Icon name="home" size={26} color={focused ? '#202020' : '#fafafa'} />
+                                <Icon name="home" size={26} color={focused ? '#202020' : '#f0f0f5'} />
                             </View>
                         </Animatable.View>
                     )

@@ -28,6 +28,8 @@ export const Title = styled(Text)`
 export const Conteiner = styled(View)`
   border-radius: 5px;
   display: flex;
+
+  padding: 5px;
 `;
 
 export const ItemHistory = styled(View)`
@@ -49,7 +51,7 @@ export const ItemHistory = styled(View)`
 export const Row = styled(ScrollView)``;
 
 export const Card = styled(TouchableOpacity)`
-  width: 85px;
+  width: 100px;
   height: 85px;
   padding: 5px 10px;
   background-color: ${COLORS.white100};
@@ -59,7 +61,7 @@ export const Card = styled(TouchableOpacity)`
   justify-content: space-between;
   align-items: center;
   margin-top: 5px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   margin-right: 10px;
 `;
 

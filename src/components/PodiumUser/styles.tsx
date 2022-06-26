@@ -5,7 +5,7 @@ export const Container = styled(TouchableOpacity)`
     width: 90%;
     max-height: 100px;
     border-radius: 5px;
-    background-color: #FAFAFA;
+    background-color: #f0f0f5;
 
     flex: 1;
     flex-direction: row;

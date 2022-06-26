@@ -108,9 +108,11 @@ export const Home = () => {
                     />
 
                     <S.CardAnswer style={S.Styles.Shadow}>
+                        
                         <S.HeaderCardAnswer>
                             <S.HeaderText>{`${selectedDay < 10 ? '0' + selectedDay : selectedDay}/${Number(selectedMonth + 1) < 10 ? '0' + (selectedMonth + 1) : (selectedMonth + 1)}/${new Date().getFullYear()}`}</S.HeaderText>
                         </S.HeaderCardAnswer>
+
                         <S.BodyCardAnswer>
                             <S.AreaText>
                                 <S.StatusPoints correct={true} />

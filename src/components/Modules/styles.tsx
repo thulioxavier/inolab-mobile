@@ -21,7 +21,7 @@ export const Card = styled(TouchableOpacity)`
 
     background-color: #FFFF;
     border-radius: 5px;
-    margin-bottom: 7px;
+    margin-bottom: 10px;
 `;
 
 export const ProgressBack = styled(View)`

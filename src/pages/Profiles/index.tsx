@@ -24,7 +24,7 @@ export const Profiles = () => {
         <Fragment>
             <Header title={`Perfil`} btnLeft={goBackPage} btnRight={() => { }} iconRight="tool" iconLeft="arrow-left" leftColor={COLORS.white100} rightColor={COLORS.white100} />
             <S.Container>
-                <S.Scroll>
+                <S.Scroll showsVerticalScrollIndicator={false}>
 
                     <S.Label style={{ textAlign: 'center' }}>Olá, {user.name}</S.Label>
                     <S.H6 style={{ textAlign: 'center' }}>{'26'} lv. #{'Prata'}</S.H6>
@@ -41,6 +41,8 @@ export const Profiles = () => {
                     <S.CardPoints>
 
                     </S.CardPoints>
+                
+                <S.Form>
 
                     <InputText
                         placeholder="Nome"
@@ -85,6 +87,8 @@ export const Profiles = () => {
                         label={'E-mail'}
                         returnKeyType="next"
                     />
+                </S.Form>
+
                 </S.Scroll>
             </S.Container>
         </Fragment>
