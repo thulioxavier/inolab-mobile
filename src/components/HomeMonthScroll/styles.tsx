@@ -26,7 +26,7 @@ export const MonthText = styled.Text`
 export const MonthItem = styled.View`
     width: 90%;
     height: ${({selected}) => selected ? '40px' :'30px'};
-    background-color: ${({selected}) => selected ? COLORS.primary :COLORS.grey};
+    background-color: ${({selected}) => selected ? COLORS.primary :'#F0f0f5'};
     border-radius: 40px;
     justify-content: center;
     align-items: center;

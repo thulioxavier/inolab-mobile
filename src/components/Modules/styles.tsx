@@ -19,7 +19,7 @@ export const Card = styled(TouchableOpacity)`
     height: 130px;
     padding: 5px;
 
-    background-color: #FFFF;
+    background-color: #F0f0f5;
     border-radius: 5px;
     margin-bottom: 10px;
 `;

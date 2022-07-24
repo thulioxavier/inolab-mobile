@@ -16,7 +16,7 @@ export const Modules = ({ values = [] }: Props) => {
             <S.Scrool horizontal={true} showsHorizontalScrollIndicator={false}>
                 {values.map((item, index) => {
                     return (
-                        <S.Card key={index} style={S.Styles.Shadow}
+                        <S.Card key={index}  
                             onPress={() => {
                                 navigation.navigate(
                                     "ViewContents",

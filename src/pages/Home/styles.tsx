@@ -124,7 +124,7 @@ export const Styles = StyleSheet.create({
 
 export const HeaderCardAnswer = styled.View`
     width: 100%;
-    background-color: ${COLORS.grey};
+    background-color: #F0f0f5;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     padding: 5px 10px;

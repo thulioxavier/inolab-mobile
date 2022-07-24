@@ -8,7 +8,7 @@ export const Header = (props: any) => {
     return (
         <Fragment>
             <S.Header>
-                <S.ButtomHeader color={props.leftColor} style={S.Styles.Shadow} onPress={() => { props?.btnLeft() }}>
+                <S.ButtomHeader color={props.leftColor}  onPress={() => { props?.btnLeft() }}>
                     <Icon name={props.iconLeft} size={24} color={COLORS.black} />
                 </S.ButtomHeader>
                 <S.Hello>{props.title}</S.Hello>
@@ -16,12 +16,12 @@ export const Header = (props: any) => {
                 {
                     props.iconRight === 'bell' ? (
                         <Animatable.View animation="tada" easing="ease-out" useNativeDriver iterationCount={3}>
-                            <S.ButtomHeader color={props.rightColor} style={S.Styles.Shadow} onPress={() => { props?.btnRight() }} >
+                            <S.ButtomHeader color={props.rightColor}  onPress={() => { props?.btnRight() }} >
                                 <Icon name={props.iconRight} size={24} color={COLORS.black} />
                             </S.ButtomHeader>
                         </Animatable.View>
                     ) : (
-                        <S.ButtomHeader color={props.rightColor} style={S.Styles.Shadow} onPress={() => { props?.btnRight() }} >
+                        <S.ButtomHeader color={props.rightColor}  onPress={() => { props?.btnRight() }} >
                             <Icon name={props.iconRight} size={24} color={COLORS.black} />
                         </S.ButtomHeader>
                     )

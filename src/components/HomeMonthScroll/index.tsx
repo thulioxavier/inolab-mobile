@@ -46,7 +46,7 @@ export const HomeMonthScroll = (props: any) => {
                     return(
                         <Fragment key={index}>
                             <S.MonthButton width={thirdW} onPress={()=>{setSelectedMonth(index)}}>
-                                <S.MonthItem style={S.Styles.Shadow} selected={index==selectedMonth}>
+                                <S.MonthItem   selected={index==selectedMonth}>
                                     <S.MonthText selected={index==selectedMonth}>{item}</S.MonthText>
                                 </S.MonthItem>
                             </S.MonthButton>

@@ -52,7 +52,7 @@ export const ViewContents = ({ route }: any) => {
             renderItem={({ item }) => {
               return (
                 <Fragment>
-                    <S.CardContent  style={S.Styles.Shadow} onPress={() => {viewContent(Number(item.id), item.title)}}>
+                    <S.CardContent    onPress={() => {viewContent(Number(item.id), item.title)}}>
                       <S.Title numberOfLines={1}>{item.title}</S.Title>
                       <S.SubTitle numberOfLines={1}>
                         {item.modules.name}

@@ -20,7 +20,7 @@ export const Item = styled(TouchableOpacity)`
     margin-left: 5px;
     padding: 5px 10px;
     border-radius: 5px;
-    background-color: ${COLORS.grey};
+    background-color: #F0f0f5;
 `;
 
 export const ItemTitle = styled(Text)`

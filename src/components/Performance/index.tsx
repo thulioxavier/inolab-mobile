@@ -160,7 +160,7 @@ export const Performance = () => {
         <S.Conteiner>
           <S.Row horizontal={true} showsHorizontalScrollIndicator={false}>
             <S.Card
-              style={[S.Styles.Shadow, { marginLeft: 5 }]}
+              style={[ { marginLeft: 5 }]}
               onPress={() => {
                 setVisible(true);
                 let aux = {
@@ -195,7 +195,7 @@ export const Performance = () => {
             </S.Card>
 
             <S.Card
-              style={[S.Styles.Shadow]}
+              
               onPress={() => {
                 setVisible(true);
                 let aux = {
@@ -217,7 +217,7 @@ export const Performance = () => {
             </S.Card>
 
             <S.Card
-              style={[S.Styles.Shadow]}
+              
               onPress={() => {
                 setVisible(true);
                 let aux = {
@@ -238,7 +238,7 @@ export const Performance = () => {
               <S.Label>{values?.hits?.points}</S.Label>
             </S.Card>
 
-            <S.Card style={[S.Styles.Shadow]} disabled={true}>
+            <S.Card  disabled={true}>
               <S.LabelTitle>Ver Mais</S.LabelTitle>
               <Icon
                 name="grid"

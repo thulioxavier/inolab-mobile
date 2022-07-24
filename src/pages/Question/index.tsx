@@ -282,7 +282,7 @@ export const Question = ({ route }: any) => {
                                         )
                                     })}
                                 </S.RowDiff>
-                                <S.QuestionContent style={S.Styles.Shadow}>
+                                <S.QuestionContent  >
                                     <S.QuestionContentScroll nestedScrollEnabled>
                                         <RenderHTML tagsStyles={tagsStyles} enableExperimentalMarginCollapsing={true} contentWidth={width - 20} source={{ html: "<div>" + values[currentQuestion]?.body + "<div/>" }} />
                                     </S.QuestionContentScroll>
@@ -337,7 +337,7 @@ export const Question = ({ route }: any) => {
                                                                     setIndexOptionSelect(key);
                                                                 }}
 
-                                                                style={S.Styles.Shadow}
+                                                                 
                                                             >
                                                                 <S.IconOptions>{ArrayEmojis[key]}</S.IconOptions>
                                                                 <S.LabelOptions style={{ color: COLORS.black }}>
@@ -387,7 +387,7 @@ export const Question = ({ route }: any) => {
                                     <S.ButtonNext onPress={() => {
                                         nextQuestion()
                                     }}
-                                        style={S.Styles.Shadow}
+                                         
                                     >
                                         <S.BtnText> {(currentQuestion + 1) !== values.length ? 'Próximo' : 'Concluir'}</S.BtnText>
                                         <Icon name="chevrons-right" size={24} style={{ marginBottom: -2 }} />

@@ -54,7 +54,7 @@ export const Card = styled(TouchableOpacity)`
   width: 100px;
   height: 85px;
   padding: 5px 10px;
-  background-color: ${COLORS.white100};
+  background-color:#F0f0f5;
   border-radius: 5px;
   flex: 1;
   flex-direction: column;

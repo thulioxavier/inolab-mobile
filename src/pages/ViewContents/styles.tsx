@@ -81,7 +81,7 @@ export const CardContent = styled(TouchableOpacity)`
     border-style: solid;
     padding: 5px;
     border-radius: 5px;
-    background-color: ${COLORS.white100};
+    background-color:#F0f0f5;
     margin: 5px;
 `;
 

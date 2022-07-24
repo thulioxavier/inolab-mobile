@@ -32,7 +32,7 @@ export const DayItem = styled(View)`
     width: 90%;
     height: ${({selected}) => selected ? '40px' :'40px'};
     border: ${({day}) => day ? `2px solid ${COLORS.primary}` : 'none'};
-    background-color: ${({selected, back, next, day}) =>  back ? (selected ? COLORS.primary : COLORS.yellow50 ): selected ? COLORS.primary : (day && !selected) ? COLORS.white : COLORS.grey};
+    background-color: ${({selected, back, next, day}) =>  back ? (selected ? COLORS.primary : COLORS.yellow50 ): selected ? COLORS.primary : (day && !selected) ? COLORS.white : '#F0f0f5'};
     border-radius: 50px;
     justify-content: center;
     align-items: center;
